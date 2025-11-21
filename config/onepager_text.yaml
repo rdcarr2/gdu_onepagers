@@ -1,0 +1,173 @@
+# onepager_text.yaml
+# All editable text content for the PyPSA one-pager dashboard.
+# The idea is that your Python script will read this file and
+# pass it as a "text_config" object into the Jinja template.
+
+page:
+  # Main title at the very top left
+  title: "Load Shedding in Ukraine: Winter 2025/26"
+
+  # Short description line under the title
+  subtitle: "Modelling Ukraine's current, estimated electricity deficit with PyPSA"
+
+  # Highlighted “Key message” phrase in the subtitle block
+  key_message_prefix: "Key message:"
+  key_message: "Subsantial load-shedding is expected between December 2025 and March 2026, additiaonal capacities urgently needed."
+
+meta:
+  # Small meta-info box on the top right
+  model_label: "Model:"
+  model_value: "HZB_PyPSA"
+
+  weather_year_label: "Weather year:"
+  weather_year_value: "2019"
+
+  demand_label: "Demand:"
+  demand_value: "ENTSO-E, own estimates"
+
+  solver_label: "Solver:"
+  solver_value: "Gurobi"
+
+  scenario_set_label: "Scenario set:"
+  scenario_set_value: "[name]"
+
+metrics:
+  # Four metric cards in the row under the header.
+  # You can rename / add more cards if you also adjust the template.
+  - id: "total_system_cost"   # internal id (not shown)
+    label: "Total estimated load shedding"
+    value: "2.8 TWh"
+    note: "With additional heat-shock: +1.3 TWh"
+
+  - id: "res_share"
+    label: "Available conventional generation"
+    value: "12.4 GW"
+    note: "Majority being nuclear"
+
+  - id: "co2_emissions"
+    label: "Annual electricity demand"
+    value: "~100 TWh"
+    note: "excluding losses and consumption of power sector"
+
+  - id: "interconnection"
+    label: "Cross-border transfer capacity"
+    value: "2.3 GW"
+    note: "For UA-MD block with ENTSO-E"
+
+sections:
+  # LEFT COLUMN TEXT SECTIONS
+  research_objective:
+    # Section title in the card
+    title: "Research objective"
+
+    # Short paragraph explaining the main study question
+    body: >
+      This analysis attempts to quantify the expected load-shedding in Ukraine over 
+      the winter period 2025/26, accounting for the current state of generation capacities,
+      war-adjusted demand, and cross-border transfer limits.
+
+  background:
+    title: "Background / motivation"
+    body: >
+      The re-intensification of Russian attacks on Ukrainian energy infrastructure over October
+      and November 2025 has led to losses in thermal capacities, both to coal and
+      combined-heat-and-power (CHP) plants, the latter of which provide essential heating 
+      during winter. Reports from aroudn the country indicate that load-shedding is already
+      occuring, and is expected to worsen as heating demand peaks in the coldest months. Here we
+      provide a model-based estimate of the expected load-shedding and explore potential mitigation
+      measures.
+
+  methodology:
+    title: "Methodology"
+    # Bullet points shown in the "Methodology" list
+    bullets:
+      - "Model: In-house PyPSA (Python for Power Systems Analysis) model at hourly resolution."
+      - "Objective: minimise total system cost subject to constraints."
+      - "Spatial granularity: 1 node per country, entirety of ENTSO-E modelled"
+      - "Hourly dispatch optimised economically over the period November 2025 - March 2026."
+      - "Maintenance outages for nuclear units included"
+      - "Dummy load shedding generators (very high cost, last in merid order) installed in Ukraine to capture unserved energy."
+      - "Demand data: ENTSO-E Transparency Platform; for UA adjusted to reflect war impacts." 
+      - "Installed capacities data: Powerplantmatching & Global Energy Monitor; UA capacities estimated by GDU" 
+      - "Weather data for capacity factors and heat demand: ERA5 cutouts via Atlite."
+      - "Fuel and commodity costs: TradeEconomics"
+    
+
+  scenario_space:
+    title: "Scenario space"
+    bullets:
+      - "Baseline: Current estimated capacities and cross-border limits."
+      - "Heat Shock: +XX% demand in certain hours to reflect increased electrical heating."
+
+
+  main_findings:
+    title: "Main findings"
+    bullets:
+      - "Load shedding is required in 41% of hours and sums up to 2.8 TWh." 
+      - "The maximum load shedding is about 5.6 GW, representing approx. 34% of the peak load."
+      - "Substituting gas and district heating with electric heaters increases demand by 2 TWh mainly in the afternoon and evening hours. Under this assumption, load shedding takes place in 49% of the hours and sum up to 4.1 TWh."
+      - "The increase of cross-border capacity has helped, but the following measures would provide even more relief:"
+
+figures_text:
+  # These are the *default* titles/subtitles for figure tiles.
+  # You already derive nice names from filenames, but if you prefer,
+  # you can override or enrich them here and merge in Python.
+
+  installed_capacities:
+    title: "Installed Capacities (GW)"
+    subtitle: "By technology for selected bus."
+
+  generation_agg:
+    title: "Aggregated Generation (TWh)"
+    subtitle: "Annual generation by technology."
+
+  generation_hourly:
+    title: "Hourly Generation (GW)"
+    subtitle: "Dispatch profile over the simulation year."
+
+  agg_net_transmission:
+    title: "Aggregated Net Transmission (TWh)"
+    subtitle: "Net imports (+) and exports (–) for the bus."
+
+  hourly_prices:
+    title: "Hourly Prices (EUR/MWh)"
+    subtitle: "Zonal market price time series with average price."
+
+  load_shedding:
+    title: "Load Shedding (MW)"
+    subtitle: "Unserved load over time (only shown where non-zero)."
+
+ui_labels:
+  # Labels for drop-downs and buttons in the UI.
+  scenario_label: "Scenario"
+  bus_label: "Bus"
+
+  compare_scenarios_button: "Compare Scenarios"
+  compare_buses_button: "Compare Buses"
+
+  # Single-view generation toggle
+  single_generation_view_label: "View:"
+  generation_mode_agg: "Aggregated"
+  generation_mode_hourly: "Hourly"
+
+  # Compare-view generation toggle
+  compare_generation_view_label: "Generation view:"
+
+  # Generic small messages
+  compare_hint_scenarios: "Select one or more scenarios to compare."
+  compare_hint_buses: "Select one or more buses to compare."
+  compare_no_data: "No data available for this combination."
+  compare_limit_warning: "You can select at most 4."
+
+footer:
+  # Bottom row of the page
+  generated_on_prefix: "Generated on:"
+  # The date itself you might inject dynamically from Python, but you can
+  # also put a static string here if you prefer.
+  generated_on_value: "2025-11-21"
+
+  run_id_label: "Run ID:"
+  run_id_value: "PLOT_DASH_TEMPLATE"
+
+  contact_text: "Contact: modelling team"
+  version_text: "Version: v2.2 image-based dashboard"

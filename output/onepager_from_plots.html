@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Load Shedding in Ukraine: Winter 2025/26</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      --bg: #f4f5f7;
+      --fg: #111827;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+      --radius-lg: 16px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 20px 24px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .title-block { flex: 2; }
+
+    .title-block h1 {
+      margin: 0 0 4px;
+      font-size: 1.8rem;
+      line-height: 1.1;
+    }
+
+    .title-block p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .meta-block {
+      flex: 1;
+      text-align: right;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .meta-tag {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #eef2ff;
+      font-size: 0.75rem;
+      color: #4338ca;
+    }
+
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .metric-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .metric-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    .metric-value { font-size: 1.05rem; font-weight: 600; }
+
+    .metric-note { font-size: 0.75rem; color: var(--muted); }
+
+    /* Global controls row (scenario + bus + compare buttons) */
+    .global-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .controls-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .controls-left label {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .controls-left select {
+      font-size: 0.8rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #f9fafb;
+    }
+
+    .controls-right {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .pill-button {
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #f9fafb;
+      padding: 2px 10px;
+      font-size: 0.78rem;
+      cursor: pointer;
+      color: var(--muted);
+    }
+
+    .pill-button.active {
+      background: #eef2ff;
+      border-color: #c7d2fe;
+      color: #1d4ed8;
+      font-weight: 500;
+    }
+
+    .pill-button:hover {
+      background: #e5e7eb;
+    }
+
+    /* Single-view main grid */
+    .main-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
+      gap: 16px;
+      align-items: stretch;
+      margin-top: 8px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 0;
+    }
+
+    .card-section { margin-bottom: 4px; }
+
+    .card h2 {
+      margin: 0 0 4px;
+      font-size: 1rem;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.35;
+    }
+
+    .bullet-list {
+      margin: 4px 0 0;
+      padding-left: 16px;
+      font-size: 0.85rem;
+    }
+
+    .bullet-list li { margin-bottom: 2px; }
+
+    .right-column {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 0;
+    }
+
+    .figures-column {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .figure-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .figure-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .figure-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .figure-subtitle {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .figure-body {
+      flex: 1;
+      min-height: 0;
+    }
+
+    .figure-body img {
+      width: 100%;
+      max-height: 260px;
+      object-fit: contain;
+      border-radius: 10px;
+      background: #f9fafb;
+      border: 1px solid var(--border);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .page-footer {
+      margin-top: 6px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 6px;
+    }
+
+    /* Compare view layout */
+    #compare-view {
+      margin-top: 10px;
+    }
+
+    .compare-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .compare-checkboxes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .compare-checkboxes span.label {
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .compare-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .compare-options select {
+      font-size: 0.8rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #f9fafb;
+    }
+
+    .compare-columns {
+      display: flex;
+      gap: 10px;
+      align-items: stretch;
+      flex-wrap: wrap;
+    }
+
+    .compare-column {
+      flex: 1 1 0;
+      min-width: 220px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .compare-column-header {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .compare-figure-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      padding: 8px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .compare-figure-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .compare-figure-subtitle {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .compare-figure-body {
+      min-height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .compare-figure-body img {
+      width: 100%;
+      max-height: 180px;
+      object-fit: contain;
+      border-radius: 8px;
+      background: #f9fafb;
+      border: 1px solid var(--border);
+    }
+
+    .compare-placeholder {
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+      background: #f9fafb;
+      border: 1px dashed var(--border);
+    }
+
+    .compare-empty {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    @media (max-width: 900px) {
+      .metrics-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .main-grid { grid-template-columns: 1fr; }
+      .page-header { flex-direction: column; }
+      .meta-block { text-align: left; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header class="page-header">
+      <div class="title-block">
+        <h1>Load Shedding in Ukraine: Winter 2025/26</h1>
+        <p>
+          Modelling Ukraine&#39;s current, estimated electricity deficit with PyPSA<br />
+          <span style="color: var(--accent); font-weight: 500;">
+            Key message:
+          </span>
+          Subsantial load-shedding is expected between December 2025 and March 2026, additiaonal capacities urgently needed.
+        </p>
+      </div>
+      <div class="meta-block">
+        <div>
+          Model:
+          HZB_PyPSA
+        </div>
+        <div>
+          Weather year:
+          2019
+          &nbsp;|&nbsp;
+          Demand:
+          ENTSO-E, own estimates
+        </div>
+        <div>
+          Solver:
+          Gurobi
+          <span class="meta-tag">
+            Scenario set:
+            [name]
+          </span>
+        </div>
+      </div>
+    </header>
+
+    <section class="metrics-row">
+      
+      <div class="metric-card">
+        <div class="metric-label">Total estimated load shedding</div>
+        <div class="metric-value">2.8 TWh</div>
+        <div class="metric-note">With additional heat-shock: +1.3 TWh</div>
+      </div>
+      
+      <div class="metric-card">
+        <div class="metric-label">Available conventional generation</div>
+        <div class="metric-value">12.4 GW</div>
+        <div class="metric-note">Majority being nuclear</div>
+      </div>
+      
+      <div class="metric-card">
+        <div class="metric-label">Annual electricity demand</div>
+        <div class="metric-value">~100 TWh</div>
+        <div class="metric-note">excluding losses and consumption of power sector</div>
+      </div>
+      
+      <div class="metric-card">
+        <div class="metric-label">Cross-border transfer capacity</div>
+        <div class="metric-value">2.3 GW</div>
+        <div class="metric-note">For UA-MD block with ENTSO-E</div>
+      </div>
+      
+    </section>
+
+    <!-- GLOBAL CONTROLS -->
+    <section class="global-controls">
+      <div class="controls-left">
+        <label for="scenario-select">Scenario:</label>
+        <select id="scenario-select"></select>
+
+        <label for="bus-select">Bus:</label>
+        <select id="bus-select"></select>
+      </div>
+      <div class="controls-right">
+        <button id="btn-compare-scenarios" class="pill-button">
+          Compare Scenarios
+        </button>
+        <button id="btn-compare-buses" class="pill-button">
+          Compare Buses
+        </button>
+      </div>
+    </section>
+
+    <!-- SINGLE VIEW -->
+    <div id="single-view" class="main-grid">
+      <!-- LEFT: text -->
+      <div class="card">
+        <div class="card-section">
+          <h2>Research objective</h2>
+          <p>This analysis attempts to quantify the expected load-shedding in Ukraine over  the winter period 2025/26, accounting for the current state of generation capacities, war-adjusted demand, and cross-border transfer limits.
+</p>
+        </div>
+        <div class="card-section">
+          <h2>Background / motivation</h2>
+          <p>The re-intensification of Russian attacks on Ukrainian energy infrastructure over October and November 2025 has led to losses in thermal capacities, both to coal and combined-heat-and-power (CHP) plants, the latter of which provide essential heating  during winter. Reports from aroudn the country indicate that load-shedding is already occuring, and is expected to worsen as heating demand peaks in the coldest months. Here we provide a model-based estimate of the expected load-shedding and explore potential mitigation measures.
+</p>
+        </div>
+        <div class="card-section">
+          <h2>Methodology</h2>
+          <ul class="bullet-list">
+            
+            <li>Model: In-house PyPSA (Python for Power Systems Analysis) model at hourly resolution.</li>
+            
+            <li>Objective: minimise total system cost subject to constraints.</li>
+            
+            <li>Spatial granularity: 1 node per country, entirety of ENTSO-E modelled</li>
+            
+            <li>Hourly dispatch optimised economically over the period November 2025 - March 2026.</li>
+            
+            <li>Maintenance outages for nuclear units included</li>
+            
+            <li>Dummy load shedding generators (very high cost, last in merid order) installed in Ukraine to capture unserved energy.</li>
+            
+            <li>Demand data: ENTSO-E Transparency Platform; for UA adjusted to reflect war impacts.</li>
+            
+            <li>Installed capacities data: Powerplantmatching &amp; Global Energy Monitor; UA capacities estimated by GDU</li>
+            
+            <li>Weather data for capacity factors and heat demand: ERA5 cutouts via Atlite.</li>
+            
+            <li>Fuel and commodity costs: TradeEconomics</li>
+            
+          </ul>
+        </div>
+        <div class="card-section">
+          <h2>Scenario space</h2>
+          <ul class="bullet-list">
+            
+            <li>Baseline: Current estimated capacities and cross-border limits.</li>
+            
+            <li>Heat Shock: +XX% demand in certain hours to reflect increased electrical heating.</li>
+            
+          </ul>
+        </div>
+        <div class="card-section">
+          <h2>Main findings</h2>
+          <ul class="bullet-list">
+            
+            <li>Load shedding is required in 41% of hours and sums up to 2.8 TWh.</li>
+            
+            <li>The maximum load shedding is about 5.6 GW, representing approx. 34% of the peak load.</li>
+            
+            <li>Substituting gas and district heating with electric heaters increases demand by 2 TWh mainly in the afternoon and evening hours. Under this assumption, load shedding takes place in 49% of the hours and sum up to 4.1 TWh.</li>
+            
+            <li>The increase of cross-border capacity has helped, but the following measures would provide even more relief:</li>
+            
+          </ul>
+        </div>
+      </div>
+
+      <!-- RIGHT: figures -->
+      <div class="right-column">
+        <div class="figures-column">
+          <!-- Installed capacities -->
+          <section class="figure-card" data-fig-id="installed_capacities">
+            <div class="figure-header">
+              <div>
+                <div class="figure-title" id="title-installed_capacities"></div>
+                <div class="figure-subtitle" id="subtitle-installed_capacities"></div>
+              </div>
+            </div>
+            <div class="figure-body">
+              <img id="img-installed_capacities" alt="Installed capacities" />
+            </div>
+          </section>
+
+          <!-- Generation (aggregated vs hourly toggle) -->
+          <section class="figure-card" data-fig-group="generation">
+            <div class="figure-header">
+              <div>
+                <div class="figure-title" id="title-generation"></div>
+                <div class="figure-subtitle" id="subtitle-generation"></div>
+              </div>
+              <div class="control-row">
+                <label for="generation-mode-select">
+                  View:
+                </label>
+                <select id="generation-mode-select">
+                  <option value="agg">
+                    Aggregated
+                  </option>
+                  <option value="hourly">
+                    Hourly
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="figure-body">
+              <img id="img-generation" alt="Generation" />
+            </div>
+          </section>
+
+          <!-- Aggregated net transmission -->
+          <section class="figure-card" data-fig-id="agg_net_transmission">
+            <div class="figure-header">
+              <div>
+                <div class="figure-title" id="title-agg_net_transmission"></div>
+                <div class="figure-subtitle" id="subtitle-agg_net_transmission"></div>
+              </div>
+            </div>
+            <div class="figure-body">
+              <img id="img-agg_net_transmission" alt="Aggregated net transmission" />
+            </div>
+          </section>
+
+          <!-- Hourly prices -->
+          <section class="figure-card" data-fig-id="hourly_prices">
+            <div class="figure-header">
+              <div>
+                <div class="figure-title" id="title-hourly_prices"></div>
+                <div class="figure-subtitle" id="subtitle-hourly_prices"></div>
+              </div>
+            </div>
+            <div class="figure-body">
+              <img id="img-hourly_prices" alt="Hourly prices" />
+            </div>
+          </section>
+
+          <!-- Load shedding -->
+          <section class="figure-card" data-fig-id="load_shedding">
+            <div class="figure-header">
+              <div>
+                <div class="figure-title" id="title-load_shedding"></div>
+                <div class="figure-subtitle" id="subtitle-load_shedding"></div>
+              </div>
+            </div>
+            <div class="figure-body">
+              <img id="img-load_shedding" alt="Load shedding" />
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPARE VIEW -->
+    <div id="compare-view" class="hidden">
+      <div class="compare-options">
+        <span>Generation view:</span>
+        <select id="compare-generation-mode">
+          <option value="agg">
+            Aggregated
+          </option>
+          <option value="hourly">
+            Hourly
+          </option>
+        </select>
+      </div>
+
+      <!-- Compare scenarios panel -->
+      <div id="compare-scenarios-panel" class="compare-panel hidden">
+        <div class="compare-checkboxes" id="compare-scenarios-checkboxes">
+          <!-- filled by JS -->
+        </div>
+        <div id="compare-scenarios-columns" class="compare-columns"></div>
+      </div>
+
+      <!-- Compare buses panel -->
+      <div id="compare-buses-panel" class="compare-panel hidden">
+        <div class="compare-checkboxes" id="compare-buses-checkboxes">
+          <!-- filled by JS -->
+        </div>
+        <div id="compare-buses-columns" class="compare-columns"></div>
+      </div>
+    </div>
+
+    <footer class="page-footer">
+      <div>
+        Generated on:
+        2025-11-21
+        &nbsp;|&nbsp;
+        Run ID:
+        PLOT_DASH_TEMPLATE
+      </div>
+      <div>
+        Contact: modelling team
+        •
+        Version: v2.2 image-based dashboard
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // scenarios_json is a nested dict from Python
+    const scenarios = {"outage_heatshock": {"name": "Outage Heat Shock", "buses": {"MD": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_MD_installed capacities.png", "url": "assets/outage_heatshock/MD/HSCBP_MD_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_MD_aggregated generation.png", "url": "assets/outage_heatshock/MD/HSCBP_MD_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_MD_hourly generation.png", "url": "assets/outage_heatshock/MD/SAPwL_MD_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_MD_aggregated net transmission.png", "url": "assets/outage_heatshock/MD/HSCBP_MD_aggregated%20net%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_MD_hourly prices.png", "url": "assets/outage_heatshock/MD/SAPwL_MD_hourly%20prices.png"}, "load_shedding": {"title": "Hourly Load Shedding (MW)", "subtitle": "SAPwL_MD_load shedding.png", "url": null}}, "UA": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_UA_installed capacities.png", "url": "assets/outage_heatshock/UA/HSCBP_UA_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_UA_aggregated generation.png", "url": "assets/outage_heatshock/UA/HSCBP_UA_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_UA_hourly generation.png", "url": "assets/outage_heatshock/UA/SAPwL_UA_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_UA_aggregated net transmission.png", "url": "assets/outage_heatshock/UA/HSCBP_UA_aggregated%20net%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_UA_hourly prices.png", "url": "assets/outage_heatshock/UA/SAPwL_UA_hourly%20prices.png"}, "load_shedding": {"title": "Hourly Load Shedding (MW)", "subtitle": "SAPwL_UA_load shedding.png", "url": "assets/outage_heatshock/UA/SAPwL_UA_load%20shedding.png"}}, "UA_MD_block": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_UA_MD_block_installed capacities.png", "url": "assets/outage_heatshock/UA_MD_block/HSCBP_UA_MD_block_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_UA_MD_block_aggregated generation.png", "url": "assets/outage_heatshock/UA_MD_block/HSCBP_UA_MD_block_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_UA_MD_block_hourly generation.png", "url": "assets/outage_heatshock/UA_MD_block/SAPwL_UA_MD_block_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_UA_MD_block_aggregated net transmission.png", "url": "assets/outage_heatshock/UA_MD_block/HSCBP_UA_MD_block_aggregated%20net%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_UA_MD_block_hourly prices.png", "url": "assets/outage_heatshock/UA_MD_block/SAPwL_UA_MD_block_hourly%20prices.png"}, "load_shedding": {"title": "Hourly Load Shedding (MW)", "subtitle": "SAPwL_UA_MD_block_load shedding.png", "url": "assets/outage_heatshock/UA_MD_block/SAPwL_UA_MD_block_load%20shedding.png"}}}}, "baseline": {"name": "Baseline", "buses": {"MD": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_MD_installed capacities.png", "url": "assets/baseline/MD/HSCBP_MD_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_MD_aggregated generation.png", "url": "assets/baseline/MD/HSCBP_MD_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_MD_hourly generation.png", "url": "assets/baseline/MD/SAPwL_MD_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_MD_aggregated net transmission.png", "url": "assets/baseline/MD/HSCBP_MD_aggregated%20net%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_MD_hourly prices.png", "url": "assets/baseline/MD/SAPwL_MD_hourly%20prices.png"}, "load_shedding": {"title": "Hourly Load Shedding (MW)", "subtitle": "SAPwL_MD_load shedding.png", "url": null}}, "UA": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_UA_installed capacities.png", "url": "assets/baseline/UA/HSCBP_UA_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_UA_aggregated generation.png", "url": "assets/baseline/UA/HSCBP_UA_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_UA_hourly generation.png", "url": "assets/baseline/UA/SAPwL_UA_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_UA_aggregated net transmission.png", "url": "assets/baseline/UA/HSCBP_UA_aggregated%20net%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_UA_hourly prices.png", "url": "assets/baseline/UA/SAPwL_UA_hourly%20prices.png"}, "load_shedding": {"title": "Hourly Load Shedding (MW)", "subtitle": "SAPwL_UA_load shedding.png", "url": "assets/baseline/UA/SAPwL_UA_load%20shedding.png"}}, "UA_MD_block": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_UA_MD_block_installed capacities.png", "url": "assets/baseline/UA_MD_block/HSCBP_UA_MD_block_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_UA_MD_block_aggregated generation.png", "url": "assets/baseline/UA_MD_block/HSCBP_UA_MD_block_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_UA_MD_block_hourly generation.png", "url": "assets/baseline/UA_MD_block/SAPwL_UA_MD_block_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_UA_MD_block_aggregated net transmission.png", "url": "assets/baseline/UA_MD_block/HSCBP_UA_MD_block_aggregated%20net%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_UA_MD_block_hourly prices.png", "url": "assets/baseline/UA_MD_block/SAPwL_UA_MD_block_hourly%20prices.png"}, "load_shedding": {"title": "Hourly Load Shedding (MW)", "subtitle": "SAPwL_UA_MD_block_load shedding.png", "url": "assets/baseline/UA_MD_block/SAPwL_UA_MD_block_load%20shedding.png"}}}}, "outage_23GW_transmission": {"name": "Outage 2.3GW Transmission", "buses": {"MD": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_MD_installed capacities.png", "url": "assets/outage_23GW_transmission/MD/HSCBP_MD_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_MD_aggregated generation.png", "url": "assets/outage_23GW_transmission/MD/HSCBP_MD_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_MD_hourly generation.png", "url": "assets/outage_23GW_transmission/MD/SAPwL_MD_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_MD_aggregated net transmission.png", "url": "assets/outage_23GW_transmission/MD/HSCBP_MD_aggregated%20net%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_MD_hourly prices.png", "url": "assets/outage_23GW_transmission/MD/SAPwL_MD_hourly%20prices.png"}, "load_shedding": {"title": "Hourly Load Shedding (MW)", "subtitle": "SAPwL_MD_load shedding.png", "url": null}}, "UA": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_UA_installed capacities.png", "url": "assets/outage_23GW_transmission/UA/HSCBP_UA_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_UA_aggregated generation.png", "url": "assets/outage_23GW_transmission/UA/HSCBP_UA_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_UA_hourly generation.png", "url": "assets/outage_23GW_transmission/UA/SAPwL_UA_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_UA_aggregated net transmission.png", "url": "assets/outage_23GW_transmission/UA/HSCBP_UA_aggregated%20net%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_UA_hourly prices.png", "url": "assets/outage_23GW_transmission/UA/SAPwL_UA_hourly%20prices.png"}, "load_shedding": {"title": "Hourly Load Shedding (MW)", "subtitle": "SAPwL_UA_load shedding.png", "url": "assets/outage_23GW_transmission/UA/SAPwL_UA_load%20shedding.png"}}, "UA_MD_block": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_UA_MD_block_installed capacities.png", "url": "assets/outage_23GW_transmission/UA_MD_block/HSCBP_UA_MD_block_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_UA_MD_block_aggregated generation.png", "url": "assets/outage_23GW_transmission/UA_MD_block/HSCBP_UA_MD_block_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_UA_MD_block_hourly generation.png", "url": "assets/outage_23GW_transmission/UA_MD_block/SAPwL_UA_MD_block_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_UA_MD_block_aggregated net transmission.png", "url": "assets/outage_23GW_transmission/UA_MD_block/HSCBP_UA_MD_block_aggregated%20net%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_UA_MD_block_hourly prices.png", "url": "assets/outage_23GW_transmission/UA_MD_block/SAPwL_UA_MD_block_hourly%20prices.png"}, "load_shedding": {"title": "Hourly Load Shedding (MW)", "subtitle": "SAPwL_UA_MD_block_load shedding.png", "url": "assets/outage_23GW_transmission/UA_MD_block/SAPwL_UA_MD_block_load%20shedding.png"}}}}};
+    // text_config_json is YAML -> JSON, for UI messages in JS
+    const textConfig = {"page": {"title": "Load Shedding in Ukraine: Winter 2025/26", "subtitle": "Modelling Ukraine's current, estimated electricity deficit with PyPSA", "key_message_prefix": "Key message:", "key_message": "Subsantial load-shedding is expected between December 2025 and March 2026, additiaonal capacities urgently needed."}, "meta": {"model_label": "Model:", "model_value": "HZB_PyPSA", "weather_year_label": "Weather year:", "weather_year_value": "2019", "demand_label": "Demand:", "demand_value": "ENTSO-E, own estimates", "solver_label": "Solver:", "solver_value": "Gurobi", "scenario_set_label": "Scenario set:", "scenario_set_value": "[name]"}, "metrics": [{"id": "total_system_cost", "label": "Total estimated load shedding", "value": "2.8 TWh", "note": "With additional heat-shock: +1.3 TWh"}, {"id": "res_share", "label": "Available conventional generation", "value": "12.4 GW", "note": "Majority being nuclear"}, {"id": "co2_emissions", "label": "Annual electricity demand", "value": "~100 TWh", "note": "excluding losses and consumption of power sector"}, {"id": "interconnection", "label": "Cross-border transfer capacity", "value": "2.3 GW", "note": "For UA-MD block with ENTSO-E"}], "sections": {"research_objective": {"title": "Research objective", "body": "This analysis attempts to quantify the expected load-shedding in Ukraine over  the winter period 2025/26, accounting for the current state of generation capacities, war-adjusted demand, and cross-border transfer limits.\n"}, "background": {"title": "Background / motivation", "body": "The re-intensification of Russian attacks on Ukrainian energy infrastructure over October and November 2025 has led to losses in thermal capacities, both to coal and combined-heat-and-power (CHP) plants, the latter of which provide essential heating  during winter. Reports from aroudn the country indicate that load-shedding is already occuring, and is expected to worsen as heating demand peaks in the coldest months. Here we provide a model-based estimate of the expected load-shedding and explore potential mitigation measures.\n"}, "methodology": {"title": "Methodology", "bullets": ["Model: In-house PyPSA (Python for Power Systems Analysis) model at hourly resolution.", "Objective: minimise total system cost subject to constraints.", "Spatial granularity: 1 node per country, entirety of ENTSO-E modelled", "Hourly dispatch optimised economically over the period November 2025 - March 2026.", "Maintenance outages for nuclear units included", "Dummy load shedding generators (very high cost, last in merid order) installed in Ukraine to capture unserved energy.", "Demand data: ENTSO-E Transparency Platform; for UA adjusted to reflect war impacts.", "Installed capacities data: Powerplantmatching & Global Energy Monitor; UA capacities estimated by GDU", "Weather data for capacity factors and heat demand: ERA5 cutouts via Atlite.", "Fuel and commodity costs: TradeEconomics"]}, "scenario_space": {"title": "Scenario space", "bullets": ["Baseline: Current estimated capacities and cross-border limits.", "Heat Shock: +XX% demand in certain hours to reflect increased electrical heating."]}, "main_findings": {"title": "Main findings", "bullets": ["Load shedding is required in 41% of hours and sums up to 2.8 TWh.", "The maximum load shedding is about 5.6 GW, representing approx. 34% of the peak load.", "Substituting gas and district heating with electric heaters increases demand by 2 TWh mainly in the afternoon and evening hours. Under this assumption, load shedding takes place in 49% of the hours and sum up to 4.1 TWh.", "The increase of cross-border capacity has helped, but the following measures would provide even more relief:"]}}, "figures_text": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "By technology for selected bus."}, "generation_agg": {"title": "Aggregated Generation (TWh)", "subtitle": "Annual generation by technology."}, "generation_hourly": {"title": "Hourly Generation (GW)", "subtitle": "Dispatch profile over the simulation year."}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "Net imports (+) and exports (–) for the bus."}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "Zonal market price time series with average price."}, "load_shedding": {"title": "Load Shedding (MW)", "subtitle": "Unserved load over time (only shown where non-zero)."}}, "ui_labels": {"scenario_label": "Scenario", "bus_label": "Bus", "compare_scenarios_button": "Compare Scenarios", "compare_buses_button": "Compare Buses", "single_generation_view_label": "View:", "generation_mode_agg": "Aggregated", "generation_mode_hourly": "Hourly", "compare_generation_view_label": "Generation view:", "compare_hint_scenarios": "Select one or more scenarios to compare.", "compare_hint_buses": "Select one or more buses to compare.", "compare_no_data": "No data available for this combination.", "compare_limit_warning": "You can select at most 4."}, "footer": {"generated_on_prefix": "Generated on:", "generated_on_value": "2025-11-21", "run_id_label": "Run ID:", "run_id_value": "PLOT_DASH_TEMPLATE", "contact_text": "Contact: modelling team", "version_text": "Version: v2.2 image-based dashboard"}};
+
+    // modes: 'single', 'compare_scenarios', 'compare_buses'
+    let mode = "single";
+    let generationMode = "agg"; // 'agg' or 'hourly'
+
+    function setGenerationMode(newMode) {
+      generationMode = newMode;
+      // keep both dropdowns in sync
+      const singleSelect = document.getElementById("generation-mode-select");
+      const compareSelect = document.getElementById("compare-generation-mode");
+      if (singleSelect && singleSelect.value !== newMode) singleSelect.value = newMode;
+      if (compareSelect && compareSelect.value !== newMode) compareSelect.value = newMode;
+
+      if (mode === "single") {
+        updateSingleViewFigures();
+      } else if (mode === "compare_scenarios") {
+        renderScenarioComparison();
+      } else if (mode === "compare_buses") {
+        renderBusComparison();
+      }
+    }
+
+    function getAllBuses() {
+      const set = new Set();
+      Object.values(scenarios).forEach(scen => {
+        Object.keys(scen.buses || {}).forEach(b => set.add(b));
+      });
+      return Array.from(set).sort();
+    }
+
+    // --- dropdowns ---
+    function initScenarioDropdown() {
+      const scenarioSelect = document.getElementById("scenario-select");
+      scenarioSelect.innerHTML = "";
+      for (const [key, scen] of Object.entries(scenarios)) {
+        const opt = document.createElement("option");
+        opt.value = key;
+        opt.textContent = scen.name || key;
+        scenarioSelect.appendChild(opt);
+      }
+    }
+
+    function initBusDropdown() {
+      const busSelect = document.getElementById("bus-select");
+      busSelect.innerHTML = "";
+      const buses = getAllBuses();
+      buses.forEach(bus => {
+        const opt = document.createElement("option");
+        opt.value = bus;
+        opt.textContent = bus;
+        busSelect.appendChild(opt);
+      });
+    }
+
+    // --- single-view simple figures ---
+    function toggleSimpleSection(figId, hasData) {
+      const section = document.querySelector(`section[data-fig-id="${figId}"]`);
+      if (!section) return;
+      if (hasData) {
+        section.classList.remove("hidden");
+      } else {
+        section.classList.add("hidden");
+      }
+    }
+
+    function toggleGenerationSection(hasAnyData) {
+      const section = document.querySelector(`section[data-fig-group="generation"]`);
+      if (!section) return;
+      if (hasAnyData) {
+        section.classList.remove("hidden");
+      } else {
+        section.classList.add("hidden");
+      }
+    }
+
+    function showSimpleFigure(figId, figData) {
+      const img = document.getElementById(`img-${figId}`);
+      const titleEl = document.getElementById(`title-${figId}`);
+      const subtitleEl = document.getElementById(`subtitle-${figId}`);
+
+      titleEl.textContent = figData.title;
+      subtitleEl.textContent = figData.subtitle;
+
+      if (figData.url) {
+        img.src = figData.url;
+      } else {
+        img.src = "";
+      }
+    }
+
+    function showGenerationFigureSingle(busFigMap) {
+      const aggData = busFigMap["agg_generation"];
+      const hourlyData = busFigMap["hourly_generation"];
+      const img = document.getElementById("img-generation");
+      const titleEl = document.getElementById("title-generation");
+      const subtitleEl = document.getElementById("subtitle-generation");
+
+      const hasAgg = aggData && aggData.url;
+      const hasHourly = hourlyData && hourlyData.url;
+      const hasAny = hasAgg || hasHourly;
+
+      toggleGenerationSection(hasAny);
+
+      if (!hasAny) {
+        img.src = "";
+        titleEl.textContent = textConfig.figures_text.generation_agg.title;
+        subtitleEl.textContent = "";
+        return;
+      }
+
+      let chosen = null;
+      if (generationMode === "agg" && hasAgg) {
+        chosen = aggData;
+      } else if (generationMode === "hourly" && hasHourly) {
+        chosen = hourlyData;
+      } else {
+        // Fallback: whichever exists
+        chosen = hasAgg ? aggData : hourlyData;
+      }
+
+      if (chosen) {
+        titleEl.textContent = chosen.title;
+        subtitleEl.textContent = chosen.subtitle;
+        img.src = chosen.url || "";
+      }
+    }
+
+    function updateSingleViewFigures() {
+      const scenarioKey = document.getElementById("scenario-select").value;
+      const busKey = document.getElementById("bus-select").value;
+      if (!scenarioKey || !busKey) return;
+
+      const scen = scenarios[scenarioKey];
+      const busFigMap = scen.buses[busKey];
+      if (!busFigMap) {
+        ["installed_capacities","agg_net_transmission","hourly_prices","load_shedding"].forEach(figId => {
+          toggleSimpleSection(figId, false);
+          const img = document.getElementById(`img-${figId}`);
+          if (img) img.src = "";
+        });
+        toggleGenerationSection(false);
+        return;
+      }
+
+      const simpleFigIds = [
+        "installed_capacities",
+        "agg_net_transmission",
+        "hourly_prices",
+        "load_shedding",
+      ];
+
+      simpleFigIds.forEach(figId => {
+        const figData = busFigMap[figId];
+        const hasData = figData && figData.url;
+        toggleSimpleSection(figId, !!hasData);
+        if (hasData) {
+          showSimpleFigure(figId, figData);
+        } else {
+          const img = document.getElementById(`img-${figId}`);
+          if (img) img.src = "";
+        }
+      });
+
+      showGenerationFigureSingle(busFigMap);
+    }
+
+    // --- modes ---
+    function setMode(newMode) {
+      mode = newMode;
+
+      const singleView = document.getElementById("single-view");
+      const compareView = document.getElementById("compare-view");
+      const btnCompareScen = document.getElementById("btn-compare-scenarios");
+      const btnCompareBus = document.getElementById("btn-compare-buses");
+
+      if (mode === "single") {
+        singleView.classList.remove("hidden");
+        compareView.classList.add("hidden");
+        btnCompareScen.classList.remove("active");
+        btnCompareBus.classList.remove("active");
+        updateSingleViewFigures();
+      } else {
+        singleView.classList.add("hidden");
+        compareView.classList.remove("hidden");
+
+        const scenariosPanel = document.getElementById("compare-scenarios-panel");
+        const busesPanel = document.getElementById("compare-buses-panel");
+
+        if (mode === "compare_scenarios") {
+          btnCompareScen.classList.add("active");
+          btnCompareBus.classList.remove("active");
+          scenariosPanel.classList.remove("hidden");
+          busesPanel.classList.add("hidden");
+          renderScenarioComparison();
+        } else if (mode === "compare_buses") {
+          btnCompareBus.classList.add("active");
+          btnCompareScen.classList.remove("active");
+          scenariosPanel.classList.add("hidden");
+          busesPanel.classList.remove("hidden");
+          renderBusComparison();
+        }
+      }
+    }
+
+    // --- compare: helpers ---
+    function buildScenarioCheckboxes() {
+      const boxContainer = document.getElementById("compare-scenarios-checkboxes");
+      boxContainer.innerHTML = "";
+      const label = document.createElement("span");
+      label.className = "label";
+      label.textContent = "Select scenarios (max 4):";
+      boxContainer.appendChild(label);
+
+      for (const [key, scen] of Object.entries(scenarios)) {
+        const wrapper = document.createElement("label");
+        wrapper.style.display = "inline-flex";
+        wrapper.style.alignItems = "center";
+        const cb = document.createElement("input");
+        cb.type = "checkbox";
+        cb.value = key;
+        cb.name = "compare-scenarios";
+        cb.style.marginRight = "4px";
+        cb.addEventListener("change", onScenarioCheckboxChange);
+        wrapper.appendChild(cb);
+        wrapper.append(scen.name || key);
+        boxContainer.appendChild(wrapper);
+      }
+    }
+
+    function buildBusCheckboxes() {
+      const boxContainer = document.getElementById("compare-buses-checkboxes");
+      boxContainer.innerHTML = "";
+      const label = document.createElement("span");
+      label.className = "label";
+      label.textContent = "Select buses (max 4):";
+      boxContainer.appendChild(label);
+
+      const scenarioKey = document.getElementById("scenario-select").value;
+      const scen = scenarios[scenarioKey];
+      const buses = Object.keys(scen.buses || {});
+
+      buses.forEach(bus => {
+        const wrapper = document.createElement("label");
+        wrapper.style.display = "inline-flex";
+        wrapper.style.alignItems = "center";
+        const cb = document.createElement("input");
+        cb.type = "checkbox";
+        cb.value = bus;
+        cb.name = "compare-buses";
+        cb.style.marginRight = "4px";
+        cb.addEventListener("change", onBusCheckboxChange);
+        wrapper.appendChild(cb);
+        wrapper.append(bus);
+        boxContainer.appendChild(wrapper);
+      });
+    }
+
+    function getCheckedValues(name) {
+      const cbs = Array.from(document.querySelectorAll(`input[name="${name}"]:checked`));
+      return cbs.map(cb => cb.value);
+    }
+
+    function enforceMax(name, maxCount, event) {
+      const checked = getCheckedValues(name);
+      if (checked.length > maxCount) {
+        event.target.checked = false;
+        alert(textConfig.ui_labels.compare_limit_warning);
+        return false;
+      }
+      return true;
+    }
+
+    function onScenarioCheckboxChange(e) {
+      if (!enforceMax("compare-scenarios", 4, e)) return;
+      renderScenarioComparison();
+    }
+
+    function onBusCheckboxChange(e) {
+      if (!enforceMax("compare-buses", 4, e)) return;
+      renderBusComparison();
+    }
+
+    // Build one column in compare mode, with fixed order:
+    // Installed capacities → Generation → Net transmission → Prices → Load shedding
+    function buildCompareColumn(label, busFigMap) {
+      if (!busFigMap) {
+        return `
+          <div class="compare-column">
+            <div class="compare-column-header">${label}</div>
+            <div class="compare-empty">${textConfig.ui_labels.compare_no_data}</div>
+          </div>
+        `;
+      }
+
+      let html = `<div class="compare-column">
+        <div class="compare-column-header">${label}</div>
+      `;
+
+      // 1. Installed capacities
+      html += buildCompareTile(busFigMap["installed_capacities"]);
+
+      // 2. Generation (mode-dependent)
+      html += buildCompareGenerationTile(busFigMap);
+
+      // 3. Aggregated net transmission
+      html += buildCompareTile(busFigMap["agg_net_transmission"]);
+
+      // 4. Prices
+      html += buildCompareTile(busFigMap["hourly_prices"]);
+
+      // 5. Load shedding
+      html += buildCompareTile(busFigMap["load_shedding"]);
+
+      html += `</div>`;
+      return html;
+    }
+
+    function buildCompareTile(fig) {
+      const hasData = fig && fig.url;
+      const title = hasData ? fig.title : "";
+      const subtitle = hasData ? fig.subtitle : "";
+      const content = hasData
+        ? `<img src="${fig.url}" alt="${fig.title}" />`
+        : `<div class="compare-placeholder"></div>`;
+
+      return `
+        <div class="compare-figure-card">
+          <div class="compare-figure-title">${title}</div>
+          <div class="compare-figure-subtitle">${subtitle}</div>
+          <div class="compare-figure-body">
+            ${content}
+          </div>
+        </div>
+      `;
+    }
+
+    function buildCompareGenerationTile(busFigMap) {
+      const aggData = busFigMap["agg_generation"];
+      const hourlyData = busFigMap["hourly_generation"];
+      const hasAgg = aggData && aggData.url;
+      const hasHourly = hourlyData && hourlyData.url;
+      const hasAny = hasAgg || hasHourly;
+
+      let title = "";
+      let subtitle = "";
+      let content = `<div class="compare-placeholder"></div>`;
+
+      if (hasAny) {
+        let chosen = null;
+        if (generationMode === "agg" && hasAgg) {
+          chosen = aggData;
+        } else if (generationMode === "hourly" && hasHourly) {
+          chosen = hourlyData;
+        } else {
+          // Fallback: whichever exists
+          chosen = hasAgg ? aggData : hourlyData;
+        }
+
+        if (chosen) {
+          title = chosen.title;
+          subtitle = chosen.subtitle;
+          content = `<img src="${chosen.url}" alt="${chosen.title}" />`;
+        }
+      }
+
+      return `
+        <div class="compare-figure-card">
+          <div class="compare-figure-title">${title}</div>
+          <div class="compare-figure-subtitle">${subtitle}</div>
+          <div class="compare-figure-body">
+            ${content}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderScenarioComparison() {
+      const busKey = document.getElementById("bus-select").value;
+      const selectedScenarios = getCheckedValues("compare-scenarios");
+      const container = document.getElementById("compare-scenarios-columns");
+      container.innerHTML = "";
+
+      if (selectedScenarios.length === 0) {
+        container.innerHTML = `<div class="compare-empty">${textConfig.ui_labels.compare_hint_scenarios}</div>`;
+        return;
+      }
+
+      let html = "";
+      selectedScenarios.forEach(sKey => {
+        const scen = scenarios[sKey];
+        const busFigMap = (scen.buses || {})[busKey];
+        const label = `${scen.name || sKey} (${busKey})`;
+        html += buildCompareColumn(label, busFigMap);
+      });
+
+      container.innerHTML = html;
+    }
+
+    function renderBusComparison() {
+      const scenarioKey = document.getElementById("scenario-select").value;
+      const selectedBuses = getCheckedValues("compare-buses");
+      const container = document.getElementById("compare-buses-columns");
+      container.innerHTML = "";
+
+      if (selectedBuses.length === 0) {
+        container.innerHTML = `<div class="compare-empty">${textConfig.ui_labels.compare_hint_buses}</div>`;
+        return;
+      }
+
+      const scen = scenarios[scenarioKey];
+      let html = "";
+      selectedBuses.forEach(busKey => {
+        const busFigMap = (scen.buses || {})[busKey];
+        const label = `${busKey} (${scen.name || scenarioKey})`;
+        html += buildCompareColumn(label, busFigMap);
+      });
+
+      if (!html) {
+        container.innerHTML = `<div class="compare-empty">${textConfig.ui_labels.compare_no_data}</div>`;
+      } else {
+        container.innerHTML = html;
+      }
+    }
+
+    // --- event wiring ---
+    function setupEvents() {
+      const scenarioSelect = document.getElementById("scenario-select");
+      const busSelect = document.getElementById("bus-select");
+      const genModeSelect = document.getElementById("generation-mode-select");
+      const compareGenModeSelect = document.getElementById("compare-generation-mode");
+      const btnCompareScen = document.getElementById("btn-compare-scenarios");
+      const btnCompareBus = document.getElementById("btn-compare-buses");
+
+      scenarioSelect.addEventListener("change", () => {
+        if (mode === "compare_buses") {
+          buildBusCheckboxes();
+          renderBusComparison();
+        } else if (mode === "compare_scenarios") {
+          renderScenarioComparison();
+        } else {
+          updateSingleViewFigures();
+        }
+      });
+
+      busSelect.addEventListener("change", () => {
+        if (mode === "compare_scenarios") {
+          renderScenarioComparison();
+        } else if (mode === "single") {
+          updateSingleViewFigures();
+        }
+      });
+
+      genModeSelect.addEventListener("change", () => {
+        setGenerationMode(genModeSelect.value);
+      });
+
+      compareGenModeSelect.addEventListener("change", () => {
+        setGenerationMode(compareGenModeSelect.value);
+      });
+
+      btnCompareScen.addEventListener("click", () => {
+        if (mode === "compare_scenarios") {
+          setMode("single");
+        } else {
+          setMode("compare_scenarios");
+        }
+      });
+
+      btnCompareBus.addEventListener("click", () => {
+        if (mode === "compare_buses") {
+          setMode("single");
+        } else {
+          setMode("compare_buses");
+        }
+      });
+    }
+
+    function init() {
+      initScenarioDropdown();
+      initBusDropdown();
+
+      // initial gen dropdown sync
+      document.getElementById("generation-mode-select").value = generationMode;
+      document.getElementById("compare-generation-mode").value = generationMode;
+
+      // build compare UIs
+      buildScenarioCheckboxes();
+      buildBusCheckboxes();
+
+      setupEvents();
+      updateSingleViewFigures();
+    }
+
+    init();
+  </script>
+</body>
+</html>

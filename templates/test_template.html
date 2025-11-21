@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Jinja2 Test</title>
+</head>
+<body>
+  <h1>Hello, {{ name }}!</h1>
+
+  <p>This page was rendered using Jinja2.</p>
+
+  <p>Scenarios I know about:</p>
+  <ul>
+    {% for key, scenario in scenarios.items() %}
+      <li><strong>{{ key }}</strong>: {{ scenario.name }}</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

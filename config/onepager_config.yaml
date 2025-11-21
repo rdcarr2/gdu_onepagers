@@ -1,0 +1,64 @@
+# config/onepager_config.yaml
+# Structural/config settings for the one-pager generator:
+# - template & output locations
+# - scenarios & where to find their plots
+# - figure definitions (patterns, titles, subtitles)
+
+template:
+  # Name of the Jinja2 template inside the templates/ folder
+  name: "onepager_images_auto.html"
+
+  # Name of the final HTML file written into output_dir
+  output_html: "onepager_from_plots.html"
+
+  # Directory where the final HTML and copied assets are written
+  output_dir: "output"
+
+  # Subdirectory under output_dir where images will be copied
+  assets_subdir: "assets"
+
+scenarios:
+  # key used in JSON/JS: "outage_heatshock"
+  outage_heatshock:
+    name: "Outage Heat Shock"
+    folder: "outage_heatshock"   # under ./plots/
+
+  baseline:
+    name: "Baseline"
+    folder: "outage_baseline"           # under ./plots/
+
+  outage_23GW_transmission:
+    name: "Outage 2.3GW Transmission"
+    folder: "outage_23GW_transmission"  # under ./plots/  
+
+figures:
+  # Figure IDs used internally in the script + template
+  installed_capacities:
+    pattern: "HSCBP_{bus}_installed capacities.png"
+    title: "Installed Capacities (GW)"
+    subtitle_template: "HSCBP_{bus}_installed capacities.png"
+
+  agg_generation:
+    pattern: "HSCBP_{bus}_aggregated generation.png"
+    title: "Aggregated Generation (TWh)"
+    subtitle_template: "HSCBP_{bus}_aggregated generation.png"
+
+  hourly_generation:
+    pattern: "SAPwL_{bus}_hourly generation.png"
+    title: "Hourly Generation (GW)"
+    subtitle_template: "SAPwL_{bus}_hourly generation.png"
+
+  agg_net_transmission:
+    pattern: "HSCBP_{bus}_aggregated net transmission.png"
+    title: "Aggregated Net Transmission (TWh)"
+    subtitle_template: "HSCBP_{bus}_aggregated net transmission.png"
+
+  hourly_prices:
+    pattern: "SAPwL_{bus}_hourly prices.png"
+    title: "Hourly Prices (EUR/MWh)"
+    subtitle_template: "SAPwL_{bus}_hourly prices.png"
+
+  load_shedding:
+    pattern: "SAPwL_{bus}_load shedding.png"
+    title: "Hourly Load Shedding (MW)"
+    subtitle_template: "SAPwL_{bus}_load shedding.png"
