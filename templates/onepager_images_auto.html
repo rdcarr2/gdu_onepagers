@@ -64,7 +64,6 @@
       font-size: 0.85rem;
       color: var(--muted);
     }
-
     .meta-tag {
       display: inline-block;
       margin-left: 6px;
@@ -75,6 +74,38 @@
       font-size: 0.75rem;
       color: #4338ca;
     }
+
+    /* Citation box on the right */
+    .citation-box {
+      margin-top: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+      padding: 8px;
+      border-radius: 8px;
+      text-align: left;
+    }
+    .citation-text {
+      width: 100%;
+      height: 72px;
+      padding: 8px;
+      font-size: 0.9rem;
+      border: 1px dashed var(--border);
+      border-radius: 6px;
+      resize: vertical;
+      background: transparent;
+      color: var(--fg);
+    }
+    .copy-btn {
+      margin-top: 6px;
+      padding: 6px 8px;
+      border-radius: 6px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+    .copy-btn:active { transform: translateY(1px); }
 
     .metrics-row {
       display: grid;
@@ -386,51 +417,157 @@
       font-style: italic;
     }
 
+    /* new: authors styling */
+    .authors-block {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+    .authors-line {
+      font-weight: 600;
+      color: var(--fg);
+    }
+    .authors-line a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      margin-right: 6px;
+    }
+    .authors-line a:hover {
+      text-decoration: underline;
+    }
+    .affiliation-line {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* left-side meta block under affiliation */
+    .left-meta {
+      margin-top: 8px;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .left-meta strong { color: var(--fg); font-weight:600; margin-right:6px; }
+
+    /* Key-message styling: subtle boxed callout with accent stripe */
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .key-message-container {
+      margin-top: 10px;
+      display: inline-flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: rgba(37, 99, 235, 0.06); /* light tint of --accent */
+      border-left: 4px solid var(--accent);
+      padding: 10px 12px;
+      border-radius: 8px;
+      max-width: 100%;
+    }
+    /* full-width variant that sits under the header and spans both columns */
+    .key-message-container.full {
+      display: flex;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .key-message-prefix { font-weight: 700; color: var(--accent); margin-right:8px; }
+    .key-message-text { font-weight: 700; color: var(--fg); line-height:1.25; font-size:1rem; }
+
+    @media (max-width: 900px) {
+      .key-message-container { padding: 8px 10px; }
+    }
+
     @media (max-width: 900px) {
       .metrics-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .main-grid { grid-template-columns: 1fr; }
       .page-header { flex-direction: column; }
       .meta-block { text-align: left; }
     }
+
+    /* simple dialog styles */
+    #network-map-dialog { display:none; position:fixed; inset:0; z-index:1200; align-items:center; justify-content:center; }
+    #network-map-backdrop { position:fixed; inset:0; background:rgba(0,0,0,0.45); }
+    #network-map-box { width:92vw; max-width:1200px; height:82vh; background:#fff; border-radius:8px; box-shadow:0 10px 40px rgba(0,0,0,0.35); overflow:hidden; display:flex; flex-direction:column; }
+    #network-map-toolbar { display:flex; justify-content:space-between; align-items:center; padding:8px 12px; border-bottom:1px solid #eee; background:#fafafa; }
+    #network-map-canvas { flex:1 1 auto; min-height:0; } /* for leaflet container */
   </style>
 </head>
-
 <body>
   <div class="page">
     <header class="page-header">
       <div class="title-block">
         <h1>{{ text_config.page.title }}</h1>
-        <p>
-          {{ text_config.page.subtitle }}<br />
-          <span style="color: var(--accent); font-weight: 500;">
-            {{ text_config.page.key_message_prefix }}
-          </span>
-          {{ text_config.page.key_message }}
-        </p>
+        <p class="subtitle">{{ text_config.page.subtitle }}</p>
+
+        <!-- new: authors & affiliation -->
+        <div class="authors-block">
+          <div class="authors-line">
+            Main author{{ "s" if (text_config.page.authors|length > 1) else "" }}:
+            {% for a in text_config.page.authors %}
+              <a href="{{ a.linkedin }}" target="_blank" rel="noopener noreferrer">{{ a.name }}</a>{% if not loop.last %},{% endif %}
+            {% endfor %}
+          </div>
+          <div class="affiliation-line">
+            Affiliation: {{ text_config.page.affiliation }}
+          </div>
+        </div>
+
+        <!-- left-meta remains under affiliation -->
+        <!-- <div class="left-meta">
+          {% if text_config.meta.weather_year_label %}
+            <div><strong>{{ text_config.meta.weather_year_label }}</strong> {{ text_config.meta.weather_year_value }}</div>
+          {% endif %}
+          {% if text_config.meta.tools_label %}
+            <div><strong>{{ text_config.meta.tools_label }}</strong> {{ text_config.meta.tools_value }}</div>
+          {% endif %}
+          {% if text_config.meta.specific_model_label %}
+            <div><strong>{{ text_config.meta.specific_model_label }}</strong> {{ text_config.meta.specific_model_value }}</div>
+          {% endif %}
+          {% if text_config.meta.solver_label %}
+            <div><strong>{{ text_config.meta.solver_label }}</strong> {{ text_config.meta.solver_value }}</div>
+          {% endif %}
+          {% if text_config.meta.scenario_set_label %}
+            <div><strong>{{ text_config.meta.scenario_set_label }}</strong> {{ text_config.meta.scenario_set_value }}</div>
+          {% endif %}
+        </div> -->
       </div>
+
       <div class="meta-block">
-        <div>
-          {{ text_config.meta.model_label }}
-          {{ text_config.meta.model_value }}
-        </div>
-        <div>
-          {{ text_config.meta.weather_year_label }}
-          {{ text_config.meta.weather_year_value }}
-          &nbsp;|&nbsp;
-          {{ text_config.meta.demand_label }}
-          {{ text_config.meta.demand_value }}
-        </div>
-        <div>
-          {{ text_config.meta.solver_label }}
-          {{ text_config.meta.solver_value }}
-          <span class="meta-tag">
-            {{ text_config.meta.scenario_set_label }}
-            {{ text_config.meta.scenario_set_value }}
-          </span>
-        </div>
+        <!-- restore meta fields in the top-right block -->
+        {% if text_config.meta.model_label %}
+          <div><strong>{{ text_config.meta.model_label }}</strong> {{ text_config.meta.model_value }}</div>
+        {% endif %}
+        {% if text_config.meta.weather_year_label %}
+          <div><strong>{{ text_config.meta.weather_year_label }}</strong> {{ text_config.meta.weather_year_value }}</div>
+        {% endif %}
+        {% if text_config.meta.tools_label %}
+          <div><strong>{{ text_config.meta.tools_label }}</strong> {{ text_config.meta.tools_value }}</div>
+        {% endif %}
+        {% if text_config.meta.specific_model_label %}
+          <div><strong>{{ text_config.meta.specific_model_label }}</strong> {{ text_config.meta.specific_model_value }}</div>
+        {% endif %}
+        {% if text_config.meta.solver_label %}
+          <div><strong>{{ text_config.meta.solver_label }}</strong> {{ text_config.meta.solver_value }}</div>
+        {% endif %}
+        {% if text_config.meta.scenario_set_label %}
+          <div><strong>{{ text_config.meta.scenario_set_label }}</strong> {{ text_config.meta.scenario_set_value }}</div>
+        {% endif %}
       </div>
     </header>
 
+    <!-- full-width key message directly under header, spans both columns -->
+    <div class="key-message-container full" role="note" aria-label="Key message">
+      <div class="key-message-prefix">{{ text_config.page.key_message_prefix }}</div>
+      <div class="key-message-text">{{ text_config.page.key_message }}</div>
+    </div>
+    
     <section class="metrics-row">
       {% for metric in text_config.metrics %}
       <div class="metric-card">
@@ -451,6 +588,7 @@
         <select id="bus-select"></select>
       </div>
       <div class="controls-right">
+        <!-- network map removed -->
         <button id="btn-compare-scenarios" class="pill-button">
           {{ text_config.ui_labels.compare_scenarios_button }}
         </button>
@@ -496,6 +634,18 @@
             {% endfor %}
           </ul>
         </div>
+
+        <!-- citation box moved here, under Main findings -->
+        <div class="card-section">
+          <div class="citation-box" aria-label="Citation">
+            <label style="font-weight:600; font-size:0.9rem; margin-bottom:6px; display:block;">Citation</label>
+            <textarea id="citationText" class="citation-text" readonly>{{ text_config.citation.text }}</textarea>
+            <div style="display:flex; justify-content:flex-end;">
+              <button class="copy-btn" onclick="copyCitation()">Copy citation</button>
+            </div>
+          </div>
+        </div>
+        
       </div>
 
       <!-- RIGHT: figures -->
@@ -1128,6 +1278,75 @@
     }
 
     init();
+
+    function copyCitation() {
+      const el = document.getElementById("citationText");
+      const text = el.value || "";
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          // small visual feedback: temporarily change button text
+          const btn = event.currentTarget || null;
+          if (btn) {
+            const old = btn.innerText;
+            btn.innerText = "Copied";
+            setTimeout(()=> btn.innerText = old, 1200);
+          }
+        }).catch(()=> alert("Copy failed; select and copy manually."));
+      } else {
+        // Fallback: select + execCommand
+        el.select();
+        try {
+          document.execCommand("copy");
+          alert("Citation copied to clipboard.");
+        } catch (e) {
+          alert("Copy not available. Select and copy manually.");
+        }
+      }
+    }
+
+    // defaults injected from Jinja
+    const DEFAULT_SCENARIO = "{{ default_scenario | default('') }}";
+    const DEFAULT_BUS = "{{ default_bus | default('') }}";
+
+    // --- example initialization flow (adapt to your existing code) ---
+    function initControls(scenariosData) {
+      const scenarioSelect = document.getElementById('scenarioSelect'); // adjust id
+      const busSelect = document.getElementById('busSelect');           // adjust id
+
+      // populate scenarioSelect from scenariosData...
+      // (your existing code likely does this already)
+
+      // set default scenario (use key, not display name)
+      if (DEFAULT_SCENARIO && Array.from(scenarioSelect.options).some(o => o.value === DEFAULT_SCENARIO)) {
+        scenarioSelect.value = DEFAULT_SCENARIO;
+      } else {
+        scenarioSelect.selectedIndex = 0;
+      }
+
+      // trigger whatever populates buses for the selected scenario
+      scenarioSelect.dispatchEvent(new Event('change'));
+
+      // now set default bus if available
+      if (DEFAULT_BUS && Array.from(busSelect.options).some(o => o.value === DEFAULT_BUS)) {
+        busSelect.value = DEFAULT_BUS;
+      } else {
+        busSelect.selectedIndex = 0;
+      }
+
+      // call your function that renders the page for the selected scenario+bus
+      // e.g. onScenarioOrBusChanged();
+    }
   </script>
+
+<!-- === Embedded Folium Map === -->
+<div style="width:100%; height:600px; margin-top:20px; margin-bottom:20px;">
+  <iframe
+    src="network_map.html"
+    style="width:100%; height:100%; border:none;"
+    loading="lazy"
+  ></iframe>
+</div>
+<!-- === End of Embedded Folium Map === -->
+
 </body>
 </html>

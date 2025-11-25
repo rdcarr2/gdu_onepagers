@@ -1,0 +1,2506 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_776ca3ca0b51c67c2b461654c341bd4e {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_776ca3ca0b51c67c2b461654c341bd4e" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_776ca3ca0b51c67c2b461654c341bd4e = L.map(
+                "map_776ca3ca0b51c67c2b461654c341bd4e",
+                {
+                    center: [48.795028333333335, 14.545348611111113],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 6,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_4847ac7338b07fef4d606a31bdf8672d = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_4847ac7338b07fef4d606a31bdf8672d.addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            var poly_line_1116807d9fc2477354f8559f3c01b7da = L.polyline(
+                [[50.81889, 4.61746], [46.80158, 3.14164]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_1116807d9fc2477354f8559f3c01b7da.bindTooltip(
+                `<div>
+                     Line Line_BE_FR<br>Bus0: BE<br>Bus1: FR<br>Transfer capacity: 6367.88479 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_47b1443262234f1430e812518d16d521 = L.polyline(
+                [[50.81889, 4.61746], [49.67734, 6.13051]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_47b1443262234f1430e812518d16d521.bindTooltip(
+                `<div>
+                     Line Line_BE_LU<br>Bus0: BE<br>Bus1: LU<br>Transfer capacity: 983.11204 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_4935ba09004fa3c205081f3cf4624cbd = L.polyline(
+                [[50.81889, 4.61746], [52.37429, 5.55145]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_4935ba09004fa3c205081f3cf4624cbd.bindTooltip(
+                `<div>
+                     Line Line_BE_NL<br>Bus0: BE<br>Bus1: NL<br>Transfer capacity: 6792.41045 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_0b6707aca90a54caff6c5efc331dce85 = L.polyline(
+                [[42.83585, 24.86522], [38.94859, 22.73004]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_0b6707aca90a54caff6c5efc331dce85.bindTooltip(
+                `<div>
+                     Line Line_BG_GR<br>Bus0: BG<br>Bus1: GR<br>Transfer capacity: 1787.47643 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_78dfdffa5212585edf2105089f21890f = L.polyline(
+                [[42.83585, 24.86522], [45.59599, 25.01182]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_78dfdffa5212585edf2105089f21890f.bindTooltip(
+                `<div>
+                     Line Line_BG_RO<br>Bus0: BG<br>Bus1: RO<br>Transfer capacity: 7149.90573 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_38424c31c624bb5ff1bf43ea8e8c1fd8 = L.polyline(
+                [[46.83243, 8.21308], [50.9781, 9.48201]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_38424c31c624bb5ff1bf43ea8e8c1fd8.bindTooltip(
+                `<div>
+                     Line Line_CH_DE<br>Bus0: CH<br>Bus1: DE<br>Transfer capacity: 27482.45016 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_1b3c9e1f9e62e8129113c0660212e5d0 = L.polyline(
+                [[46.83243, 8.21308], [46.80158, 3.14164]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_1b3c9e1f9e62e8129113c0660212e5d0.bindTooltip(
+                `<div>
+                     Line Line_CH_FR<br>Bus0: CH<br>Bus1: FR<br>Transfer capacity: 7786.69421 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_8a39a87ab08eb713fa2203ea0d650898 = L.polyline(
+                [[46.83243, 8.21308], [43.46794, 11.61168]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_8a39a87ab08eb713fa2203ea0d650898.bindTooltip(
+                `<div>
+                     Line Line_CH_IT<br>Bus0: CH<br>Bus1: IT<br>Transfer capacity: 7552.08793 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_4b456192b440118aa2c6e88d1f3b90e1 = L.polyline(
+                [[49.83503, 15.25577], [50.9781, 9.48201]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_4b456192b440118aa2c6e88d1f3b90e1.bindTooltip(
+                `<div>
+                     Line Line_CZ_DE<br>Bus0: CZ<br>Bus1: DE<br>Transfer capacity: 6792.41045 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_bbe9d58577b8bb29a83f18a82309f158 = L.polyline(
+                [[49.83503, 15.25577], [51.5829, 19.10804]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_bbe9d58577b8bb29a83f18a82309f158.bindTooltip(
+                `<div>
+                     Line Line_CZ_PL<br>Bus0: CZ<br>Bus1: PL<br>Transfer capacity: 4558.0649 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_5423b70a43196f3b95a67695830b1195 = L.polyline(
+                [[49.83503, 15.25577], [48.65333, 19.02789]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_5423b70a43196f3b95a67695830b1195.bindTooltip(
+                `<div>
+                     Line Line_CZ_SK<br>Bus0: CZ<br>Bus1: SK<br>Transfer capacity: 6345.54134 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_4d1bd21f39a270897609a59155c87347 = L.polyline(
+                [[50.9781, 9.48201], [55.8119, 10.58166]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_4d1bd21f39a270897609a59155c87347.bindTooltip(
+                `<div>
+                     Line Line_DE_DK<br>Bus0: DE<br>Bus1: DK<br>Transfer capacity: 6792.41045 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_0411cb01c4f06e0c6fb4b7bb963da94f = L.polyline(
+                [[50.9781, 9.48201], [46.80158, 3.14164]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_0411cb01c4f06e0c6fb4b7bb963da94f.bindTooltip(
+                `<div>
+                     Line Line_DE_FR<br>Bus0: DE<br>Bus1: FR<br>Transfer capacity: 9663.54447 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_9382e9b88da0d5ea28d245eb45221168 = L.polyline(
+                [[50.9781, 9.48201], [49.67734, 6.13051]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_9382e9b88da0d5ea28d245eb45221168.bindTooltip(
+                `<div>
+                     Line Line_DE_LU<br>Bus0: DE<br>Bus1: LU<br>Transfer capacity: 1966.22408 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_7b1d438703b33bfe8d47982de9ce3e42 = L.polyline(
+                [[50.9781, 9.48201], [52.37429, 5.55145]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_7b1d438703b33bfe8d47982de9ce3e42.bindTooltip(
+                `<div>
+                     Line Line_DE_NL<br>Bus0: DE<br>Bus1: NL<br>Transfer capacity: 13584.82089 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_3aea33ef414074758e6484b4cc2bf8bc = L.polyline(
+                [[50.9781, 9.48201], [51.5829, 19.10804]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_3aea33ef414074758e6484b4cc2bf8bc.bindTooltip(
+                `<div>
+                     Line Line_DE_PL<br>Bus0: DE<br>Bus1: PL<br>Transfer capacity: 6971.15809 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_0ce5a1c7dd6019bfcb0303b21ad18e49 = L.polyline(
+                [[47.5495, 13.60427], [46.83243, 8.21308]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_0ce5a1c7dd6019bfcb0303b21ad18e49.bindTooltip(
+                `<div>
+                     Line Line_AT_CH<br>Bus0: AT<br>Bus1: CH<br>Transfer capacity: 4155.88271 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_ad76f2fea4e3157cbace8d0c65ae579a = L.polyline(
+                [[55.8119, 10.58166], [61.27498, 16.23341]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_ad76f2fea4e3157cbace8d0c65ae579a.bindTooltip(
+                `<div>
+                     Line Line_DK_SE<br>Bus0: DK<br>Bus1: SE<br>Transfer capacity: 3574.95287 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_6f72c4a98f3994276b8e4ae82fafebe5 = L.polyline(
+                [[58.97991, 25.87915], [56.8388, 23.72468]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_6f72c4a98f3994276b8e4ae82fafebe5.bindTooltip(
+                `<div>
+                     Line Line_EE_LV<br>Bus0: EE<br>Bus1: LV<br>Transfer capacity: 3318.00313 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_73bf40120ccc65aa71cbe46d0d6d535c = L.polyline(
+                [[40.59522, -3.38704], [46.80158, 3.14164]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_73bf40120ccc65aa71cbe46d0d6d535c.bindTooltip(
+                `<div>
+                     Line Line_ES_FR<br>Bus0: ES<br>Bus1: FR<br>Transfer capacity: 4569.23663 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_3ef06e797c51c3a7e16cb3198c60cda2 = L.polyline(
+                [[40.59522, -3.38704], [40.31347, -8.28212]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_3ef06e797c51c3a7e16cb3198c60cda2.bindTooltip(
+                `<div>
+                     Line Line_ES_PT<br>Bus0: ES<br>Bus1: PT<br>Transfer capacity: 21002.84809 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_7bf3c8875c71f5c9d05e3f33ba777169 = L.polyline(
+                [[62.85768, 25.05369], [61.27498, 16.23341]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_7bf3c8875c71f5c9d05e3f33ba777169.bindTooltip(
+                `<div>
+                     Line Line_FI_SE<br>Bus0: FI<br>Bus1: SE<br>Transfer capacity: 3574.95287 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_35600b265f9b00b07e6c1bb3e2ca35ff = L.polyline(
+                [[46.80158, 3.14164], [43.46794, 11.61168]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_35600b265f9b00b07e6c1bb3e2ca35ff.bindTooltip(
+                `<div>
+                     Line Line_FR_IT<br>Bus0: FR<br>Bus1: IT<br>Transfer capacity: 5865.15705 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_5a7077b86e8dd568ac02b1468aedc5a6 = L.polyline(
+                [[46.80158, 3.14164], [49.67734, 6.13051]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_5a7077b86e8dd568ac02b1468aedc5a6.bindTooltip(
+                `<div>
+                     Line Line_FR_LU<br>Bus0: FR<br>Bus1: LU<br>Transfer capacity: 502.72775 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_71c1fc7501833aeaf5a98c39f0041608 = L.polyline(
+                [[45.20687, 16.15755], [47.28338, 19.07187]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_71c1fc7501833aeaf5a98c39f0041608.bindTooltip(
+                `<div>
+                     Line Line_HR_HU<br>Bus0: HR<br>Bus1: HU<br>Transfer capacity: 7149.90573 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_e6da42caa193b9b8a9266e6f843c4727 = L.polyline(
+                [[47.5495, 13.60427], [49.83503, 15.25577]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_e6da42caa193b9b8a9266e6f843c4727.bindTooltip(
+                `<div>
+                     Line Line_AT_CZ<br>Bus0: AT<br>Bus1: CZ<br>Transfer capacity: 4379.31726 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_d6273c816db6f114e0b1695a5b3d85de = L.polyline(
+                [[45.20687, 16.15755], [46.12128, 14.80522]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_d6273c816db6f114e0b1695a5b3d85de.bindTooltip(
+                `<div>
+                     Line Line_HR_SI<br>Bus0: HR<br>Bus1: SI<br>Transfer capacity: 6345.54134 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_e6c1de35149ed290d50c2aa87a613d21 = L.polyline(
+                [[47.28338, 19.07187], [46.12128, 14.80522]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_e6c1de35149ed290d50c2aa87a613d21.bindTooltip(
+                `<div>
+                     Line Line_HU_SI<br>Bus0: HU<br>Bus1: SI<br>Transfer capacity: 3574.95287 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_971c92ac1ae856f479dce9f5bb042ebd = L.polyline(
+                [[43.46794, 11.61168], [46.12128, 14.80522]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_971c92ac1ae856f479dce9f5bb042ebd.bindTooltip(
+                `<div>
+                     Line Line_IT_SI<br>Bus0: IT<br>Bus1: SI<br>Transfer capacity: 2189.65863 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_ebff9886e3093f85c670fd935bfd4406 = L.polyline(
+                [[55.16156, 23.00728], [56.8388, 23.72468]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_ebff9886e3093f85c670fd935bfd4406.bindTooltip(
+                `<div>
+                     Line Line_LT_LV<br>Bus0: LT<br>Bus1: LV<br>Transfer capacity: 4424.00417 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_fb23b826ec259cd7f76b47f0ce0a401d = L.polyline(
+                [[55.16156, 23.00728], [51.5829, 19.10804]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_fb23b826ec259cd7f76b47f0ce0a401d.bindTooltip(
+                `<div>
+                     Line Line_LT_PL<br>Bus0: LT<br>Bus1: PL<br>Transfer capacity: 3574.95287 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_21c04325f6fbc065730ab0cbb2b16707 = L.polyline(
+                [[47.5495, 13.60427], [50.9781, 9.48201]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_21c04325f6fbc065730ab0cbb2b16707.bindTooltip(
+                `<div>
+                     Line Line_AT_DE<br>Bus0: AT<br>Bus1: DE<br>Transfer capacity: 15327.61042 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_ec98238f20c2157c4bcd57a4e768f763 = L.polyline(
+                [[60.9991, 8.62311], [61.27498, 16.23341]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_ec98238f20c2157c4bcd57a4e768f763.bindTooltip(
+                `<div>
+                     Line Line_NO_SE<br>Bus0: NO<br>Bus1: SE<br>Transfer capacity: 7820.2094 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_f56ccf4839fbc0edb94663d8ad68ea58 = L.polyline(
+                [[47.5495, 13.60427], [47.28338, 19.07187]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_f56ccf4839fbc0edb94663d8ad68ea58.bindTooltip(
+                `<div>
+                     Line Line_AT_HU<br>Bus0: AT<br>Bus1: HU<br>Transfer capacity: 4379.31726 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_51bc11fb9341b20463e15ffbfd10a6c0 = L.polyline(
+                [[47.5495, 13.60427], [43.46794, 11.61168]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_51bc11fb9341b20463e15ffbfd10a6c0.bindTooltip(
+                `<div>
+                     Line Line_AT_IT<br>Bus0: AT<br>Bus1: IT<br>Transfer capacity: 983.11204 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_07f03c0842cf0eb1bc18035c13b8a99f = L.polyline(
+                [[47.5495, 13.60427], [46.12128, 14.80522]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_07f03c0842cf0eb1bc18035c13b8a99f.bindTooltip(
+                `<div>
+                     Line Line_AT_SI<br>Bus0: AT<br>Bus1: SI<br>Transfer capacity: 3887.76124 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_11c7d01c827ee879bee63ab7e4301668 = L.polyline(
+                [[47.28338, 19.07187], [45.59599, 25.01182]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_11c7d01c827ee879bee63ab7e4301668.bindTooltip(
+                `<div>
+                     Line Line_HU_RO<br>Bus0: HU<br>Bus1: RO<br>Transfer capacity: 5000.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_59062dfc998a1d8031f2f258bc6f2eeb = L.polyline(
+                [[47.28338, 19.07187], [48.65333, 19.02789]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_59062dfc998a1d8031f2f258bc6f2eeb.bindTooltip(
+                `<div>
+                     Line Line_HU_SK<br>Bus0: HU<br>Bus1: SK<br>Transfer capacity: 5000.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_578d516035c6478552616cda62818e01 = L.polyline(
+                [[51.5829, 19.10804], [48.65333, 19.02789]],
+                {"bubblingMouseEvents": true, "color": "gray", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "gray", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_578d516035c6478552616cda62818e01.bindTooltip(
+                `<div>
+                     Line Line_PL_SK<br>Bus0: PL<br>Bus1: SK<br>Transfer capacity: 5000.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_4604eb277983a6a8199f846483b8d18f = L.polyline(
+                [[41.58757, 19.89791], [42.6, 21.0]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_4604eb277983a6a8199f846483b8d18f.bindTooltip(
+                `<div>
+                     Link Link_AL_XK<br>Bus0: AL<br>Bus1: XK<br>Transfer capacity: 195.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_2515913f33b67c24f348bf3694b91d76 = L.polyline(
+                [[41.58757, 19.89791], [42.80666, 19.1445]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_2515913f33b67c24f348bf3694b91d76.bindTooltip(
+                `<div>
+                     Link Link_AL_ME<br>Bus0: AL<br>Bus1: ME<br>Transfer capacity: 334.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_b7540d9f6045de1f0e56d37164d24b43 = L.polyline(
+                [[38.94859, 22.73004], [41.58757, 19.89791]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_b7540d9f6045de1f0e56d37164d24b43.bindTooltip(
+                `<div>
+                     Link Link_GR_AL<br>Bus0: GR<br>Bus1: AL<br>Transfer capacity: 334.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_16b74f1c74a7a6cece1302a5ce333598 = L.polyline(
+                [[43.81137, 18.1227], [42.80666, 19.1445]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_16b74f1c74a7a6cece1302a5ce333598.bindTooltip(
+                `<div>
+                     Link Link_BA_ME<br>Bus0: BA<br>Bus1: ME<br>Transfer capacity: 803.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_dd3d062a6b76f50488a7c5a7a02d28d0 = L.polyline(
+                [[45.20687, 16.15755], [43.81137, 18.1227]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_dd3d062a6b76f50488a7c5a7a02d28d0.bindTooltip(
+                `<div>
+                     Link Link_HR_BA<br>Bus0: HR<br>Bus1: BA<br>Transfer capacity: 761.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_7695aaabbf4f60edf2ef61ac8ee2ad66 = L.polyline(
+                [[43.81137, 18.1227], [44.11371, 20.66269]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_7695aaabbf4f60edf2ef61ac8ee2ad66.bindTooltip(
+                `<div>
+                     Link Link_BA_RS<br>Bus0: BA<br>Bus1: RS<br>Transfer capacity: 307.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_63231053b1fd901e3c9896380447caba = L.polyline(
+                [[46.65821, 28.68874], [49.87714, 24.50098]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_63231053b1fd901e3c9896380447caba.bindTooltip(
+                `<div>
+                     Link Link_MD_UA<br>Bus0: MD<br>Bus1: UA<br>Transfer capacity: 800.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_0df4452f27511f5afec0335d1c20c2e7 = L.polyline(
+                [[45.59599, 25.01182], [46.65821, 28.68874]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_0df4452f27511f5afec0335d1c20c2e7.bindTooltip(
+                `<div>
+                     Link Link_RO_MD<br>Bus0: RO<br>Bus1: MD<br>Transfer capacity: 930.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_a8dd7bcd62ddbcb8244653b34a302150 = L.polyline(
+                [[42.80666, 19.1445], [42.6, 21.0]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_a8dd7bcd62ddbcb8244653b34a302150.bindTooltip(
+                `<div>
+                     Link Link_ME_XK<br>Bus0: ME<br>Bus1: XK<br>Transfer capacity: 224.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_aa40c05dc0f3a31b79c4e93784222be4 = L.polyline(
+                [[42.80666, 19.1445], [44.11371, 20.66269]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_aa40c05dc0f3a31b79c4e93784222be4.bindTooltip(
+                `<div>
+                     Link Link_ME_RS<br>Bus0: ME<br>Bus1: RS<br>Transfer capacity: 270.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_0edb60149e5356e90e86b87b1b13ffab = L.polyline(
+                [[42.80666, 19.1445], [43.81137, 18.1227]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_0edb60149e5356e90e86b87b1b13ffab.bindTooltip(
+                `<div>
+                     Link Link_ME_BA<br>Bus0: ME<br>Bus1: BA<br>Transfer capacity: 52.7 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_f433641317f741cc204ab80c0412d46d = L.polyline(
+                [[42.80666, 19.1445], [41.58757, 19.89791]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_f433641317f741cc204ab80c0412d46d.bindTooltip(
+                `<div>
+                     Link Link_ME_AL<br>Bus0: ME<br>Bus1: AL<br>Transfer capacity: 315.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_2b83795673b00b96fff5a2b46c5dccdd = L.polyline(
+                [[41.58136, 21.58745], [42.6, 21.0]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_2b83795673b00b96fff5a2b46c5dccdd.bindTooltip(
+                `<div>
+                     Link Link_MK_XK<br>Bus0: MK<br>Bus1: XK<br>Transfer capacity: 342.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_03db99577a66e308f050d7a4358e71a3 = L.polyline(
+                [[38.94859, 22.73004], [41.58136, 21.58745]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_03db99577a66e308f050d7a4358e71a3.bindTooltip(
+                `<div>
+                     Link Link_GR_MK<br>Bus0: GR<br>Bus1: MK<br>Transfer capacity: 281.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_00cdf205ba1d3a67835ffa828a64f79e = L.polyline(
+                [[41.58136, 21.58745], [44.11371, 20.66269]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_00cdf205ba1d3a67835ffa828a64f79e.bindTooltip(
+                `<div>
+                     Link Link_MK_RS<br>Bus0: MK<br>Bus1: RS<br>Transfer capacity: 195.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_be9a6705e6d80c05aaa8c7ecd2bf7b20 = L.polyline(
+                [[42.83585, 24.86522], [41.58136, 21.58745]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_be9a6705e6d80c05aaa8c7ecd2bf7b20.bindTooltip(
+                `<div>
+                     Link Link_BG_MK<br>Bus0: BG<br>Bus1: MK<br>Transfer capacity: 302.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_319b04fcea34734c817b1f890401a686 = L.polyline(
+                [[44.11371, 20.66269], [42.6, 21.0]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_319b04fcea34734c817b1f890401a686.bindTooltip(
+                `<div>
+                     Link Link_RS_XK<br>Bus0: RS<br>Bus1: XK<br>Transfer capacity: 225.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_3999d34b193534aca63b945c56db3fe5 = L.polyline(
+                [[47.28338, 19.07187], [44.11371, 20.66269]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_3999d34b193534aca63b945c56db3fe5.bindTooltip(
+                `<div>
+                     Link Link_HU_RS<br>Bus0: HU<br>Bus1: RS<br>Transfer capacity: 300.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_e69cd51d80b5d710bcfcd17b59274562 = L.polyline(
+                [[44.11371, 20.66269], [43.81137, 18.1227]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_e69cd51d80b5d710bcfcd17b59274562.bindTooltip(
+                `<div>
+                     Link Link_RS_BA<br>Bus0: RS<br>Bus1: BA<br>Transfer capacity: 193.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_598ac740fb18d797166a28e3dcace7e7 = L.polyline(
+                [[42.83585, 24.86522], [44.11371, 20.66269]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_598ac740fb18d797166a28e3dcace7e7.bindTooltip(
+                `<div>
+                     Link Link_BG_RS<br>Bus0: BG<br>Bus1: RS<br>Transfer capacity: 402.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_30ef3dbe8789c7e7491cabc3df299faa = L.polyline(
+                [[44.11371, 20.66269], [41.58136, 21.58745]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_30ef3dbe8789c7e7491cabc3df299faa.bindTooltip(
+                `<div>
+                     Link Link_RS_MK<br>Bus0: RS<br>Bus1: MK<br>Transfer capacity: 127.9 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_3705c5b897b5fe99cd4afc9c3f1ccb48 = L.polyline(
+                [[44.11371, 20.66269], [42.80666, 19.1445]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_3705c5b897b5fe99cd4afc9c3f1ccb48.bindTooltip(
+                `<div>
+                     Link Link_RS_ME<br>Bus0: RS<br>Bus1: ME<br>Transfer capacity: 216.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_b0c5e708a8bf72e6dc0648be2955c83f = L.polyline(
+                [[45.59599, 25.01182], [44.11371, 20.66269]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_b0c5e708a8bf72e6dc0648be2955c83f.bindTooltip(
+                `<div>
+                     Link Link_RO_RS<br>Bus0: RO<br>Bus1: RS<br>Transfer capacity: 244.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_51c2b3453ff8ef3f910d573b05bdf474 = L.polyline(
+                [[45.20687, 16.15755], [44.11371, 20.66269]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_51c2b3453ff8ef3f910d573b05bdf474.bindTooltip(
+                `<div>
+                     Link Link_HR_RS<br>Bus0: HR<br>Bus1: RS<br>Transfer capacity: 417.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_830aa89f94ebbe8fa4c66ebf29070605 = L.polyline(
+                [[42.6, 21.0], [42.80666, 19.1445]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_830aa89f94ebbe8fa4c66ebf29070605.bindTooltip(
+                `<div>
+                     Link Link_XK_ME<br>Bus0: XK<br>Bus1: ME<br>Transfer capacity: 261.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_48e4cc2b5fb31549b6f0314b17393cc2 = L.polyline(
+                [[42.6, 21.0], [44.11371, 20.66269]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_48e4cc2b5fb31549b6f0314b17393cc2.bindTooltip(
+                `<div>
+                     Link Link_XK_RS<br>Bus0: XK<br>Bus1: RS<br>Transfer capacity: 305.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_5fc68ca343e77f8583521d43e6e4a530 = L.polyline(
+                [[42.6, 21.0], [41.58757, 19.89791]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_5fc68ca343e77f8583521d43e6e4a530.bindTooltip(
+                `<div>
+                     Link Link_XK_AL<br>Bus0: XK<br>Bus1: AL<br>Transfer capacity: 100.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_882d37b2f4040f0a4513e3adcfa705ef = L.polyline(
+                [[42.6, 21.0], [41.58136, 21.58745]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_882d37b2f4040f0a4513e3adcfa705ef.bindTooltip(
+                `<div>
+                     Link Link_XK_MK<br>Bus0: XK<br>Bus1: MK<br>Transfer capacity: 228.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_e44929e0b8e523d9b931909c351428bd = L.polyline(
+                [[45.59599, 25.01182], [49.87714, 24.50098]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_e44929e0b8e523d9b931909c351428bd.bindTooltip(
+                `<div>
+                     Link Link_RO_UA<br>Bus0: RO<br>Bus1: UA<br>Transfer capacity: 430.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_fbe57e61bf073bbb5d15f191b87e5107 = L.polyline(
+                [[48.65333, 19.02789], [49.87714, 24.50098]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_fbe57e61bf073bbb5d15f191b87e5107.bindTooltip(
+                `<div>
+                     Link Link_SK_UA<br>Bus0: SK<br>Bus1: UA<br>Transfer capacity: 960.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_76da84d375f7f26a3178f0757cc62820 = L.polyline(
+                [[47.28338, 19.07187], [49.87714, 24.50098]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_76da84d375f7f26a3178f0757cc62820.bindTooltip(
+                `<div>
+                     Link Link_HU_UA<br>Bus0: HU<br>Bus1: UA<br>Transfer capacity: 840.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_bf38fb6914365f9c95ff4520e53121b7 = L.polyline(
+                [[49.87714, 24.50098], [46.65821, 28.68874]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_bf38fb6914365f9c95ff4520e53121b7.bindTooltip(
+                `<div>
+                     Link Link_UA_MD<br>Bus0: UA<br>Bus1: MD<br>Transfer capacity: 430.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_f5a7f9d8aed606233d832e364eb7fb34 = L.polyline(
+                [[51.5829, 19.10804], [49.87714, 24.50098]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_f5a7f9d8aed606233d832e364eb7fb34.bindTooltip(
+                `<div>
+                     Link Link_PL_UA<br>Bus0: PL<br>Bus1: UA<br>Transfer capacity: 480.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_cd5f3849c8491895c9e0af96ce4c8f01 = L.polyline(
+                [[52.79981, -7.63134], [53.38928, -2.16042]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_cd5f3849c8491895c9e0af96ce4c8f01.bindTooltip(
+                `<div>
+                     Link Link_IE_UK<br>Bus0: IE<br>Bus1: UK<br>Transfer capacity: 0.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_c8455e77c8d2f2f3c6813b58f9ec8edb = L.polyline(
+                [[50.81889, 4.61746], [53.38928, -2.16042]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_c8455e77c8d2f2f3c6813b58f9ec8edb.bindTooltip(
+                `<div>
+                     Link Link_BE_UK<br>Bus0: BE<br>Bus1: UK<br>Transfer capacity: 1028.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_f710f6027452a1467c92ff407d115156 = L.polyline(
+                [[60.9991, 8.62311], [53.38928, -2.16042]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_f710f6027452a1467c92ff407d115156.bindTooltip(
+                `<div>
+                     Link Link_NO_UK<br>Bus0: NO<br>Bus1: UK<br>Transfer capacity: 1451.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_43c71bbcfdd85c7f4e301439bf340dc0 = L.polyline(
+                [[46.80158, 3.14164], [53.38928, -2.16042]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_43c71bbcfdd85c7f4e301439bf340dc0.bindTooltip(
+                `<div>
+                     Link Link_FR_UK<br>Bus0: FR<br>Bus1: UK<br>Transfer capacity: 4021.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_62231b59295df9cbefd7ab6c0c1d83b1 = L.polyline(
+                [[52.37429, 5.55145], [53.38928, -2.16042]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+            poly_line_62231b59295df9cbefd7ab6c0c1d83b1.bindTooltip(
+                `<div>
+                     Link Link_NL_UK<br>Bus0: NL<br>Bus1: UK<br>Transfer capacity: 1026.0 MW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4daaeff9ffcec0177be58e8fcb38687e = L.circleMarker(
+                [41.58757, 19.89791],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_ea1c445b7bf573fbadd3141edfe6ab7a = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_9dd91e134f3f29e3e44c7253f061b6e6 = $(`<div id="html_9dd91e134f3f29e3e44c7253f061b6e6" style="width: 100.0%; height: 100.0%;"><b>AL</b><br>Coordinates: 19.8979, 41.5876<br>Total demand: 3.432775 TWh<br>Total installed capacity: 0.896260 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>OTH: 0.098000 GW<br>biomass: 0.000000 GW<br>ror: 0.527000 GW<br>solar: 0.254500 GW<br>waste: 0.000000 GW<br><u>Storage</u><br>hydro: 0.016760 GW</div>`)[0];
+                popup_ea1c445b7bf573fbadd3141edfe6ab7a.setContent(html_9dd91e134f3f29e3e44c7253f061b6e6);
+            
+        
+
+        circle_marker_4daaeff9ffcec0177be58e8fcb38687e.bindPopup(popup_ea1c445b7bf573fbadd3141edfe6ab7a)
+        ;
+
+        
+    
+    
+            circle_marker_4daaeff9ffcec0177be58e8fcb38687e.bindTooltip(
+                `<div>
+                     AL:<br>Load: 3.432775 TWh<br>Total installed capacities: 0.896260 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ac357e68eaf40b00296a0c20b9fadf65 = L.circleMarker(
+                [47.5495, 13.60427],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_c19912164bb582fccf6b7af0549ffb37 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_069e6fbd8dcdca40e27090e0f1d147de = $(`<div id="html_069e6fbd8dcdca40e27090e0f1d147de" style="width: 100.0%; height: 100.0%;"><b>AT</b><br>Coordinates: 13.6043, 47.5495<br>Total demand: 26.619279 TWh<br>Total installed capacity: 19.684540 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>biomass: 0.549000 GW<br>natural gas: 4.154000 GW<br>onwind: 4.021000 GW<br>ror: 5.817000 GW<br>solar: 5.003500 GW<br>waste: 0.080000 GW<br><u>Storage</u><br>hydro: 0.060040 GW</div>`)[0];
+                popup_c19912164bb582fccf6b7af0549ffb37.setContent(html_069e6fbd8dcdca40e27090e0f1d147de);
+            
+        
+
+        circle_marker_ac357e68eaf40b00296a0c20b9fadf65.bindPopup(popup_c19912164bb582fccf6b7af0549ffb37)
+        ;
+
+        
+    
+    
+            circle_marker_ac357e68eaf40b00296a0c20b9fadf65.bindTooltip(
+                `<div>
+                     AT:<br>Load: 26.619279 TWh<br>Total installed capacities: 19.684540 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_20cb66ef5a24db5320e9573104f4dbef = L.circleMarker(
+                [43.81137, 18.1227],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_32ba296ae2d40db7ff69b3d9b7f94d3a = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_d505898afd46a8ecac9feab4551aadbf = $(`<div id="html_d505898afd46a8ecac9feab4551aadbf" style="width: 100.0%; height: 100.0%;"><b>BA</b><br>Coordinates: 18.1227, 43.8114<br>Total demand: 5.079354 TWh<br>Total installed capacity: 2.222256 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>biomass: 0.000000 GW<br>lignite: 1.911596 GW<br>onwind: 0.134600 GW<br>solar: 0.157100 GW<br>waste: 0.000000 GW<br><u>Storage</u><br>hydro: 0.018960 GW</div>`)[0];
+                popup_32ba296ae2d40db7ff69b3d9b7f94d3a.setContent(html_d505898afd46a8ecac9feab4551aadbf);
+            
+        
+
+        circle_marker_20cb66ef5a24db5320e9573104f4dbef.bindPopup(popup_32ba296ae2d40db7ff69b3d9b7f94d3a)
+        ;
+
+        
+    
+    
+            circle_marker_20cb66ef5a24db5320e9573104f4dbef.bindTooltip(
+                `<div>
+                     BA:<br>Load: 5.079354 TWh<br>Total installed capacities: 2.222256 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_602e9e96c777005506ee12b067baab55 = L.circleMarker(
+                [50.81889, 4.61746],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_9de35cecf4813f9dcdae1c4c67472565 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_ceb5a4ba8f8e6d6bbea293c99952525c = $(`<div id="html_ceb5a4ba8f8e6d6bbea293c99952525c" style="width: 100.0%; height: 100.0%;"><b>BE</b><br>Coordinates: 4.6175, 50.8189<br>Total demand: 35.692452 TWh<br>Total installed capacity: 25.847330 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>biomass: 0.730820 GW<br>natural gas: 5.251300 GW<br>nuclear: 5.919000 GW<br>offwind-ac: 2.262100 GW<br>oil: 0.131600 GW<br>onwind: 3.053180 GW<br>ror: 0.185510 GW<br>solar: 7.917100 GW<br>waste: 0.383640 GW<br><u>Storage</u><br>hydro: 0.013080 GW</div>`)[0];
+                popup_9de35cecf4813f9dcdae1c4c67472565.setContent(html_ceb5a4ba8f8e6d6bbea293c99952525c);
+            
+        
+
+        circle_marker_602e9e96c777005506ee12b067baab55.bindPopup(popup_9de35cecf4813f9dcdae1c4c67472565)
+        ;
+
+        
+    
+    
+            circle_marker_602e9e96c777005506ee12b067baab55.bindTooltip(
+                `<div>
+                     BE:<br>Load: 35.692452 TWh<br>Total installed capacities: 25.847330 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_408054b9da5f60028b546e3b1e601968 = L.circleMarker(
+                [42.83585, 24.86522],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_ab9647aa9072ba53980f3318e2e688b4 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_0521e64f2e2c7607e8c865725b722a57 = $(`<div id="html_0521e64f2e2c7607e8c865725b722a57" style="width: 100.0%; height: 100.0%;"><b>BG</b><br>Coordinates: 24.8652, 42.8359<br>Total demand: 17.671726 TWh<br>Total installed capacity: 12.184356 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>biomass: 0.074000 GW<br>hard coal: 0.529192 GW<br>lignite: 4.807355 GW<br>natural gas: 0.990000 GW<br>nuclear: 2.080000 GW<br>onwind: 0.705000 GW<br>ror: 0.542000 GW<br>solar: 2.424100 GW<br>waste: 0.006000 GW<br><u>Storage</u><br>hydro: 0.026710 GW</div>`)[0];
+                popup_ab9647aa9072ba53980f3318e2e688b4.setContent(html_0521e64f2e2c7607e8c865725b722a57);
+            
+        
+
+        circle_marker_408054b9da5f60028b546e3b1e601968.bindPopup(popup_ab9647aa9072ba53980f3318e2e688b4)
+        ;
+
+        
+    
+    
+            circle_marker_408054b9da5f60028b546e3b1e601968.bindTooltip(
+                `<div>
+                     BG:<br>Load: 17.671726 TWh<br>Total installed capacities: 12.184356 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_aa80fec59f9a3e187a59d26ea3fd659d = L.circleMarker(
+                [46.83243, 8.21308],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_37f8c612b61c26cf194633e64b374e18 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_9e219f2a2c1c54d7dc6da0bbf35b909a = $(`<div id="html_9e219f2a2c1c54d7dc6da0bbf35b909a" style="width: 100.0%; height: 100.0%;"><b>CH</b><br>Coordinates: 8.2131, 46.8324<br>Total demand: 27.156186 TWh<br>Total installed capacity: 3.935987 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>biomass: 0.000000 GW<br>natural gas: 0.055000 GW<br>nuclear: 2.970000 GW<br>onwind: 0.055000 GW<br>ror: 0.634500 GW<br>solar: 0.096800 GW<br>waste: 0.000000 GW<br><u>Storage</u><br>hydro: 0.124687 GW</div>`)[0];
+                popup_37f8c612b61c26cf194633e64b374e18.setContent(html_9e219f2a2c1c54d7dc6da0bbf35b909a);
+            
+        
+
+        circle_marker_aa80fec59f9a3e187a59d26ea3fd659d.bindPopup(popup_37f8c612b61c26cf194633e64b374e18)
+        ;
+
+        
+    
+    
+            circle_marker_aa80fec59f9a3e187a59d26ea3fd659d.bindTooltip(
+                `<div>
+                     CH:<br>Load: 27.156186 TWh<br>Total installed capacities: 3.935987 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_85c0284920108b8b9c284cee5c23d2f3 = L.circleMarker(
+                [49.83503, 15.25577],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_4312d17ffd11a9e5ce587787753c8e09 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_2cc724baaa4c76d8eed7c3fa633e1cc1 = $(`<div id="html_2cc724baaa4c76d8eed7c3fa633e1cc1" style="width: 100.0%; height: 100.0%;"><b>CZ</b><br>Coordinates: 15.2558, 49.8350<br>Total demand: 27.725872 TWh<br>Total installed capacity: 12.922787 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>biomass: 0.410000 GW<br>hard coal: 1.138989 GW<br>lignite: 3.787817 GW<br>natural gas: 1.659000 GW<br>nuclear: 4.164000 GW<br>onwind: 0.342000 GW<br>solar: 1.301600 GW<br>waste: 0.100000 GW<br><u>Storage</u><br>hydro: 0.019380 GW</div>`)[0];
+                popup_4312d17ffd11a9e5ce587787753c8e09.setContent(html_2cc724baaa4c76d8eed7c3fa633e1cc1);
+            
+        
+
+        circle_marker_85c0284920108b8b9c284cee5c23d2f3.bindPopup(popup_4312d17ffd11a9e5ce587787753c8e09)
+        ;
+
+        
+    
+    
+            circle_marker_85c0284920108b8b9c284cee5c23d2f3.bindTooltip(
+                `<div>
+                     CZ:<br>Load: 27.725872 TWh<br>Total installed capacities: 12.922787 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cb8b1274fecf68f1712b6386acf0af35 = L.circleMarker(
+                [50.9781, 9.48201],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_a1cf9c92e7e6a0659709294da4c1995b = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_7ea361050c30637c0d8daf34e389dcb4 = $(`<div id="html_7ea361050c30637c0d8daf34e389dcb4" style="width: 100.0%; height: 100.0%;"><b>DE</b><br>Coordinates: 9.4820, 50.9781<br>Total demand: 205.586819 TWh<br>Total installed capacity: 221.910391 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>OTH: 2.296496 GW<br>biomass: 8.576540 GW<br>hard coal: 15.067219 GW<br>lignite: 21.680713 GW<br>natural gas: 35.157357 GW<br>offwind-ac: 8.456000 GW<br>oil: 5.994045 GW<br>onwind: 59.840620 GW<br>ror: 3.730800 GW<br>solar: 59.194300 GW<br>waste: 1.808000 GW<br><u>Storage</u><br>hydro: 0.108300 GW</div>`)[0];
+                popup_a1cf9c92e7e6a0659709294da4c1995b.setContent(html_7ea361050c30637c0d8daf34e389dcb4);
+            
+        
+
+        circle_marker_cb8b1274fecf68f1712b6386acf0af35.bindPopup(popup_a1cf9c92e7e6a0659709294da4c1995b)
+        ;
+
+        
+    
+    
+            circle_marker_cb8b1274fecf68f1712b6386acf0af35.bindTooltip(
+                `<div>
+                     DE:<br>Load: 205.586819 TWh<br>Total installed capacities: 221.910391 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f997a29d12552165fa761235d8816a85 = L.circleMarker(
+                [55.8119, 10.58166],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_05ccd60055dca7ebd2e9e2d019f31e6d = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_8398dac9767d1ab5a063c4d07178d841 = $(`<div id="html_8398dac9767d1ab5a063c4d07178d841" style="width: 100.0%; height: 100.0%;"><b>DK</b><br>Coordinates: 10.5817, 55.8119<br>Total demand: 16.657471 TWh<br>Total installed capacity: 15.599816 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>OTH: 0.070000 GW<br>biomass: 1.754000 GW<br>hard coal: 1.644916 GW<br>natural gas: 1.813200 GW<br>offwind-ac: 2.646000 GW<br>oil: 0.664000 GW<br>onwind: 4.860000 GW<br>solar: 2.147700 GW<br>waste: 0.000000 GW<br><u>Storage</u><br>none</div>`)[0];
+                popup_05ccd60055dca7ebd2e9e2d019f31e6d.setContent(html_8398dac9767d1ab5a063c4d07178d841);
+            
+        
+
+        circle_marker_f997a29d12552165fa761235d8816a85.bindPopup(popup_05ccd60055dca7ebd2e9e2d019f31e6d)
+        ;
+
+        
+    
+    
+            circle_marker_f997a29d12552165fa761235d8816a85.bindTooltip(
+                `<div>
+                     DK:<br>Load: 16.657471 TWh<br>Total installed capacities: 15.599816 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1eb3a8c106f25a4bed11f4692184b3fd = L.circleMarker(
+                [58.97991, 25.87915],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_6d60ec46472c70ace12fec7e718049fc = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_8098cb557259a52b076c5ce6888ac4dd = $(`<div id="html_8098cb557259a52b076c5ce6888ac4dd" style="width: 100.0%; height: 100.0%;"><b>EE</b><br>Coordinates: 25.8791, 58.9799<br>Total demand: 3.863099 TWh<br>Total installed capacity: 3.360500 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>biomass: 0.150300 GW<br>natural gas: 0.389000 GW<br>oil: 1.841000 GW<br>onwind: 0.447000 GW<br>solar: 0.516200 GW<br>waste: 0.017000 GW<br><u>Storage</u><br>none</div>`)[0];
+                popup_6d60ec46472c70ace12fec7e718049fc.setContent(html_8098cb557259a52b076c5ce6888ac4dd);
+            
+        
+
+        circle_marker_1eb3a8c106f25a4bed11f4692184b3fd.bindPopup(popup_6d60ec46472c70ace12fec7e718049fc)
+        ;
+
+        
+    
+    
+            circle_marker_1eb3a8c106f25a4bed11f4692184b3fd.bindTooltip(
+                `<div>
+                     EE:<br>Load: 3.863099 TWh<br>Total installed capacities: 3.360500 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cc0932216eb891e43094d54d3548de91 = L.circleMarker(
+                [40.59522, -3.38704],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_e61a96db75e506d080d1f2f2294a4872 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_ded5639519ff3d2987cc924a0ae676a4 = $(`<div id="html_ded5639519ff3d2987cc924a0ae676a4" style="width: 100.0%; height: 100.0%;"><b>ES</b><br>Coordinates: -3.3870, 40.5952<br>Total demand: 97.514894 TWh<br>Total installed capacity: 104.146426 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>biomass: 0.707500 GW<br>hard coal: 3.581422 GW<br>natural gas: 28.271244 GW<br>nuclear: 7.117200 GW<br>oil: 1.854371 GW<br>onwind: 30.159300 GW<br>ror: 1.154800 GW<br>solar: 30.562800 GW<br>waste: 0.545900 GW<br><u>Storage</u><br>hydro: 0.191889 GW</div>`)[0];
+                popup_e61a96db75e506d080d1f2f2294a4872.setContent(html_ded5639519ff3d2987cc924a0ae676a4);
+            
+        
+
+        circle_marker_cc0932216eb891e43094d54d3548de91.bindPopup(popup_e61a96db75e506d080d1f2f2294a4872)
+        ;
+
+        
+    
+    
+            circle_marker_cc0932216eb891e43094d54d3548de91.bindTooltip(
+                `<div>
+                     ES:<br>Load: 97.514894 TWh<br>Total installed capacities: 104.146426 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0d96f0ef094c78a843afad6aafbd0610 = L.circleMarker(
+                [62.85768, 25.05369],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_04f0c52a7d2de65f93c510f8d28b7d99 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_ba4cb1a4d3be7fef3129cac4eacb245d = $(`<div id="html_ba4cb1a4d3be7fef3129cac4eacb245d" style="width: 100.0%; height: 100.0%;"><b>FI</b><br>Coordinates: 25.0537, 62.8577<br>Total demand: 39.371300 TWh<br>Total installed capacity: 22.694707 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>OTH: 0.143100 GW<br>biomass: 1.695000 GW<br>hard coal: 1.516607 GW<br>lignite: 0.965000 GW<br>natural gas: 3.005800 GW<br>nuclear: 4.362000 GW<br>offwind-ac: 0.042000 GW<br>oil: 1.005000 GW<br>onwind: 6.618000 GW<br>ror: 3.173000 GW<br>solar: 0.082200 GW<br>waste: 0.087000 GW<br><u>Storage</u><br>none</div>`)[0];
+                popup_04f0c52a7d2de65f93c510f8d28b7d99.setContent(html_ba4cb1a4d3be7fef3129cac4eacb245d);
+            
+        
+
+        circle_marker_0d96f0ef094c78a843afad6aafbd0610.bindPopup(popup_04f0c52a7d2de65f93c510f8d28b7d99)
+        ;
+
+        
+    
+    
+            circle_marker_0d96f0ef094c78a843afad6aafbd0610.bindTooltip(
+                `<div>
+                     FI:<br>Load: 39.371300 TWh<br>Total installed capacities: 22.694707 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1cfda651d1baf7a5504b5dfb46ba1dcb = L.circleMarker(
+                [46.80158, 3.14164],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_df51ac82261881c1bfc874d607e90897 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_d91bc09d32f6efb9c780266365b2a8c7 = $(`<div id="html_d91bc09d32f6efb9c780266365b2a8c7" style="width: 100.0%; height: 100.0%;"><b>FR</b><br>Coordinates: 3.1416, 46.8016<br>Total demand: 207.279077 TWh<br>Total installed capacity: 124.234921 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>OTH: 0.062000 GW<br>biomass: 1.402710 GW<br>hard coal: 1.161641 GW<br>lignite: 0.977000 GW<br>natural gas: 9.292200 GW<br>nuclear: 52.240000 GW<br>offwind-ac: 1.483000 GW<br>oil: 3.760000 GW<br>onwind: 22.134060 GW<br>ror: 11.598120 GW<br>solar: 19.018000 GW<br>waste: 0.967670 GW<br><u>Storage</u><br>hydro: 0.138521 GW</div>`)[0];
+                popup_df51ac82261881c1bfc874d607e90897.setContent(html_d91bc09d32f6efb9c780266365b2a8c7);
+            
+        
+
+        circle_marker_1cfda651d1baf7a5504b5dfb46ba1dcb.bindPopup(popup_df51ac82261881c1bfc874d607e90897)
+        ;
+
+        
+    
+    
+            circle_marker_1cfda651d1baf7a5504b5dfb46ba1dcb.bindTooltip(
+                `<div>
+                     FR:<br>Load: 207.279077 TWh<br>Total installed capacities: 124.234921 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_39a2087a969cbce85b5479cf4cc1a466 = L.circleMarker(
+                [38.94859, 22.73004],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_0d9d79cf3b94553c4f15fb8cbcb3a40b = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_f2cf4f321aae985bcd449b1d1f032d75 = $(`<div id="html_f2cf4f321aae985bcd449b1d1f032d75" style="width: 100.0%; height: 100.0%;"><b>GR</b><br>Coordinates: 22.7300, 38.9486<br>Total demand: 19.951928 TWh<br>Total installed capacity: 25.887181 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>biomass: 0.120000 GW<br>lignite: 3.331761 GW<br>natural gas: 9.202000 GW<br>onwind: 5.065000 GW<br>ror: 0.327000 GW<br>solar: 7.810400 GW<br>waste: 0.000000 GW<br><u>Storage</u><br>hydro: 0.031020 GW</div>`)[0];
+                popup_0d9d79cf3b94553c4f15fb8cbcb3a40b.setContent(html_f2cf4f321aae985bcd449b1d1f032d75);
+            
+        
+
+        circle_marker_39a2087a969cbce85b5479cf4cc1a466.bindPopup(popup_0d9d79cf3b94553c4f15fb8cbcb3a40b)
+        ;
+
+        
+    
+    
+            circle_marker_39a2087a969cbce85b5479cf4cc1a466.bindTooltip(
+                `<div>
+                     GR:<br>Load: 19.951928 TWh<br>Total installed capacities: 25.887181 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fdc5aa8c1bf2f3e1fdebba752be9ddbb = L.circleMarker(
+                [45.20687, 16.15755],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_af254f83209b05a2a3e2291cfa242957 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_bdc557b3d29389a5984ee9a01b297a8e = $(`<div id="html_bdc557b3d29389a5984ee9a01b297a8e" style="width: 100.0%; height: 100.0%;"><b>HR</b><br>Coordinates: 16.1576, 45.2069<br>Total demand: 7.737251 TWh<br>Total installed capacity: 3.620219 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>biomass: 0.114000 GW<br>hard coal: 0.308849 GW<br>natural gas: 1.440800 GW<br>onwind: 1.209000 GW<br>ror: 0.428000 GW<br>solar: 0.096300 GW<br>waste: 0.006000 GW<br><u>Storage</u><br>hydro: 0.017270 GW</div>`)[0];
+                popup_af254f83209b05a2a3e2291cfa242957.setContent(html_bdc557b3d29389a5984ee9a01b297a8e);
+            
+        
+
+        circle_marker_fdc5aa8c1bf2f3e1fdebba752be9ddbb.bindPopup(popup_af254f83209b05a2a3e2291cfa242957)
+        ;
+
+        
+    
+    
+            circle_marker_fdc5aa8c1bf2f3e1fdebba752be9ddbb.bindTooltip(
+                `<div>
+                     HR:<br>Load: 7.737251 TWh<br>Total installed capacities: 3.620219 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_adcbff9276c95e5e14d0c04e9ed9b8c0 = L.circleMarker(
+                [47.28338, 19.07187],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_87bad0fe738c6e38cf6b8c972b151e5c = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_c899c11fd27a88670a04b22f4a130910 = $(`<div id="html_c899c11fd27a88670a04b22f4a130910" style="width: 100.0%; height: 100.0%;"><b>HU</b><br>Coordinates: 19.0719, 47.2834<br>Total demand: 19.439441 TWh<br>Total installed capacity: 9.403807 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>biomass: 0.213850 GW<br>hard coal: 0.230484 GW<br>lignite: 0.815172 GW<br>natural gas: 2.859400 GW<br>nuclear: 1.898900 GW<br>oil: 0.170000 GW<br>onwind: 0.325080 GW<br>ror: 0.033000 GW<br>solar: 2.808200 GW<br>waste: 0.049440 GW<br><u>Storage</u><br>hydro: 0.000282 GW</div>`)[0];
+                popup_87bad0fe738c6e38cf6b8c972b151e5c.setContent(html_c899c11fd27a88670a04b22f4a130910);
+            
+        
+
+        circle_marker_adcbff9276c95e5e14d0c04e9ed9b8c0.bindPopup(popup_87bad0fe738c6e38cf6b8c972b151e5c)
+        ;
+
+        
+    
+    
+            circle_marker_adcbff9276c95e5e14d0c04e9ed9b8c0.bindTooltip(
+                `<div>
+                     HU:<br>Load: 19.439441 TWh<br>Total installed capacities: 9.403807 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7cef1d3c35b8f8e8dc76fe7f7ab9134a = L.circleMarker(
+                [52.79981, -7.63134],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_c78b1475eff3e38422e5ab059d7a33c7 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_de5fd3dac37bd644054477e4ed10a609 = $(`<div id="html_de5fd3dac37bd644054477e4ed10a609" style="width: 100.0%; height: 100.0%;"><b>IE</b><br>Coordinates: -7.6313, 52.7998<br>Total demand: 14.923725 TWh<br>Total installed capacity: 10.030222 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>biomass: 0.000000 GW<br>hard coal: 0.843572 GW<br>lignite: 0.253000 GW<br>natural gas: 4.660000 GW<br>offwind-ac: 0.025000 GW<br>oil: 1.018000 GW<br>onwind: 1.918730 GW<br>ror: 0.216000 GW<br>solar: 1.093000 GW<br>waste: 0.000000 GW<br><u>Storage</u><br>hydro: 0.002920 GW</div>`)[0];
+                popup_c78b1475eff3e38422e5ab059d7a33c7.setContent(html_de5fd3dac37bd644054477e4ed10a609);
+            
+        
+
+        circle_marker_7cef1d3c35b8f8e8dc76fe7f7ab9134a.bindPopup(popup_c78b1475eff3e38422e5ab059d7a33c7)
+        ;
+
+        
+    
+    
+            circle_marker_7cef1d3c35b8f8e8dc76fe7f7ab9134a.bindTooltip(
+                `<div>
+                     IE:<br>Load: 14.923725 TWh<br>Total installed capacities: 10.030222 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e2ab561d5e63363d1847ae45dd96794c = L.circleMarker(
+                [43.46794, 11.61168],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_091af2df95ed9ef769e315e1572b6cc0 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_904c56f1c39f513bba0d5d4d4576238e = $(`<div id="html_904c56f1c39f513bba0d5d4d4576238e" style="width: 100.0%; height: 100.0%;"><b>IT</b><br>Coordinates: 11.6117, 43.4679<br>Total demand: 115.069218 TWh<br>Total installed capacity: 103.204426 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>OTH: 0.173000 GW<br>biomass: 1.543000 GW<br>geothermal: 0.806000 GW<br>hard coal: 7.675926 GW<br>natural gas: 49.528520 GW<br>offwind-ac: 0.030000 GW<br>oil: 1.016000 GW<br>onwind: 11.651000 GW<br>ror: 10.291000 GW<br>solar: 19.702000 GW<br>waste: 0.670000 GW<br><u>Storage</u><br>hydro: 0.117980 GW</div>`)[0];
+                popup_091af2df95ed9ef769e315e1572b6cc0.setContent(html_904c56f1c39f513bba0d5d4d4576238e);
+            
+        
+
+        circle_marker_e2ab561d5e63363d1847ae45dd96794c.bindPopup(popup_091af2df95ed9ef769e315e1572b6cc0)
+        ;
+
+        
+    
+    
+            circle_marker_e2ab561d5e63363d1847ae45dd96794c.bindTooltip(
+                `<div>
+                     IT:<br>Load: 115.069218 TWh<br>Total installed capacities: 103.204426 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d81b04b01c21b7a290581979b44311e7 = L.circleMarker(
+                [55.16156, 23.00728],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_43764617f5e33688f10bbf7c55ddbc96 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_4cd16f8ce020c802f2636a3b91877caf = $(`<div id="html_4cd16f8ce020c802f2636a3b91877caf" style="width: 100.0%; height: 100.0%;"><b>LT</b><br>Coordinates: 23.0073, 55.1616<br>Total demand: 5.448169 TWh<br>Total installed capacity: 3.139600 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>biomass: 0.196000 GW<br>natural gas: 1.148000 GW<br>onwind: 1.288000 GW<br>ror: 0.129000 GW<br>solar: 0.299600 GW<br>waste: 0.070000 GW<br><u>Storage</u><br>hydro: 0.009000 GW</div>`)[0];
+                popup_43764617f5e33688f10bbf7c55ddbc96.setContent(html_4cd16f8ce020c802f2636a3b91877caf);
+            
+        
+
+        circle_marker_d81b04b01c21b7a290581979b44311e7.bindPopup(popup_43764617f5e33688f10bbf7c55ddbc96)
+        ;
+
+        
+    
+    
+            circle_marker_d81b04b01c21b7a290581979b44311e7.bindTooltip(
+                `<div>
+                     LT:<br>Load: 5.448169 TWh<br>Total installed capacities: 3.139600 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4af546e5fec6316e460a170a76e35ba8 = L.circleMarker(
+                [49.67734, 6.13051],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_9250d90653dd73e9c1782053e8cb044a = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_e78068b665e29110528ee13c429b6ecf = $(`<div id="html_e78068b665e29110528ee13c429b6ecf" style="width: 100.0%; height: 100.0%;"><b>LU</b><br>Coordinates: 6.1305, 49.6773<br>Total demand: 2.131089 TWh<br>Total installed capacity: 0.262210 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>onwind: 0.208000 GW<br>solar: 0.054100 GW<br><u>Storage</u><br>hydro: 0.000110 GW</div>`)[0];
+                popup_9250d90653dd73e9c1782053e8cb044a.setContent(html_e78068b665e29110528ee13c429b6ecf);
+            
+        
+
+        circle_marker_4af546e5fec6316e460a170a76e35ba8.bindPopup(popup_9250d90653dd73e9c1782053e8cb044a)
+        ;
+
+        
+    
+    
+            circle_marker_4af546e5fec6316e460a170a76e35ba8.bindTooltip(
+                `<div>
+                     LU:<br>Load: 2.131089 TWh<br>Total installed capacities: 0.262210 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_be70af1beb4b8ace5b0e3e8a944f9d60 = L.circleMarker(
+                [56.8388, 23.72468],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_31a3fa1f86ce41152cfc8640450b6db7 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_1bb8005319c0cfbbe7f7d908754ee74c = $(`<div id="html_1bb8005319c0cfbbe7f7d908754ee74c" style="width: 100.0%; height: 100.0%;"><b>LV</b><br>Coordinates: 23.7247, 56.8388<br>Total demand: 3.146834 TWh<br>Total installed capacity: 3.021000 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>biomass: 0.166000 GW<br>natural gas: 1.087000 GW<br>onwind: 0.136000 GW<br>ror: 1.588000 GW<br>solar: 0.044000 GW<br>waste: 0.000000 GW<br><u>Storage</u><br>none</div>`)[0];
+                popup_31a3fa1f86ce41152cfc8640450b6db7.setContent(html_1bb8005319c0cfbbe7f7d908754ee74c);
+            
+        
+
+        circle_marker_be70af1beb4b8ace5b0e3e8a944f9d60.bindPopup(popup_31a3fa1f86ce41152cfc8640450b6db7)
+        ;
+
+        
+    
+    
+            circle_marker_be70af1beb4b8ace5b0e3e8a944f9d60.bindTooltip(
+                `<div>
+                     LV:<br>Load: 3.146834 TWh<br>Total installed capacities: 3.021000 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1f50d069d366bc83f57fabba3adbedfd = L.circleMarker(
+                [46.65821, 28.68874],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_caaad0ba96741b2098a147013525c278 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_3d880d6cfaf5f4803ad315b01138c696 = $(`<div id="html_3d880d6cfaf5f4803ad315b01138c696" style="width: 100.0%; height: 100.0%;"><b>MD</b><br>Coordinates: 28.6887, 46.6582<br>Total demand: 2.576992 TWh<br>Total installed capacity: 0.998640 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>biomass: 0.007000 GW<br>natural gas: 0.361000 GW<br>onwind: 0.190000 GW<br>solar: 0.440000 GW<br><u>Storage</u><br>hydro: 0.000640 GW</div>`)[0];
+                popup_caaad0ba96741b2098a147013525c278.setContent(html_3d880d6cfaf5f4803ad315b01138c696);
+            
+        
+
+        circle_marker_1f50d069d366bc83f57fabba3adbedfd.bindPopup(popup_caaad0ba96741b2098a147013525c278)
+        ;
+
+        
+    
+    
+            circle_marker_1f50d069d366bc83f57fabba3adbedfd.bindTooltip(
+                `<div>
+                     MD:<br>Load: 2.576992 TWh<br>Total installed capacities: 0.998640 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_00dfae663d4dfffef5796da2d9de411d = L.circleMarker(
+                [42.80666, 19.1445],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_b449f4de30922b51a5b4a6e013e272d3 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_e5bababacdab8d72d4163ce8a3870805 = $(`<div id="html_e5bababacdab8d72d4163ce8a3870805" style="width: 100.0%; height: 100.0%;"><b>ME</b><br>Coordinates: 19.1445, 42.8067<br>Total demand: 1.320461 TWh<br>Total installed capacity: 0.639101 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>biomass: 0.000000 GW<br>lignite: 0.207481 GW<br>onwind: 0.118000 GW<br>ror: 0.307000 GW<br>solar: 0.003200 GW<br>waste: 0.000000 GW<br><u>Storage</u><br>hydro: 0.003420 GW</div>`)[0];
+                popup_b449f4de30922b51a5b4a6e013e272d3.setContent(html_e5bababacdab8d72d4163ce8a3870805);
+            
+        
+
+        circle_marker_00dfae663d4dfffef5796da2d9de411d.bindPopup(popup_b449f4de30922b51a5b4a6e013e272d3)
+        ;
+
+        
+    
+    
+            circle_marker_00dfae663d4dfffef5796da2d9de411d.bindTooltip(
+                `<div>
+                     ME:<br>Load: 1.320461 TWh<br>Total installed capacities: 0.639101 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2844155e9bbb3a4d783b57d2dbe74bfa = L.circleMarker(
+                [41.58136, 21.58745],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_45290bb87586670277433a8816f4860d = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_0178cfba028b825e9ea8c66a2cc77643 = $(`<div id="html_0178cfba028b825e9ea8c66a2cc77643" style="width: 100.0%; height: 100.0%;"><b>MK</b><br>Coordinates: 21.5875, 41.5814<br>Total demand: 2.893916 TWh<br>Total installed capacity: 1.403052 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>biomass: 0.007000 GW<br>lignite: 0.737712 GW<br>natural gas: 0.418000 GW<br>onwind: 0.037000 GW<br>solar: 0.196900 GW<br>waste: 0.000000 GW<br><u>Storage</u><br>hydro: 0.006440 GW</div>`)[0];
+                popup_45290bb87586670277433a8816f4860d.setContent(html_0178cfba028b825e9ea8c66a2cc77643);
+            
+        
+
+        circle_marker_2844155e9bbb3a4d783b57d2dbe74bfa.bindPopup(popup_45290bb87586670277433a8816f4860d)
+        ;
+
+        
+    
+    
+            circle_marker_2844155e9bbb3a4d783b57d2dbe74bfa.bindTooltip(
+                `<div>
+                     MK:<br>Load: 2.893916 TWh<br>Total installed capacities: 1.403052 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fa3ffe4b3cf1490779adf782c986e57a = L.circleMarker(
+                [52.37429, 5.55145],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_f30630ac117a6c9b855fd449bc96b525 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_d3e08aa43b7c8dc204b8b9af41ad522e = $(`<div id="html_d3e08aa43b7c8dc204b8b9af41ad522e" style="width: 100.0%; height: 100.0%;"><b>NL</b><br>Coordinates: 5.5514, 52.3743<br>Total demand: 51.236537 TWh<br>Total installed capacity: 39.174992 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>OTH: 0.548000 GW<br>biomass: 0.415000 GW<br>hard coal: 6.299892 GW<br>natural gas: 15.859600 GW<br>offwind-ac: 3.978000 GW<br>onwind: 6.812000 GW<br>solar: 4.476500 GW<br>waste: 0.786000 GW<br><u>Storage</u><br>none</div>`)[0];
+                popup_f30630ac117a6c9b855fd449bc96b525.setContent(html_d3e08aa43b7c8dc204b8b9af41ad522e);
+            
+        
+
+        circle_marker_fa3ffe4b3cf1490779adf782c986e57a.bindPopup(popup_f30630ac117a6c9b855fd449bc96b525)
+        ;
+
+        
+    
+    
+            circle_marker_fa3ffe4b3cf1490779adf782c986e57a.bindTooltip(
+                `<div>
+                     NL:<br>Load: 51.236537 TWh<br>Total installed capacities: 39.174992 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6c5c9b16e5a4087e155440d4d379bb15 = L.circleMarker(
+                [60.9991, 8.62311],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_7fdacc3e272bec78a56232dbd1b5bc03 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_ec884680265653bd860eb4d635903ae0 = $(`<div id="html_ec884680265653bd860eb4d635903ae0" style="width: 100.0%; height: 100.0%;"><b>NO</b><br>Coordinates: 8.6231, 60.9991<br>Total demand: 67.610964 TWh<br>Total installed capacity: 13.284479 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>biomass: 0.014380 GW<br>natural gas: 0.753000 GW<br>offwind-ac: 0.138000 GW<br>onwind: 5.133000 GW<br>ror: 6.875490 GW<br>solar: 0.001400 GW<br>waste: 0.091960 GW<br><u>Storage</u><br>hydro: 0.277249 GW</div>`)[0];
+                popup_7fdacc3e272bec78a56232dbd1b5bc03.setContent(html_ec884680265653bd860eb4d635903ae0);
+            
+        
+
+        circle_marker_6c5c9b16e5a4087e155440d4d379bb15.bindPopup(popup_7fdacc3e272bec78a56232dbd1b5bc03)
+        ;
+
+        
+    
+    
+            circle_marker_6c5c9b16e5a4087e155440d4d379bb15.bindTooltip(
+                `<div>
+                     NO:<br>Load: 67.610964 TWh<br>Total installed capacities: 13.284479 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_42a5aab9f73b44e45f503014fa2a38cf = L.circleMarker(
+                [51.5829, 19.10804],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_d41befd0913a0d1e1e1b12d395e80a47 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_6bfa866e4b38533db70760d8e449cf41 = $(`<div id="html_6bfa866e4b38533db70760d8e449cf41" style="width: 100.0%; height: 100.0%;"><b>PL</b><br>Coordinates: 19.1080, 51.5829<br>Total demand: 72.026771 TWh<br>Total installed capacity: 54.797113 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>biomass: 0.662300 GW<br>hard coal: 13.980925 GW<br>lignite: 7.522602 GW<br>natural gas: 6.516500 GW<br>oil: 0.055000 GW<br>onwind: 9.582930 GW<br>ror: 0.320690 GW<br>solar: 16.135600 GW<br>waste: 0.000000 GW<br><u>Storage</u><br>hydro: 0.020566 GW</div>`)[0];
+                popup_d41befd0913a0d1e1e1b12d395e80a47.setContent(html_6bfa866e4b38533db70760d8e449cf41);
+            
+        
+
+        circle_marker_42a5aab9f73b44e45f503014fa2a38cf.bindPopup(popup_d41befd0913a0d1e1e1b12d395e80a47)
+        ;
+
+        
+    
+    
+            circle_marker_42a5aab9f73b44e45f503014fa2a38cf.bindTooltip(
+                `<div>
+                     PL:<br>Load: 72.026771 TWh<br>Total installed capacities: 54.797113 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9c7ce56d0aaf93afc25b8df5c7f0ef4e = L.circleMarker(
+                [40.31347, -8.28212],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_9267f133c6ad0ce2d66088ada1ec13a2 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_f6d4b0418be9f686a8fcb40c7647c3bf = $(`<div id="html_f6d4b0418be9f686a8fcb40c7647c3bf" style="width: 100.0%; height: 100.0%;"><b>PT</b><br>Coordinates: -8.2821, 40.3135<br>Total demand: 22.449853 TWh<br>Total installed capacity: 16.402664 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>biomass: 0.681000 GW<br>natural gas: 4.677500 GW<br>offwind-ac: 0.025000 GW<br>onwind: 5.332800 GW<br>ror: 2.855500 GW<br>solar: 2.777500 GW<br>waste: 0.000000 GW<br><u>Storage</u><br>hydro: 0.053364 GW</div>`)[0];
+                popup_9267f133c6ad0ce2d66088ada1ec13a2.setContent(html_f6d4b0418be9f686a8fcb40c7647c3bf);
+            
+        
+
+        circle_marker_9c7ce56d0aaf93afc25b8df5c7f0ef4e.bindPopup(popup_9267f133c6ad0ce2d66088ada1ec13a2)
+        ;
+
+        
+    
+    
+            circle_marker_9c7ce56d0aaf93afc25b8df5c7f0ef4e.bindTooltip(
+                `<div>
+                     PT:<br>Load: 22.449853 TWh<br>Total installed capacities: 16.402664 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e4322a81e5bd2fa12b88e766466c4f3a = L.circleMarker(
+                [45.59599, 25.01182],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_e0630cd1a2c470c0873c041e91f19d76 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_76f1c0176b59f0665f402edf94eb9958 = $(`<div id="html_76f1c0176b59f0665f402edf94eb9958" style="width: 100.0%; height: 100.0%;"><b>RO</b><br>Coordinates: 25.0118, 45.5960<br>Total demand: 24.073387 TWh<br>Total installed capacity: 16.885102 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>biomass: 0.118000 GW<br>hard coal: 0.193607 GW<br>lignite: 2.803305 GW<br>natural gas: 4.831500 GW<br>nuclear: 1.300000 GW<br>onwind: 2.958000 GW<br>ror: 2.780000 GW<br>solar: 1.867100 GW<br>waste: 0.000000 GW<br><u>Storage</u><br>hydro: 0.033590 GW</div>`)[0];
+                popup_e0630cd1a2c470c0873c041e91f19d76.setContent(html_76f1c0176b59f0665f402edf94eb9958);
+            
+        
+
+        circle_marker_e4322a81e5bd2fa12b88e766466c4f3a.bindPopup(popup_e0630cd1a2c470c0873c041e91f19d76)
+        ;
+
+        
+    
+    
+            circle_marker_e4322a81e5bd2fa12b88e766466c4f3a.bindTooltip(
+                `<div>
+                     RO:<br>Load: 24.073387 TWh<br>Total installed capacities: 16.885102 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e6e5f35bbb9e178d8155957376f52eb2 = L.circleMarker(
+                [44.11371, 20.66269],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_615b4a371e83e5e26a93a6e474d29631 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_bd04847a2e7321ea5583794a724e6e97 = $(`<div id="html_bd04847a2e7321ea5583794a724e6e97" style="width: 100.0%; height: 100.0%;"><b>RS</b><br>Coordinates: 20.6627, 44.1137<br>Total demand: 15.986330 TWh<br>Total installed capacity: 8.360739 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>biomass: 0.002380 GW<br>lignite: 5.026367 GW<br>natural gas: 0.554000 GW<br>onwind: 0.645620 GW<br>ror: 2.053110 GW<br>solar: 0.035600 GW<br>waste: 0.032400 GW<br><u>Storage</u><br>hydro: 0.011262 GW</div>`)[0];
+                popup_615b4a371e83e5e26a93a6e474d29631.setContent(html_bd04847a2e7321ea5583794a724e6e97);
+            
+        
+
+        circle_marker_e6e5f35bbb9e178d8155957376f52eb2.bindPopup(popup_615b4a371e83e5e26a93a6e474d29631)
+        ;
+
+        
+    
+    
+            circle_marker_e6e5f35bbb9e178d8155957376f52eb2.bindTooltip(
+                `<div>
+                     RS:<br>Load: 15.986330 TWh<br>Total installed capacities: 8.360739 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4c2f35951bb566e24fb16e3ea2f8b060 = L.circleMarker(
+                [61.27498, 16.23341],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_6aa51ab5bcb3f9a949eab2d9fa86252b = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_8d35a326642e7f3525d5ef2a059d44d7 = $(`<div id="html_8d35a326642e7f3525d5ef2a059d44d7" style="width: 100.0%; height: 100.0%;"><b>SE</b><br>Coordinates: 16.2334, 61.2750<br>Total demand: 65.337489 TWh<br>Total installed capacity: 30.563400 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>biomass: 0.000000 GW<br>natural gas: 2.358000 GW<br>nuclear: 8.617000 GW<br>offwind-ac: 0.188000 GW<br>oil: 1.015000 GW<br>onwind: 16.700000 GW<br>ror: 1.279000 GW<br>solar: 0.243400 GW<br>waste: 0.000000 GW<br><u>Storage</u><br>hydro: 0.163000 GW</div>`)[0];
+                popup_6aa51ab5bcb3f9a949eab2d9fa86252b.setContent(html_8d35a326642e7f3525d5ef2a059d44d7);
+            
+        
+
+        circle_marker_4c2f35951bb566e24fb16e3ea2f8b060.bindPopup(popup_6aa51ab5bcb3f9a949eab2d9fa86252b)
+        ;
+
+        
+    
+    
+            circle_marker_4c2f35951bb566e24fb16e3ea2f8b060.bindTooltip(
+                `<div>
+                     SE:<br>Load: 65.337489 TWh<br>Total installed capacities: 30.563400 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1a48ab8bf748de79ba16ca1e4bccb7f3 = L.circleMarker(
+                [46.12128, 14.80522],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_ee36c0fa3a1162c682a55a5e1c6436c7 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_c37713966bbd76b5c14172de3ff8e9bf = $(`<div id="html_c37713966bbd76b5c14172de3ff8e9bf" style="width: 100.0%; height: 100.0%;"><b>SI</b><br>Coordinates: 14.8052, 46.1213<br>Total demand: 5.708514 TWh<br>Total installed capacity: 3.105412 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>biomass: 0.043390 GW<br>lignite: 1.005422 GW<br>natural gas: 0.194000 GW<br>nuclear: 0.696000 GW<br>onwind: 0.003250 GW<br>ror: 1.125240 GW<br>solar: 0.030000 GW<br>waste: 0.006310 GW<br><u>Storage</u><br>hydro: 0.001800 GW</div>`)[0];
+                popup_ee36c0fa3a1162c682a55a5e1c6436c7.setContent(html_c37713966bbd76b5c14172de3ff8e9bf);
+            
+        
+
+        circle_marker_1a48ab8bf748de79ba16ca1e4bccb7f3.bindPopup(popup_ee36c0fa3a1162c682a55a5e1c6436c7)
+        ;
+
+        
+    
+    
+            circle_marker_1a48ab8bf748de79ba16ca1e4bccb7f3.bindTooltip(
+                `<div>
+                     SI:<br>Load: 5.708514 TWh<br>Total installed capacities: 3.105412 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ee9afb2ef19a1cdd8b72671795d75ee7 = L.circleMarker(
+                [48.65333, 19.02789],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_d5f89ef61f410876a0d05719f179eca3 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_4fdaaafc3976e12a4bf387d4947f5c99 = $(`<div id="html_4fdaaafc3976e12a4bf387d4947f5c99" style="width: 100.0%; height: 100.0%;"><b>SK</b><br>Coordinates: 19.0279, 48.6533<br>Total demand: 11.459277 TWh<br>Total installed capacity: 5.490297 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>biomass: 0.000000 GW<br>hard coal: 0.592674 GW<br>lignite: 0.285863 GW<br>natural gas: 1.004870 GW<br>nuclear: 1.940000 GW<br>ror: 1.217690 GW<br>solar: 0.449200 GW<br>waste: 0.000000 GW<br><u>Storage</u><br>none</div>`)[0];
+                popup_d5f89ef61f410876a0d05719f179eca3.setContent(html_4fdaaafc3976e12a4bf387d4947f5c99);
+            
+        
+
+        circle_marker_ee9afb2ef19a1cdd8b72671795d75ee7.bindPopup(popup_d5f89ef61f410876a0d05719f179eca3)
+        ;
+
+        
+    
+    
+            circle_marker_ee9afb2ef19a1cdd8b72671795d75ee7.bindTooltip(
+                `<div>
+                     SK:<br>Load: 11.459277 TWh<br>Total installed capacities: 5.490297 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2b2639f2b9b2df4b2a2ea5c3b085325a = L.circleMarker(
+                [49.87714, 24.50098],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_a61f22b005fcc8a477664f152191021b = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_e0521e2e55a607319b241bdf72802cf6 = $(`<div id="html_e0521e2e55a607319b241bdf72802cf6" style="width: 100.0%; height: 100.0%;"><b>UA</b><br>Coordinates: 24.5010, 49.8771<br>Total demand: 47.091555 TWh<br>Total installed capacity: 17.925380 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>biomass: 0.318000 GW<br>hard coal: 0.300000 GW<br>load shedding: 0.169170 GW<br>natural gas: 1.062000 GW<br>nuclear: 7.835000 GW<br>onwind: 0.607000 GW<br>solar: 7.600000 GW<br><u>Storage</u><br>PHS: 0.019850 GW<br>hydro: 0.014360 GW</div>`)[0];
+                popup_a61f22b005fcc8a477664f152191021b.setContent(html_e0521e2e55a607319b241bdf72802cf6);
+            
+        
+
+        circle_marker_2b2639f2b9b2df4b2a2ea5c3b085325a.bindPopup(popup_a61f22b005fcc8a477664f152191021b)
+        ;
+
+        
+    
+    
+            circle_marker_2b2639f2b9b2df4b2a2ea5c3b085325a.bindTooltip(
+                `<div>
+                     UA:<br>Load: 47.091555 TWh<br>Total installed capacities: 17.925380 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_009333b5c60343bf5fe4b6211ad670b1 = L.circleMarker(
+                [53.38928, -2.16042],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_96e47fd67b436e60a4d51975931e5e12 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_995550695a54cbee4607a33c35e2b376 = $(`<div id="html_995550695a54cbee4607a33c35e2b376" style="width: 100.0%; height: 100.0%;"><b>UK</b><br>Coordinates: -2.1604, 53.3893<br>Total demand: 126.157032 TWh<br>Total installed capacity: 95.103975 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>OTH: 0.055000 GW<br>biomass: 4.500000 GW<br>natural gas: 36.212400 GW<br>nuclear: 10.650000 GW<br>offwind-ac: 15.179000 GW<br>oil: 0.100000 GW<br>onwind: 14.596700 GW<br>ror: 3.636175 GW<br>solar: 9.886700 GW<br>waste: 0.288000 GW<br><u>Storage</u><br>none</div>`)[0];
+                popup_96e47fd67b436e60a4d51975931e5e12.setContent(html_995550695a54cbee4607a33c35e2b376);
+            
+        
+
+        circle_marker_009333b5c60343bf5fe4b6211ad670b1.bindPopup(popup_96e47fd67b436e60a4d51975931e5e12)
+        ;
+
+        
+    
+    
+            circle_marker_009333b5c60343bf5fe4b6211ad670b1.bindTooltip(
+                `<div>
+                     UK:<br>Load: 126.157032 TWh<br>Total installed capacities: 95.103975 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e20bb7566a6196928421396120c9352c = L.circleMarker(
+                [42.6, 21.0],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_776ca3ca0b51c67c2b461654c341bd4e);
+        
+    
+        var popup_a675dcf65e2065505c6a39137634d798 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_b4e2cc7f3f942de2c373155e72c9d022 = $(`<div id="html_b4e2cc7f3f942de2c373155e72c9d022" style="width: 100.0%; height: 100.0%;"><b>XK</b><br>Coordinates: 21.0000, 42.6000<br>Total demand: 3.399867 TWh<br>Total installed capacity: 1.187716 GW<br><hr><br><b>Installed capacities by type (GW)</b><br><u>Generators</u><br>biomass: 0.000000 GW<br>lignite: 1.187716 GW<br>waste: 0.000000 GW<br><u>Storage</u><br>none</div>`)[0];
+                popup_a675dcf65e2065505c6a39137634d798.setContent(html_b4e2cc7f3f942de2c373155e72c9d022);
+            
+        
+
+        circle_marker_e20bb7566a6196928421396120c9352c.bindPopup(popup_a675dcf65e2065505c6a39137634d798)
+        ;
+
+        
+    
+    
+            circle_marker_e20bb7566a6196928421396120c9352c.bindTooltip(
+                `<div>
+                     XK:<br>Load: 3.399867 TWh<br>Total installed capacities: 1.187716 GW
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>
