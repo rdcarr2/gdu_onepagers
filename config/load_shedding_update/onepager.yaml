@@ -1,44 +1,45 @@
-# config/onepager_config.yaml
-# Structural/config settings for the one-pager generator:
-# - template & output locations
-# - scenarios & where to find their plots
-# - figure definitions (patterns, titles, subtitles)
+# =============================================================================
+# ONE-PAGER CONFIGURATION
+# Structural + content settings for the one-pager generator
+# =============================================================================
 
-# Name of the overall project (used in title/header)
+# ---------------------------------------------------------------------------
+# PROJECT SETTINGS
+# ---------------------------------------------------------------------------
 project: load_shedding_update
-
-# optional: make plots root confiqurable
 plots_root: "plots"
 
+network_file: "network_files/load_shedding_update/LP_network_unsolved.nc"
+
+# ---------------------------------------------------------------------------
+# TEMPLATE + OUTPUT SETTINGS
+# ---------------------------------------------------------------------------
 template:
-  # Name of the Jinja2 template inside the templates/ folder
   name: "onepager_images_auto.html"
-
-  # Name of the final HTML file written into output_dir
   output_html: "onepager_map.html"
-
-  # Directory where the final HTML and copied assets are written
   output_dir: "output"
-
-  # Subdirectory under output_dir where images will be copied
   assets_subdir: "assets"
 
+# ---------------------------------------------------------------------------
+# SCENARIOS
+# ---------------------------------------------------------------------------
 scenarios:
-  # key used in JSON/JS: "outage_heatshock"
   baseline:
     name: "Baseline"
-    folder: "outage_baseline"           # under ./plots/
+    folder: "outage_baseline"
 
   outage_heatshock:
     name: "Outage Heat Shock"
-    folder: "outage_heatshock"   # under ./plots/
+    folder: "outage_heatshock"
 
   outage_23GW_transmission:
     name: "Outage 2.3GW Transmission"
-    folder: "outage_23GW_transmission"  # under ./plots/  
+    folder: "outage_23GW_transmission"
 
+# ---------------------------------------------------------------------------
+# FIGURE DEFINITIONS
+# ---------------------------------------------------------------------------
 figures:
-  # Figure IDs used internally in the script + template
   installed_capacities:
     pattern: "HSCBP_{bus}_installed capacities.png"
     title: "Installed Capacities (GW)"
@@ -69,40 +70,35 @@ figures:
     title: "Hourly Load Shedding (MW)"
     subtitle_template: "SAPwL_{bus}_load shedding.png"
 
-network_file: "network_files/load_shedding_update/LP_network_unsolved.nc"
+# =============================================================================
+# TEXT CONTENT (onepager_text.yaml)
+# =============================================================================
 
-# onepager_text.yaml
-# All editable text content for the PyPSA one-pager dashboard.
-# The idea is that your Python script will read this file and
-# pass it as a "text_config" object into the Jinja template.
-
+# ---------------------------------------------------------------------------
+# PAGE HEADER
+# ---------------------------------------------------------------------------
 page:
-  # Main title at the very top left
   title: "Load Shedding in Ukraine: Winter 2025/26"
-
-  # Short description line under the title
   subtitle: "Modelling Ukraine's current, estimated electricity deficit with PyPSA"
 
-  # Highlighted “Key message” phrase in the subtitle block
   key_message_prefix: "Key message:"
   key_message: "Subsantial load-shedding is expected between December 2025 and March 2026, additional capacities are urgently needed."
 
-  # new: authors list (fill names & linkedin URLs)
   authors:
     - name: "Robert Carr"
       linkedin: "https://www.linkedin.com/in/robert-carr-b71826183/"
     - name: "Frank Meissner"
       linkedin: "https://www.linkedin.com/in/frank-mei%C3%9Fner-317991211/"
-  # new: affiliation string
+
   affiliation: "Green Deal Ukraïna project @ Helmholtz-Zentrum Berlin"
 
+# ---------------------------------------------------------------------------
+# META INFO BOX
+# ---------------------------------------------------------------------------
 meta:
-  # Small meta-info box on the top right
-  # new: tools used
   tools_label: "Tool(s):"
   tools_value: "PyPSA, Atlite"
 
-  # new: specific model descriptor
   specific_model_label: "Specific model (if applicable):"
   specific_model_value: "HZB_PyPSA v1.0"
 
@@ -115,6 +111,9 @@ meta:
   scenario_set_label: "Scenario set:"
   scenario_set_value: "[name]"
 
+# ---------------------------------------------------------------------------
+# KEY METRICS
+# ---------------------------------------------------------------------------
 metrics:
   - id: "load_shedding"
     label: "Total estimated load shedding"
@@ -136,13 +135,13 @@ metrics:
     value: "2.3 GW"
     note: "For UA-MD block with ENTSO-E"
 
+# ---------------------------------------------------------------------------
+# TEXT SECTIONS (LEFT COLUMN)
+# ---------------------------------------------------------------------------
 sections:
-  # LEFT COLUMN TEXT SECTIONS
-  research_objective:
-    # Section title in the card
-    title: "Research objective"
 
-    # Short paragraph explaining the main study question
+  research_objective:
+    title: "Research objective"
     body: >
       This analysis attempts to quantify the expected load-shedding in Ukraine over 
       the winter period 2025/26, accounting for the current state of generation capacities,
@@ -161,7 +160,6 @@ sections:
 
   methodology:
     title: "Methodology"
-    # Bullet points shown in the "Methodology" list
     bullets:
       - "Model: In-house PyPSA (Python for Power Systems Analysis) model at hourly resolution."
       - "Objective: minimise total system cost subject to constraints."
@@ -173,14 +171,12 @@ sections:
       - "Installed capacities data: Powerplantmatching & Global Energy Monitor; UA capacities estimated by GDU" 
       - "Weather data for capacity factors and heat demand: ERA5 cutouts via Atlite."
       - "Fuel and commodity costs: TradeEconomics"
-    
 
   scenario_space:
     title: "Scenario space"
     bullets:
       - "Baseline: Current estimated capacities and cross-border limits."
       - "Heat Shock: +XX% demand in certain hours to reflect increased electrical heating."
-
 
   main_findings:
     title: "Main findings"
@@ -190,34 +186,32 @@ sections:
       - "Substituting gas and district heating with electric heaters increases demand by 2 TWh mainly in the afternoon and evening hours. Under this assumption, load shedding takes place in 49% of the hours and sum up to 4.1 TWh."
       - "The increase of cross-border capacity has helped, but the following measures would provide even more relief:"
 
-
+# ---------------------------------------------------------------------------
+# UI LABELS
+# ---------------------------------------------------------------------------
 ui_labels:
-  # Labels for drop-downs and buttons in the UI.
   scenario_label: "Scenario"
   bus_label: "Bus"
 
   compare_scenarios_button: "Compare Scenarios"
   compare_buses_button: "Compare Buses"
 
-  # Single-view generation toggle
   single_generation_view_label: "View:"
   generation_mode_agg: "Aggregated"
   generation_mode_hourly: "Hourly"
 
-  # Compare-view generation toggle
   compare_generation_view_label: "Generation view:"
 
-  # Generic small messages
   compare_hint_scenarios: "Select one or more scenarios to compare."
   compare_hint_buses: "Select one or more buses to compare."
   compare_no_data: "No data available for this combination."
   compare_limit_warning: "You can select at most 4."
 
+# ---------------------------------------------------------------------------
+# FOOTER
+# ---------------------------------------------------------------------------
 footer:
-  # Bottom row of the page
   generated_on_prefix: "Generated on:"
-  # The date itself you might inject dynamically from Python, but you can
-  # also put a static string here if you prefer.
   generated_on_value: "2025-11-21"
 
   run_id_label: "Run ID:"
@@ -226,11 +220,11 @@ footer:
   contact_text: "Contact: modelling team"
   version_text: "Version: v2.2 image-based dashboard"
 
-# New citation block (parameterisable)
+# ---------------------------------------------------------------------------
+# CITATION BLOCK
+# ---------------------------------------------------------------------------
 citation:
-  # The citation text shown in the textbox and copied by the button
   text: "Carr, R. & Meissner, F. (2025). Load Shedding in Ukraine: Winter 2025/26. Green Deal Ukraïna project, Helmholtz-Zentrum Berlin."
-  # optionally include bibtex or alternative copy text
   bibtex: |
     @techreport{carr2025load,
       author = {Carr, Robert and Meissner, Frank},
@@ -238,4 +232,3 @@ citation:
       institution = {Helmholtz-Zentrum Berlin, Green Deal Ukraïna project},
       year = {2025}
     }
-
