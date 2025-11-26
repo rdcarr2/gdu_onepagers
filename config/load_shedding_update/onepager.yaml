@@ -16,7 +16,7 @@ network_file: "network_files/load_shedding_update/LP_network_unsolved.nc"
 # ---------------------------------------------------------------------------
 template:
   name: "onepager_images_auto.html"
-  output_html: "onepager_map.html"
+  output_html: "LS_dashboard.html"
   output_dir: "output"
   assets_subdir: "assets"
 
