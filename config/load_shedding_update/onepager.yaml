@@ -160,6 +160,12 @@ sections:
       provide a model-based estimate of the expected load-shedding and explore potential mitigation
       measures.
 
+  scenario_space:
+    title: "Scenario space"
+    bullets:
+      - "Baseline: Current estimated capacities and cross-border limits."
+      - "Heat Shock: +XX% demand in certain hours to reflect increased electrical heating."
+
   methodology:
     title: "Methodology"
     bullets:
@@ -169,16 +175,16 @@ sections:
       - "Hourly dispatch optimised economically over the period November 2025 - March 2026."
       - "Maintenance outages for nuclear units included"
       - "Dummy load shedding generators (very high cost, last in merid order) installed in Ukraine to capture unserved energy."
-      - "Demand data: ENTSO-E Transparency Platform; for UA adjusted to reflect war impacts." 
-      - "Installed capacities data: Powerplantmatching & Global Energy Monitor; UA capacities estimated by GDU" 
-      - "Weather data for capacity factors and heat demand: ERA5 cutouts via Atlite."
-      - "Fuel and commodity costs: TradeEconomics"
+      - "Heat demand drives CHP generation based on temperature data"
 
-  scenario_space:
-    title: "Scenario space"
+  data_inputs:
+    title: "Data inputs"
     bullets:
-      - "Baseline: Current estimated capacities and cross-border limits."
-      - "Heat Shock: +XX% demand in certain hours to reflect increased electrical heating."
+      - "Demand: ENTSO-E Transparency Platform; UA adjusted for wartime impacts."
+      - "Installed capacities: Powerplantmatching & Global Energy Monitor; UA estimates by GDU."
+      - "Net transfer capacities: ENTSO-E Transparency Platform."
+      - "Weather data: ERA5 cutouts via Atlite."
+      - "Fuel and commodity prices: TradeEconomics."
 
   main_findings:
     title: "Main findings"

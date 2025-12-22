@@ -131,6 +131,26 @@ def build_scenarios_data(root: Path, config: dict, assets_root: Path):
     return all_data
 
 
+def copy_logos(root: Path, output_root: Path):
+    """
+    Copy static logos (shared across dashboards) into output/logos.
+    HTML can then reference ../logos/<file>. No cleanup to avoid deleting
+    user-provided files.
+    """
+    logos_src = root / "logos"
+    if not logos_src.exists():
+        return
+
+    # always place logos under output/logos so all projects share the same copy
+    logos_dest = root / "output" / "logos"
+    logos_dest.mkdir(parents=True, exist_ok=True)
+
+    for logo_file in logos_src.iterdir():
+        if logo_file.is_file():
+            shutil.copy2(logo_file, logos_dest / logo_file.name)
+            print(f"[DEBUG] copied logo {logo_file.name} -> {logos_dest}")
+
+
 def render_onepager(root: Path, config: dict, scenarios_data, output_root: Path = None):
     # --- Determine text config ---
     # Support three cases:
@@ -270,6 +290,9 @@ def main():
 
     assets_root.mkdir(parents=True, exist_ok=True)
     scenarios_data = build_scenarios_data(root=root, config=config, assets_root=assets_root)
+
+    # copy shared logos (if any) to output/logos
+    copy_logos(root=root, output_root=output_root)
 
     render_onepager(root=root, config=config, scenarios_data=scenarios_data, output_root=output_root)
 

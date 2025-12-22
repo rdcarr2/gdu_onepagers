@@ -6,12 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     :root {
-      --bg: #f4f5f7;
-      --fg: #111827;
-      --muted: #6b7280;
-      --accent: #2563eb;
+      --bg: #eef2f5;
+      --fg: #0f172a;
+      --muted: #5b6478;
+      --accent: #0ea5e9;
       --card-bg: #ffffff;
-      --border: #e5e7eb;
+      --border: #d7dde6;
       --radius-lg: 16px;
     }
 
@@ -20,9 +20,11 @@
     body {
       margin: 0;
       padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
-      background: var(--bg);
+      font-family: "Courier New", Courier, monospace;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(14,165,233,0.08), transparent 35%),
+        radial-gradient(circle at 80% 10%, rgba(99,102,241,0.08), transparent 32%),
+        var(--bg);
       color: var(--fg);
     }
 
@@ -105,6 +107,25 @@
       font-size: 0.85rem;
     }
     .copy-btn:active { transform: translateY(1px); }
+    .main-findings-card {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      border-left: 4px solid var(--accent);
+      background: rgba(14,165,233,0.08);
+      padding: 12px 14px;
+      border-radius: 10px;
+    }
+    .main-findings-icon {
+      font-weight: 700;
+      color: var(--accent);
+      margin-top: 2px;
+    }
+    .main-findings-content h2 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+    }
+    .main-findings-content .bullet-list { margin: 0; }
 
     .metrics-row {
       display: grid;
@@ -151,11 +172,12 @@
 
     .controls-right {
       display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      justify-content: flex-end;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.35rem;
+      justify-content: flex-start;
       margin-left: 1rem;
-      white-space: nowrap; /* prevent wrapping under the dropdowns */
+      min-width: 160px;
     }
 
     .pill-button {
@@ -169,6 +191,114 @@
       gap: 16px;
       align-items: stretch;
       margin-top: 8px;
+    }
+    .main-grid.compare-mode {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .data-panel {
+      position: relative;
+      min-height: 200px;
+    }
+    .data-panel-content {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: filter 0.2s ease, opacity 0.2s ease;
+    }
+    .data-panel.locked .data-panel-content {
+      filter: blur(6px);
+      opacity: 0.55;
+      pointer-events: none;
+      user-select: none;
+    }
+    .data-veil {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 12px;
+      z-index: 10;
+    }
+    .data-veil::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.55);
+      backdrop-filter: blur(3px);
+    }
+    .data-veil-inner {
+      position: relative;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 18px;
+      text-align: center;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.08);
+      max-width: 320px;
+      z-index: 11;
+    }
+    .data-veil-inner h3 {
+      margin: 0 0 6px;
+      font-size: 1.1rem;
+    }
+    .data-veil-inner p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    /* Text panel lock */
+    .text-panel {
+      position: relative;
+    }
+    .text-panel-content {
+      transition: filter 0.2s ease, opacity 0.2s ease;
+    }
+    .text-panel.locked .text-panel-content {
+      filter: blur(6px);
+      opacity: 0.55;
+      pointer-events: none;
+      user-select: none;
+    }
+    .text-veil {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 12px;
+      z-index: 10;
+    }
+    .text-veil::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.55);
+      backdrop-filter: blur(3px);
+    }
+    .text-veil-inner {
+      position: relative;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      text-align: center;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.08);
+      max-width: 340px;
+      z-index: 11;
+    }
+    .text-veil-inner h3 {
+      margin: 0 0 6px;
+      font-size: 1.05rem;
+    }
+    .text-veil-inner p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.4;
     }
 
     .card {
@@ -412,6 +542,19 @@
       font-size: 0.9rem;
       color: var(--muted);
     }
+    .logo-strip {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 6px;
+      justify-content: flex-end;
+    }
+    .logo-strip img {
+      height: 52px;
+      max-width: 190px;
+      object-fit: contain;
+    }
 
     /* left-side meta block under affiliation */
     .left-meta {
@@ -556,6 +699,10 @@
       </div>
 
       <div class="meta-block">
+        <div class="logo-strip" aria-label="Partner logos">
+          <img src="../logos/GDU_logo_nowhitespace.png" alt="GDU logo" loading="lazy" />
+          <img src="../logos/HZB_logo-a4-rgb transparent.png" alt="HZB logo" loading="lazy" />
+        </div>
         <!-- restore meta fields in the top-right block -->
         {% if text_config.meta.model_label %}
           <div><strong>{{ text_config.meta.model_label }}</strong> {{ text_config.meta.model_value }}</div>
@@ -572,9 +719,6 @@
         {% if text_config.meta.solver_label %}
           <div><strong>{{ text_config.meta.solver_label }}</strong> {{ text_config.meta.solver_value }}</div>
         {% endif %}
-        {% if text_config.meta.scenario_set_label %}
-          <div><strong>{{ text_config.meta.scenario_set_label }}</strong> {{ text_config.meta.scenario_set_value }}</div>
-        {% endif %}
       </div>
     </header>
 
@@ -583,6 +727,19 @@
       <div class="key-message-prefix">{{ text_config.page.key_message_prefix }}</div>
       <div class="key-message-text">{{ text_config.page.key_message }}</div>
     </div>
+
+    <!-- Prominent main findings -->
+    <section class="card main-findings-card" aria-label="Main findings">
+      <div class="main-findings-icon">★</div>
+      <div class="main-findings-content">
+        <h2>{{ text_config.sections.main_findings.title }}</h2>
+        <ul class="bullet-list">
+          {% for item in text_config.sections.main_findings.bullets %}
+          <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </section>
     
     <section class="metrics-row">
       {% for metric in text_config.metrics %}
@@ -594,104 +751,180 @@
       {% endfor %}
     </section>
 
-    <!-- GLOBAL CONTROLS -->
-    <section id="global-controls">
-      <div class="controls-left">
-        <label for="scenario-select">{{ text_config.ui_labels.scenario_label }}:</label>
-        <select id="scenario-select"></select>
-
-        <label for="bus-select">{{ text_config.ui_labels.bus_label }}:</label>
-        <select id="bus-select"></select>
-      </div>
-      <div class="controls-right">
-        <button id="btn-network-map" class="pill-button" title="Open network map">Network map</button>
-        <button id="btn-compare-scenarios" class="pill-button">
-          {{ text_config.ui_labels.compare_scenarios_button }}
-        </button>
-        <button id="btn-compare-buses" class="pill-button">
-          {{ text_config.ui_labels.compare_buses_button }}
-        </button>
-      </div>
-    </section>
-
     <!-- SINGLE VIEW -->
     <div id="single-view" class="main-grid">
       <!-- LEFT: text -->
-      <div class="card">
-        <div class="card-section">
-          <h2>{{ text_config.sections.research_objective.title }}</h2>
-          <p>{{ text_config.sections.research_objective.body }}</p>
-        </div>
-        <div class="card-section">
-          <h2>{{ text_config.sections.background.title }}</h2>
-          <p>{{ text_config.sections.background.body }}</p>
-        </div>
-        <div class="card-section">
-          <h2>{{ text_config.sections.methodology.title }}</h2>
-          <ul class="bullet-list">
-            {% for item in text_config.sections.methodology.bullets %}
-            <li>{{ item }}</li>
-            {% endfor %}
-          </ul>
-        </div>
-        <div class="card-section">
-          <h2>{{ text_config.sections.scenario_space.title }}</h2>
-          <ul class="bullet-list">
-            {% for item in text_config.sections.scenario_space.bullets %}
-            <li>{{ item }}</li>
-            {% endfor %}
-          </ul>
-        </div>
-        <div class="card-section">
-          <h2>{{ text_config.sections.main_findings.title }}</h2>
-          <ul class="bullet-list">
-            {% for item in text_config.sections.main_findings.bullets %}
-            <li>{{ item }}</li>
-            {% endfor %}
-          </ul>
-        </div>
+      <div class="text-panel locked" id="text-panel-wrapper">
+        <div class="card text-panel-content" id="text-panel">
+          <div style="display:flex; justify-content:flex-end; gap:8px;">
+            <button id="btn-lock-text" class="pill-button hidden">Hide summary</button>
+          </div>
+          <div class="card-section">
+            <h2>{{ text_config.sections.research_objective.title }}</h2>
+            <p>{{ text_config.sections.research_objective.body }}</p>
+          </div>
+          <div class="card-section">
+            <h2>{{ text_config.sections.background.title }}</h2>
+            <p>{{ text_config.sections.background.body }}</p>
+          </div>
+          <div class="card-section">
+            <h2>{{ text_config.sections.scenario_space.title }}</h2>
+            <ul class="bullet-list">
+              {% for item in text_config.sections.scenario_space.bullets %}
+              <li>{{ item }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="card-section">
+            <h2>{{ text_config.sections.methodology.title }}</h2>
+            <ul class="bullet-list">
+              {% for item in text_config.sections.methodology.bullets %}
+              <li>{{ item }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="card-section">
+            <h2>{{ text_config.sections.data_inputs.title }}</h2>
+            <ul class="bullet-list">
+              {% for item in text_config.sections.data_inputs.bullets %}
+              <li>{{ item }}</li>
+              {% endfor %}
+            </ul>
+          </div>
 
-        <!-- citation box moved here, under Main findings -->
-        <div class="card-section">
-          <div class="citation-box" aria-label="Citation">
-            <label style="font-weight:600; font-size:0.9rem; margin-bottom:6px; display:block;">Citation</label>
-            <textarea id="citationText" class="citation-text" readonly>{{ text_config.citation.text }}</textarea>
-            <div style="display:flex; justify-content:flex-end;">
-              <button class="copy-btn" onclick="copyCitation()">Copy citation</button>
+          <!-- citation box moved here, under Main findings -->
+          <div class="card-section">
+            <div class="citation-box" aria-label="Citation">
+              <label style="font-weight:600; font-size:0.9rem; margin-bottom:6px; display:block;">Citation</label>
+              <textarea id="citationText" class="citation-text" readonly>{{ text_config.citation.text }}</textarea>
+              <div style="display:flex; justify-content:flex-end;">
+                <button class="copy-btn" onclick="copyCitation()">Copy citation</button>
+              </div>
             </div>
           </div>
+          
         </div>
-        
+        <div class="text-veil" id="text-veil">
+          <div class="text-veil-inner">
+            <h3>Read the summary</h3>
+            <p>Review objectives, background, scenarios, and inputs.</p>
+            <button id="btn-unlock-text" class="pill-button">Show</button>
+          </div>
+        </div>
       </div>
 
       <!-- RIGHT: figures -->
       <div class="right-column">
-        <div class="figures-column">
-          <!-- Installed capacities -->
-          <section class="figure-card" data-fig-id="installed_capacities">
-            <div class="figure-header">
-              <div>
-                <div class="figure-title" id="title-installed_capacities"></div>
-                <div class="figure-subtitle" id="subtitle-installed_capacities"></div>
-              </div>
-            </div>
-            <div class="figure-body">
-              <img id="img-installed_capacities" alt="Installed capacities" />
-            </div>
-          </section>
+        <div id="data-panel" class="data-panel locked">
+          <div class="data-panel-content">
+            <!-- GLOBAL CONTROLS -->
+            <section id="global-controls">
+              <div class="controls-left">
+                <label for="scenario-select">{{ text_config.ui_labels.scenario_label }}:</label>
+                <select id="scenario-select"></select>
 
-          <!-- Generation (aggregated vs hourly toggle) -->
-          <section class="figure-card" data-fig-group="generation">
-            <div class="figure-header">
-              <div>
-                <div class="figure-title" id="title-generation"></div>
-                <div class="figure-subtitle" id="subtitle-generation"></div>
+                <label for="bus-select">{{ text_config.ui_labels.bus_label }}:</label>
+                <select id="bus-select"></select>
               </div>
-              <div class="control-row">
-                <label for="generation-mode-select">
-                  {{ text_config.ui_labels.single_generation_view_label }}
-                </label>
-                <select id="generation-mode-select">
+              <div class="controls-right">
+                <button id="btn-network-map" class="pill-button" title="Open network map">Network map</button>
+                <button id="btn-compare-scenarios" class="pill-button">
+                  {{ text_config.ui_labels.compare_scenarios_button }}
+                </button>
+                <button id="btn-compare-buses" class="pill-button">
+                  {{ text_config.ui_labels.compare_buses_button }}
+                </button>
+                <button id="btn-lock-data" class="pill-button hidden">
+                  Hide data
+                </button>
+              </div>
+            </section>
+
+            <div class="figures-column" id="figures-stack">
+              <!-- Installed capacities -->
+              <section class="figure-card" data-fig-id="installed_capacities">
+                <div class="figure-header">
+                  <div>
+                    <div class="figure-title" id="title-installed_capacities"></div>
+                    <div class="figure-subtitle" id="subtitle-installed_capacities"></div>
+                  </div>
+                </div>
+                <div class="figure-body">
+                  <img id="img-installed_capacities" alt="Installed capacities" />
+                </div>
+              </section>
+
+              <!-- Generation (aggregated vs hourly toggle) -->
+              <section class="figure-card" data-fig-group="generation">
+                <div class="figure-header">
+                  <div>
+                    <div class="figure-title" id="title-generation"></div>
+                    <div class="figure-subtitle" id="subtitle-generation"></div>
+                  </div>
+                  <div class="control-row">
+                    <label for="generation-mode-select">
+                      {{ text_config.ui_labels.single_generation_view_label }}
+                    </label>
+                    <select id="generation-mode-select">
+                      <option value="agg">
+                        {{ text_config.ui_labels.generation_mode_agg }}
+                      </option>
+                      <option value="hourly">
+                        {{ text_config.ui_labels.generation_mode_hourly }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="figure-body">
+                  <img id="img-generation" alt="Generation" />
+                </div>
+              </section>
+
+              <!-- Aggregated net transmission -->
+              <section class="figure-card" data-fig-id="agg_net_transmission">
+                <div class="figure-header">
+                  <div>
+                    <div class="figure-title" id="title-agg_net_transmission"></div>
+                    <div class="figure-subtitle" id="subtitle-agg_net_transmission"></div>
+                  </div>
+                </div>
+                <div class="figure-body">
+                  <img id="img-agg_net_transmission" alt="Aggregated net transmission" />
+                </div>
+              </section>
+
+              <!-- Hourly prices -->
+              <section class="figure-card" data-fig-id="hourly_prices">
+                <div class="figure-header">
+                  <div>
+                    <div class="figure-title" id="title-hourly_prices"></div>
+                    <div class="figure-subtitle" id="subtitle-hourly_prices"></div>
+                  </div>
+                </div>
+                <div class="figure-body">
+                  <img id="img-hourly_prices" alt="Hourly prices" />
+                </div>
+              </section>
+
+              <!-- Load shedding -->
+              <section class="figure-card" data-fig-id="load_shedding">
+                <div class="figure-header">
+                  <div>
+                    <div class="figure-title" id="title-load_shedding"></div>
+                    <div class="figure-subtitle" id="subtitle-load_shedding"></div>
+                  </div>
+                </div>
+                <div class="figure-body">
+                  <img id="img-load_shedding" alt="Load shedding" />
+                </div>
+              </section>
+            </div>
+
+            <!-- COMPARE VIEW -->
+            <div id="compare-view" class="hidden">
+              <div class="compare-options">
+                <span>{{ text_config.ui_labels.compare_generation_view_label }}</span>
+                <select id="compare-generation-mode">
                   <option value="agg">
                     {{ text_config.ui_labels.generation_mode_agg }}
                   </option>
@@ -700,82 +933,33 @@
                   </option>
                 </select>
               </div>
-            </div>
-            <div class="figure-body">
-              <img id="img-generation" alt="Generation" />
-            </div>
-          </section>
 
-          <!-- Aggregated net transmission -->
-          <section class="figure-card" data-fig-id="agg_net_transmission">
-            <div class="figure-header">
-              <div>
-                <div class="figure-title" id="title-agg_net_transmission"></div>
-                <div class="figure-subtitle" id="subtitle-agg_net_transmission"></div>
+              <!-- Compare scenarios panel -->
+              <div id="compare-scenarios-panel" class="compare-panel hidden">
+                <div class="compare-checkboxes" id="compare-scenarios-checkboxes">
+                  <!-- filled by JS -->
+                </div>
+                <div id="compare-scenarios-columns" class="compare-columns"></div>
+              </div>
+
+              <!-- Compare buses panel -->
+              <div id="compare-buses-panel" class="compare-panel hidden">
+                <div class="compare-checkboxes" id="compare-buses-checkboxes">
+                  <!-- filled by JS -->
+                </div>
+                <div id="compare-buses-columns" class="compare-columns"></div>
               </div>
             </div>
-            <div class="figure-body">
-              <img id="img-agg_net_transmission" alt="Aggregated net transmission" />
-            </div>
-          </section>
+          </div>
 
-          <!-- Hourly prices -->
-          <section class="figure-card" data-fig-id="hourly_prices">
-            <div class="figure-header">
-              <div>
-                <div class="figure-title" id="title-hourly_prices"></div>
-                <div class="figure-subtitle" id="subtitle-hourly_prices"></div>
-              </div>
+          <div class="data-veil" id="data-veil">
+            <div class="data-veil-inner">
+              <h3>Explore the results</h3>
+              <p>Dive into figures, scenario/bus selectors, and comparisons.</p>
+              <button id="btn-unlock-data" class="pill-button">Go</button>
             </div>
-            <div class="figure-body">
-              <img id="img-hourly_prices" alt="Hourly prices" />
-            </div>
-          </section>
-
-          <!-- Load shedding -->
-          <section class="figure-card" data-fig-id="load_shedding">
-            <div class="figure-header">
-              <div>
-                <div class="figure-title" id="title-load_shedding"></div>
-                <div class="figure-subtitle" id="subtitle-load_shedding"></div>
-              </div>
-            </div>
-            <div class="figure-body">
-              <img id="img-load_shedding" alt="Load shedding" />
-            </div>
-          </section>
+          </div>
         </div>
-      </div>
-    </div>
-
-    <!-- COMPARE VIEW -->
-    <div id="compare-view" class="hidden">
-      <div class="compare-options">
-        <span>{{ text_config.ui_labels.compare_generation_view_label }}</span>
-        <select id="compare-generation-mode">
-          <option value="agg">
-            {{ text_config.ui_labels.generation_mode_agg }}
-          </option>
-          <option value="hourly">
-            {{ text_config.ui_labels.generation_mode_hourly }}
-          </option>
-        </select>
-      </div>
-
-      <!-- Compare scenarios panel -->
-      <div id="compare-scenarios-panel" class="compare-panel hidden">
-        <div class="compare-checkboxes" id="compare-scenarios-checkboxes">
-          <!-- filled by JS -->
-        </div>
-        <div id="compare-scenarios-columns" class="compare-columns"></div>
-      </div>
-
-      <!-- Compare buses panel -->
-      <div id="compare-buses-panel" class="compare-panel hidden">
-        <div class="compare-checkboxes" id="compare-buses-checkboxes">
-          <!-- filled by JS -->
-        </div>
-        <div id="compare-buses-columns" class="compare-columns"></div>
       </div>
     </div>
 
@@ -804,6 +988,8 @@
     // modes: 'single', 'compare_scenarios', 'compare_buses'
     let mode = "single";
     let generationMode = "agg"; // 'agg' or 'hourly'
+    let dataUnlocked = false;
+    let textUnlocked = false;
 
     function setGenerationMode(newMode) {
       generationMode = newMode;
@@ -968,23 +1154,36 @@
 
     // --- modes ---
     function setMode(newMode) {
+      if (!dataUnlocked) return;
       mode = newMode;
 
-      const singleView = document.getElementById("single-view");
-      const compareView = document.getElementById("compare-view");
-      const btnCompareScen = document.getElementById("btn-compare-scenarios");
-      const btnCompareBus = document.getElementById("btn-compare-buses");
+        const figStack = document.getElementById("figures-stack");
+        const textPanel = document.getElementById("text-panel");
+        const textWrapper = document.getElementById("text-panel-wrapper");
+        const mainGrid = document.getElementById("single-view");
+        const compareView = document.getElementById("compare-view");
+        const btnCompareScen = document.getElementById("btn-compare-scenarios");
+        const btnCompareBus = document.getElementById("btn-compare-buses");
 
       if (mode === "single") {
-        singleView.classList.remove("hidden");
+        textWrapper.classList.remove("hidden");
+        textPanel.classList.remove("hidden");
+        mainGrid.classList.remove("compare-mode");
+        figStack.classList.remove("hidden");
         compareView.classList.add("hidden");
         btnCompareScen.classList.remove("active");
         btnCompareBus.classList.remove("active");
+        const scenariosPanel = document.getElementById("compare-scenarios-panel");
+        const busesPanel = document.getElementById("compare-buses-panel");
+        scenariosPanel.classList.add("hidden");
+        busesPanel.classList.add("hidden");
         updateSingleViewFigures();
       } else {
-        singleView.classList.add("hidden");
+        textPanel.classList.add("hidden");
+        textWrapper.classList.add("hidden");
+        mainGrid.classList.add("compare-mode");
+        figStack.classList.add("hidden");
         compareView.classList.remove("hidden");
-
         const scenariosPanel = document.getElementById("compare-scenarios-panel");
         const busesPanel = document.getElementById("compare-buses-panel");
 
@@ -1232,6 +1431,14 @@
       const compareGenModeSelect = document.getElementById("compare-generation-mode");
       const btnCompareScen = document.getElementById("btn-compare-scenarios");
       const btnCompareBus = document.getElementById("btn-compare-buses");
+      const btnUnlockData = document.getElementById("btn-unlock-data");
+      const dataPanel = document.getElementById("data-panel");
+      const dataVeil = document.getElementById("data-veil");
+      const btnLockData = document.getElementById("btn-lock-data");
+      const btnUnlockText = document.getElementById("btn-unlock-text");
+      const btnLockText = document.getElementById("btn-lock-text");
+      const textWrapper = document.getElementById("text-panel-wrapper");
+      const textVeil = document.getElementById("text-veil");
 
       scenarioSelect.addEventListener("change", () => {
         if (mode === "compare_buses") {
@@ -1274,6 +1481,58 @@
         } else {
           setMode("compare_buses");
         }
+      });
+
+      btnUnlockData.addEventListener("click", () => {
+        dataUnlocked = true;
+        dataPanel.classList.remove("locked");
+        dataVeil.classList.add("hidden");
+        updateSingleViewFigures();
+        btnLockData.classList.remove("hidden");
+      });
+
+      btnUnlockText.addEventListener("click", () => {
+        textUnlocked = true;
+        textWrapper.classList.remove("locked");
+        textVeil.classList.add("hidden");
+        btnLockText.classList.remove("hidden");
+      });
+
+      btnLockData.addEventListener("click", () => {
+        // reset to single view and hide compare panels
+        const figStack = document.getElementById("figures-stack");
+        const textPanel = document.getElementById("text-panel");
+        const textWrapper = document.getElementById("text-panel-wrapper");
+        const mainGrid = document.getElementById("single-view");
+        const compareView = document.getElementById("compare-view");
+        const scenariosPanel = document.getElementById("compare-scenarios-panel");
+        const busesPanel = document.getElementById("compare-buses-panel");
+        const btnCompareScen = document.getElementById("btn-compare-scenarios");
+        const btnCompareBus = document.getElementById("btn-compare-buses");
+
+        mode = "single";
+        textWrapper.classList.remove("hidden");
+        textPanel.classList.remove("hidden");
+        mainGrid.classList.remove("compare-mode");
+        figStack.classList.remove("hidden");
+        compareView.classList.add("hidden");
+        scenariosPanel.classList.add("hidden");
+        busesPanel.classList.add("hidden");
+        btnCompareScen.classList.remove("active");
+        btnCompareBus.classList.remove("active");
+
+        dataUnlocked = false;
+        dataPanel.classList.add("locked");
+        dataVeil.classList.remove("hidden");
+        btnLockData.classList.add("hidden");
+        // keep text unlocked state as-is
+      });
+
+      btnLockText.addEventListener("click", () => {
+        textUnlocked = false;
+        textWrapper.classList.add("locked");
+        textVeil.classList.remove("hidden");
+        btnLockText.classList.add("hidden");
       });
     }
 
