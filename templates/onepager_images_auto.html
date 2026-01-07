@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <title>{{ text_config.page.title }}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg: #eef2f5;
@@ -13,6 +16,8 @@
       --card-bg: #ffffff;
       --border: #d7dde6;
       --radius-lg: 16px;
+      --font-text: "Roboto", "Helvetica Neue", Arial, sans-serif;
+      --font-num: "Courier New", Courier, monospace;
     }
 
     * { box-sizing: border-box; }
@@ -20,12 +25,17 @@
     body {
       margin: 0;
       padding: 0;
-      font-family: "Courier New", Courier, monospace;
+      font-family: var(--font-text);
       background:
         radial-gradient(circle at 20% 20%, rgba(14,165,233,0.08), transparent 35%),
         radial-gradient(circle at 80% 10%, rgba(99,102,241,0.08), transparent 32%),
         var(--bg);
       color: var(--fg);
+    }
+
+    .num {
+      font-family: var(--font-num);
+      font-variant-numeric: tabular-nums;
     }
 
     .page {
@@ -150,7 +160,12 @@
       color: var(--muted);
     }
 
-    .metric-value { font-size: 1.05rem; font-weight: 600; }
+    .metric-value {
+      font-size: 1.05rem;
+      font-weight: 600;
+      font-family: var(--font-num);
+      font-variant-numeric: tabular-nums;
+    }
 
     .metric-note { font-size: 0.75rem; color: var(--muted); }
 
@@ -204,11 +219,9 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      transition: filter 0.2s ease, opacity 0.2s ease;
     }
     .data-panel.locked .data-panel-content {
-      filter: blur(6px);
-      opacity: 0.55;
+      display: none;
       pointer-events: none;
       user-select: none;
     }
@@ -225,8 +238,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(255,255,255,0.55);
-      backdrop-filter: blur(3px);
+      background: var(--page-bg);
     }
     .data-veil-inner {
       position: relative;
@@ -255,11 +267,9 @@
       position: relative;
     }
     .text-panel-content {
-      transition: filter 0.2s ease, opacity 0.2s ease;
     }
     .text-panel.locked .text-panel-content {
-      filter: blur(6px);
-      opacity: 0.55;
+      display: none;
       pointer-events: none;
       user-select: none;
     }
@@ -276,8 +286,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(255,255,255,0.55);
-      backdrop-filter: blur(3px);
+      background: var(--page-bg);
     }
     .text-veil-inner {
       position: relative;
@@ -369,10 +378,6 @@
       font-weight: 600;
     }
 
-    .figure-subtitle {
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
 
     .figure-body {
       flex: 1;
@@ -481,10 +486,6 @@
       font-weight: 600;
     }
 
-    .compare-figure-subtitle {
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
 
     .compare-figure-body {
       min-height: 180px;
@@ -537,10 +538,6 @@
     }
     .authors-line a:hover {
       text-decoration: underline;
-    }
-    .affiliation-line {
-      font-size: 0.9rem;
-      color: var(--muted);
     }
     .logo-strip {
       display: flex;
@@ -665,16 +662,13 @@
         <h1>{{ text_config.page.title }}</h1>
         <p class="subtitle">{{ text_config.page.subtitle }}</p>
 
-        <!-- new: authors & affiliation -->
+        <!-- new: authors -->
         <div class="authors-block">
           <div class="authors-line">
             Main author{{ "s" if (text_config.page.authors|length > 1) else "" }}:
             {% for a in text_config.page.authors %}
               <a href="{{ a.linkedin }}" target="_blank" rel="noopener noreferrer">{{ a.name }}</a>{% if not loop.last %},{% endif %}
             {% endfor %}
-          </div>
-          <div class="affiliation-line">
-            Affiliation: {{ text_config.page.affiliation }}
           </div>
         </div>
 
@@ -703,22 +697,6 @@
           <img src="../logos/GDU_logo_nowhitespace.png" alt="GDU logo" loading="lazy" />
           <img src="../logos/HZB_logo-a4-rgb transparent.png" alt="HZB logo" loading="lazy" />
         </div>
-        <!-- restore meta fields in the top-right block -->
-        {% if text_config.meta.model_label %}
-          <div><strong>{{ text_config.meta.model_label }}</strong> {{ text_config.meta.model_value }}</div>
-        {% endif %}
-        {% if text_config.meta.weather_year_label %}
-          <div><strong>{{ text_config.meta.weather_year_label }}</strong> {{ text_config.meta.weather_year_value }}</div>
-        {% endif %}
-        {% if text_config.meta.tools_label %}
-          <div><strong>{{ text_config.meta.tools_label }}</strong> {{ text_config.meta.tools_value }}</div>
-        {% endif %}
-        {% if text_config.meta.specific_model_label %}
-          <div><strong>{{ text_config.meta.specific_model_label }}</strong> {{ text_config.meta.specific_model_value }}</div>
-        {% endif %}
-        {% if text_config.meta.solver_label %}
-          <div><strong>{{ text_config.meta.solver_label }}</strong> {{ text_config.meta.solver_value }}</div>
-        {% endif %}
       </div>
     </header>
 
@@ -730,7 +708,6 @@
 
     <!-- Prominent main findings -->
     <section class="card main-findings-card" aria-label="Main findings">
-      <div class="main-findings-icon">★</div>
       <div class="main-findings-content">
         <h2>{{ text_config.sections.main_findings.title }}</h2>
         <ul class="bullet-list">
@@ -808,7 +785,7 @@
           <div class="text-veil-inner">
             <h3>Read the summary</h3>
             <p>Review objectives, background, scenarios, and inputs.</p>
-            <button id="btn-unlock-text" class="pill-button">Show</button>
+            <button id="btn-unlock-text" class="pill-button">Go</button>
           </div>
         </div>
       </div>
@@ -846,7 +823,6 @@
                 <div class="figure-header">
                   <div>
                     <div class="figure-title" id="title-installed_capacities"></div>
-                    <div class="figure-subtitle" id="subtitle-installed_capacities"></div>
                   </div>
                 </div>
                 <div class="figure-body">
@@ -859,7 +835,6 @@
                 <div class="figure-header">
                   <div>
                     <div class="figure-title" id="title-generation"></div>
-                    <div class="figure-subtitle" id="subtitle-generation"></div>
                   </div>
                   <div class="control-row">
                     <label for="generation-mode-select">
@@ -885,7 +860,6 @@
                 <div class="figure-header">
                   <div>
                     <div class="figure-title" id="title-agg_net_transmission"></div>
-                    <div class="figure-subtitle" id="subtitle-agg_net_transmission"></div>
                   </div>
                 </div>
                 <div class="figure-body">
@@ -898,7 +872,6 @@
                 <div class="figure-header">
                   <div>
                     <div class="figure-title" id="title-hourly_prices"></div>
-                    <div class="figure-subtitle" id="subtitle-hourly_prices"></div>
                   </div>
                 </div>
                 <div class="figure-body">
@@ -911,7 +884,6 @@
                 <div class="figure-header">
                   <div>
                     <div class="figure-title" id="title-load_shedding"></div>
-                    <div class="figure-subtitle" id="subtitle-load_shedding"></div>
                   </div>
                 </div>
                 <div class="figure-body">
@@ -955,7 +927,7 @@
           <div class="data-veil" id="data-veil">
             <div class="data-veil-inner">
               <h3>Explore the results</h3>
-              <p>Dive into figures, scenario/bus selectors, and comparisons.</p>
+              <p>Dive into figures and compare buses and scenearios.</p>
               <button id="btn-unlock-data" class="pill-button">Go</button>
             </div>
           </div>
@@ -966,10 +938,7 @@
     <footer class="page-footer">
       <div>
         {{ text_config.footer.generated_on_prefix }}
-        {{ text_config.footer.generated_on_value }}
-        &nbsp;|&nbsp;
-        {{ text_config.footer.run_id_label }}
-        {{ text_config.footer.run_id_value }}
+        <span class="num">{{ text_config.footer.generated_on_value }}</span>
       </div>
       <div>
         {{ text_config.footer.contact_text }}
@@ -1064,10 +1033,8 @@
     function showSimpleFigure(figId, figData) {
       const img = document.getElementById(`img-${figId}`);
       const titleEl = document.getElementById(`title-${figId}`);
-      const subtitleEl = document.getElementById(`subtitle-${figId}`);
 
       titleEl.textContent = figData.title;
-      subtitleEl.textContent = figData.subtitle;
 
       if (figData.url) {
         img.src = figData.url;
@@ -1081,7 +1048,6 @@
       const hourlyData = busFigMap["hourly_generation"];
       const img = document.getElementById("img-generation");
       const titleEl = document.getElementById("title-generation");
-      const subtitleEl = document.getElementById("subtitle-generation");
 
       const hasAgg = aggData && aggData.url;
       const hasHourly = hourlyData && hourlyData.url;
@@ -1092,7 +1058,6 @@
       if (!hasAny) {
         img.src = "";
         titleEl.textContent = textConfig.figures_text.generation_agg.title;
-        subtitleEl.textContent = "";
         return;
       }
 
@@ -1108,7 +1073,6 @@
 
       if (chosen) {
         titleEl.textContent = chosen.title;
-        subtitleEl.textContent = chosen.subtitle;
         img.src = chosen.url || "";
       }
     }
@@ -1319,7 +1283,6 @@
     function buildCompareTile(fig) {
       const hasData = fig && fig.url;
       const title = hasData ? fig.title : "";
-      const subtitle = hasData ? fig.subtitle : "";
       const content = hasData
         ? `<img src="${fig.url}" alt="${fig.title}" />`
         : `<div class="compare-placeholder"></div>`;
@@ -1327,7 +1290,6 @@
       return `
         <div class="compare-figure-card">
           <div class="compare-figure-title">${title}</div>
-          <div class="compare-figure-subtitle">${subtitle}</div>
           <div class="compare-figure-body">
             ${content}
           </div>
@@ -1343,7 +1305,6 @@
       const hasAny = hasAgg || hasHourly;
 
       let title = "";
-      let subtitle = "";
       let content = `<div class="compare-placeholder"></div>`;
 
       if (hasAny) {
@@ -1359,7 +1320,6 @@
 
         if (chosen) {
           title = chosen.title;
-          subtitle = chosen.subtitle;
           content = `<img src="${chosen.url}" alt="${chosen.title}" />`;
         }
       }
@@ -1367,7 +1327,6 @@
       return `
         <div class="compare-figure-card">
           <div class="compare-figure-title">${title}</div>
-          <div class="compare-figure-subtitle">${subtitle}</div>
           <div class="compare-figure-body">
             ${content}
           </div>

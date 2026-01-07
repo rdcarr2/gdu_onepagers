@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Load Shedding in Ukraine: Winter 2025/26</title>
+  <title>Load-Shedding in Ukraine: Winter 2025/26</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg: #eef2f5;
@@ -13,6 +16,8 @@
       --card-bg: #ffffff;
       --border: #d7dde6;
       --radius-lg: 16px;
+      --font-text: "Roboto", "Helvetica Neue", Arial, sans-serif;
+      --font-num: "Courier New", Courier, monospace;
     }
 
     * { box-sizing: border-box; }
@@ -20,12 +25,17 @@
     body {
       margin: 0;
       padding: 0;
-      font-family: "Courier New", Courier, monospace;
+      font-family: var(--font-text);
       background:
         radial-gradient(circle at 20% 20%, rgba(14,165,233,0.08), transparent 35%),
         radial-gradient(circle at 80% 10%, rgba(99,102,241,0.08), transparent 32%),
         var(--bg);
       color: var(--fg);
+    }
+
+    .num {
+      font-family: var(--font-num);
+      font-variant-numeric: tabular-nums;
     }
 
     .page {
@@ -150,7 +160,12 @@
       color: var(--muted);
     }
 
-    .metric-value { font-size: 1.05rem; font-weight: 600; }
+    .metric-value {
+      font-size: 1.05rem;
+      font-weight: 600;
+      font-family: var(--font-num);
+      font-variant-numeric: tabular-nums;
+    }
 
     .metric-note { font-size: 0.75rem; color: var(--muted); }
 
@@ -204,11 +219,9 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      transition: filter 0.2s ease, opacity 0.2s ease;
     }
     .data-panel.locked .data-panel-content {
-      filter: blur(6px);
-      opacity: 0.55;
+      display: none;
       pointer-events: none;
       user-select: none;
     }
@@ -225,8 +238,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(255,255,255,0.55);
-      backdrop-filter: blur(3px);
+      background: var(--page-bg);
     }
     .data-veil-inner {
       position: relative;
@@ -255,11 +267,9 @@
       position: relative;
     }
     .text-panel-content {
-      transition: filter 0.2s ease, opacity 0.2s ease;
     }
     .text-panel.locked .text-panel-content {
-      filter: blur(6px);
-      opacity: 0.55;
+      display: none;
       pointer-events: none;
       user-select: none;
     }
@@ -276,8 +286,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(255,255,255,0.55);
-      backdrop-filter: blur(3px);
+      background: var(--page-bg);
     }
     .text-veil-inner {
       position: relative;
@@ -369,10 +378,6 @@
       font-weight: 600;
     }
 
-    .figure-subtitle {
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
 
     .figure-body {
       flex: 1;
@@ -481,10 +486,6 @@
       font-weight: 600;
     }
 
-    .compare-figure-subtitle {
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
 
     .compare-figure-body {
       min-height: 180px;
@@ -537,10 +538,6 @@
     }
     .authors-line a:hover {
       text-decoration: underline;
-    }
-    .affiliation-line {
-      font-size: 0.9rem;
-      color: var(--muted);
     }
     .logo-strip {
       display: flex;
@@ -662,10 +659,10 @@
   <div class="page">
     <header class="page-header">
       <div class="title-block">
-        <h1>Load Shedding in Ukraine: Winter 2025/26</h1>
+        <h1>Load-Shedding in Ukraine: Winter 2025/26</h1>
         <p class="subtitle">Modelling Ukraine&#39;s current, estimated electricity deficit with PyPSA</p>
 
-        <!-- new: authors & affiliation -->
+        <!-- new: authors -->
         <div class="authors-block">
           <div class="authors-line">
             Main authors:
@@ -676,9 +673,6 @@
             
               <a href="https://www.linkedin.com/in/vlad-mikhnych/" target="_blank" rel="noopener noreferrer">Vladyslav Mikhhnych</a>
             
-          </div>
-          <div class="affiliation-line">
-            Affiliation: Green Deal Ukraïna project @ Helmholtz-Zentrum Berlin
           </div>
         </div>
 
@@ -707,20 +701,6 @@
           <img src="../logos/GDU_logo_nowhitespace.png" alt="GDU logo" loading="lazy" />
           <img src="../logos/HZB_logo-a4-rgb transparent.png" alt="HZB logo" loading="lazy" />
         </div>
-        <!-- restore meta fields in the top-right block -->
-        
-        
-          <div><strong>Weather year:</strong> 2019</div>
-        
-        
-          <div><strong>Tool(s):</strong> PyPSA, Atlite</div>
-        
-        
-          <div><strong>Specific model (if applicable):</strong> HZB_PyPSA v1.0</div>
-        
-        
-          <div><strong>Solver:</strong> Gurobi</div>
-        
       </div>
     </header>
 
@@ -732,18 +712,15 @@
 
     <!-- Prominent main findings -->
     <section class="card main-findings-card" aria-label="Main findings">
-      <div class="main-findings-icon">★</div>
       <div class="main-findings-content">
         <h2>Main findings</h2>
         <ul class="bullet-list">
           
-          <li>Load shedding is required in 41% of hours and sums up to 2.8 TWh.</li>
+          <li>Between November 2025 and March 2026, load shedding would be required in 35% of hours and sums up to 2.8 TWh.</li>
           
-          <li>The maximum load shedding is about 5.6 GW, representing approx. 34% of the peak load.</li>
+          <li>The maximum hourly load shedding is about 5.6 GW, representing approx. 34% of the peak load.</li>
           
           <li>Substituting gas and district heating with electric heaters increases demand by 2 TWh mainly in the afternoon and evening hours. Under this assumption, load shedding takes place in 49% of the hours and sum up to 4.1 TWh.</li>
-          
-          <li>The increase of cross-border capacity has helped, but the following measures would provide even more relief:</li>
           
         </ul>
       </div>
@@ -752,15 +729,15 @@
     <section class="metrics-row">
       
       <div class="metric-card">
-        <div class="metric-label">Total estimated load shedding</div>
-        <div class="metric-value">2.8 TWh</div>
-        <div class="metric-note">With additional heat-shock: +1.3 TWh</div>
+        <div class="metric-label">Total estimated load-shedding</div>
+        <div class="metric-value">2.8 TWh (35% of hours)</div>
+        <div class="metric-note">Heat shock scenario: +1.3 TWh (50%)</div>
       </div>
       
       <div class="metric-card">
-        <div class="metric-label">Available conventional generation in Ukraine</div>
+        <div class="metric-label">Installed capacity in Ukraine</div>
         <div class="metric-value">12.4 GW</div>
-        <div class="metric-note">Majority being nuclear</div>
+        <div class="metric-note">Conventional sources</div>
       </div>
       
       <div class="metric-card">
@@ -787,21 +764,21 @@
           </div>
           <div class="card-section">
             <h2>Research objective</h2>
-            <p>This analysis attempts to quantify the expected load-shedding in Ukraine over  the winter period 2025/26, accounting for the current state of generation capacities, war-adjusted demand, and cross-border transfer limits.
+            <p>This analysis quantifies the expected load-shedding in Ukraine over  the winter period 2025/26, accounting for the current state of generation capacities, war-adjusted demand, and cross-border transfer limits.
 </p>
           </div>
           <div class="card-section">
             <h2>Background / motivation</h2>
-            <p>The re-intensification of Russian attacks on Ukrainian energy infrastructure over October and November 2025 has led to losses in thermal capacities, both to coal and combined-heat-and-power (CHP) plants, the latter of which provide essential heating  during winter. Reports from aroudn the country indicate that load-shedding is already occuring, and is expected to worsen as heating demand peaks in the coldest months. Here we provide a model-based estimate of the expected load-shedding and explore potential mitigation measures.
+            <p>The re-intensification of Russian attacks on Ukrainian energy infrastructure over October and November 2025 resulted in losses in thermal capacities, both to coal and combined-heat-and-power (CHP) plants. The latter provides essential heating  during winter. Reports from around the country indicate that load-shedding is already occuring, and is expected to worsen as heating demand peaks over the coldest months. Here we provide a model-based estimate of the expected load-shedding and explore potential mitigation measures.
 </p>
           </div>
           <div class="card-section">
-            <h2>Scenario space</h2>
+            <h2>Scenarios</h2>
             <ul class="bullet-list">
               
-              <li>Baseline: Current estimated capacities and cross-border limits.</li>
+              <li>Baseline: Current state of the system in terms of installed capacities and hourly demand profile (best estimate).</li>
               
-              <li>Heat Shock: +XX% demand in certain hours to reflect increased electrical heating.</li>
+              <li>Heat Shock: Households substitute district heating with electrical space heaters during the morning and evening hours on week days, and from morning to evening on weekends. This increases the total demand by about 2 TWh.</li>
               
             </ul>
           </div>
@@ -809,19 +786,21 @@
             <h2>Methodology</h2>
             <ul class="bullet-list">
               
-              <li>Model: In-house PyPSA (Python for Power Systems Analysis) model at hourly resolution.</li>
+              <li>In-house PyPSA (Python for Power Systems Analysis) model at hourly resolution.</li>
               
-              <li>Objective: minimise total system cost subject to constraints.</li>
+              <li>Objective: to minimise total system cost subject to constraints.</li>
               
               <li>Spatial granularity: 1 node per country, entirety of ENTSO-E modelled</li>
               
-              <li>Hourly dispatch optimised economically over the period November 2025 - March 2026.</li>
+              <li>Hourly dispatch is optimised economically over the period November 2025 - March 2026.</li>
               
-              <li>Maintenance outages for nuclear units included</li>
+              <li>Dummy load-shedding generators (very high cost, last in merit order) installed in Ukraine to capture unserved energy.</li>
               
-              <li>Dummy load shedding generators (very high cost, last in merid order) installed in Ukraine to capture unserved energy.</li>
+              <li>Weather year 2019 (temperature, wind and solar profiles)</li>
               
-              <li>Heat demand drives CHP generation based on temperature data</li>
+              <li>Maintenance outages for individual nuclear units are included</li>
+              
+              <li>Heat demand drives CHP generation based on hourly temperature</li>
               
             </ul>
           </div>
@@ -829,11 +808,11 @@
             <h2>Data inputs</h2>
             <ul class="bullet-list">
               
-              <li>Demand: ENTSO-E Transparency Platform; UA adjusted for wartime impacts.</li>
+              <li>Hourly electricity demand: ENTSO-E Transparency Platform (UA adjusted for wartime impacts)</li>
               
               <li>Installed capacities: Powerplantmatching &amp; Global Energy Monitor; UA estimates by GDU.</li>
               
-              <li>Net transfer capacities: ENTSO-E Transparency Platform.</li>
+              <li>Cross-border transmission capacities: ENTSO-E Transparency Platform.</li>
               
               <li>Weather data: ERA5 cutouts via Atlite.</li>
               
@@ -858,7 +837,7 @@
           <div class="text-veil-inner">
             <h3>Read the summary</h3>
             <p>Review objectives, background, scenarios, and inputs.</p>
-            <button id="btn-unlock-text" class="pill-button">Show</button>
+            <button id="btn-unlock-text" class="pill-button">Go</button>
           </div>
         </div>
       </div>
@@ -896,7 +875,6 @@
                 <div class="figure-header">
                   <div>
                     <div class="figure-title" id="title-installed_capacities"></div>
-                    <div class="figure-subtitle" id="subtitle-installed_capacities"></div>
                   </div>
                 </div>
                 <div class="figure-body">
@@ -909,7 +887,6 @@
                 <div class="figure-header">
                   <div>
                     <div class="figure-title" id="title-generation"></div>
-                    <div class="figure-subtitle" id="subtitle-generation"></div>
                   </div>
                   <div class="control-row">
                     <label for="generation-mode-select">
@@ -935,7 +912,6 @@
                 <div class="figure-header">
                   <div>
                     <div class="figure-title" id="title-agg_net_transmission"></div>
-                    <div class="figure-subtitle" id="subtitle-agg_net_transmission"></div>
                   </div>
                 </div>
                 <div class="figure-body">
@@ -948,7 +924,6 @@
                 <div class="figure-header">
                   <div>
                     <div class="figure-title" id="title-hourly_prices"></div>
-                    <div class="figure-subtitle" id="subtitle-hourly_prices"></div>
                   </div>
                 </div>
                 <div class="figure-body">
@@ -961,7 +936,6 @@
                 <div class="figure-header">
                   <div>
                     <div class="figure-title" id="title-load_shedding"></div>
-                    <div class="figure-subtitle" id="subtitle-load_shedding"></div>
                   </div>
                 </div>
                 <div class="figure-body">
@@ -1005,7 +979,7 @@
           <div class="data-veil" id="data-veil">
             <div class="data-veil-inner">
               <h3>Explore the results</h3>
-              <p>Dive into figures, scenario/bus selectors, and comparisons.</p>
+              <p>Dive into figures and compare buses and scenearios.</p>
               <button id="btn-unlock-data" class="pill-button">Go</button>
             </div>
           </div>
@@ -1016,15 +990,12 @@
     <footer class="page-footer">
       <div>
         Generated on:
-        2025-11-21
-        &nbsp;|&nbsp;
-        Run ID:
-        PLOT_DASH_TEMPLATE
+        <span class="num">2026-01-06</span>
       </div>
       <div>
-        Contact: modelling team
+        Contact: robert.carr@helmholtz-berlin.de
         •
-        Version: v2.2 image-based dashboard
+        Version: 1.0
       </div>
     </footer>
   </div>
@@ -1033,7 +1004,7 @@
     // scenarios_json is a nested dict from Python
     const scenarios = {"baseline": {"name": "Baseline", "buses": {"MD": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_MD_installed capacities.png", "url": "assets/baseline/MD/HSCBP_MD_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_MD_aggregated generation.png", "url": "assets/baseline/MD/HSCBP_MD_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_MD_hourly generation.png", "url": "assets/baseline/MD/SAPwL_MD_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_MD_aggregated net transmission.png", "url": "assets/baseline/MD/HSCBP_MD_aggregated%20net%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_MD_hourly prices.png", "url": "assets/baseline/MD/SAPwL_MD_hourly%20prices.png"}, "load_shedding": {"title": "Hourly Load Shedding (MW)", "subtitle": "SAPwL_MD_load shedding.png", "url": null}}, "UA": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_UA_installed capacities.png", "url": "assets/baseline/UA/HSCBP_UA_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_UA_aggregated generation.png", "url": "assets/baseline/UA/HSCBP_UA_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_UA_hourly generation.png", "url": "assets/baseline/UA/SAPwL_UA_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_UA_aggregated net transmission.png", "url": "assets/baseline/UA/HSCBP_UA_aggregated%20net%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_UA_hourly prices.png", "url": "assets/baseline/UA/SAPwL_UA_hourly%20prices.png"}, "load_shedding": {"title": "Hourly Load Shedding (MW)", "subtitle": "SAPwL_UA_load shedding.png", "url": "assets/baseline/UA/SAPwL_UA_load%20shedding.png"}}, "UA_MD_block": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_UA_MD_block_installed capacities.png", "url": "assets/baseline/UA_MD_block/HSCBP_UA_MD_block_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_UA_MD_block_aggregated generation.png", "url": "assets/baseline/UA_MD_block/HSCBP_UA_MD_block_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_UA_MD_block_hourly generation.png", "url": "assets/baseline/UA_MD_block/SAPwL_UA_MD_block_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_UA_MD_block_aggregated net transmission.png", "url": "assets/baseline/UA_MD_block/HSCBP_UA_MD_block_aggregated%20net%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_UA_MD_block_hourly prices.png", "url": "assets/baseline/UA_MD_block/SAPwL_UA_MD_block_hourly%20prices.png"}, "load_shedding": {"title": "Hourly Load Shedding (MW)", "subtitle": "SAPwL_UA_MD_block_load shedding.png", "url": "assets/baseline/UA_MD_block/SAPwL_UA_MD_block_load%20shedding.png"}}}}, "outage_heatshock": {"name": "Outage Heat Shock", "buses": {"MD": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_MD_installed capacities.png", "url": "assets/outage_heatshock/MD/HSCBP_MD_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_MD_aggregated generation.png", "url": "assets/outage_heatshock/MD/HSCBP_MD_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_MD_hourly generation.png", "url": "assets/outage_heatshock/MD/SAPwL_MD_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_MD_aggregated net transmission.png", "url": "assets/outage_heatshock/MD/HSCBP_MD_aggregated%20net%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_MD_hourly prices.png", "url": "assets/outage_heatshock/MD/SAPwL_MD_hourly%20prices.png"}, "load_shedding": {"title": "Hourly Load Shedding (MW)", "subtitle": "SAPwL_MD_load shedding.png", "url": null}}, "UA": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_UA_installed capacities.png", "url": "assets/outage_heatshock/UA/HSCBP_UA_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_UA_aggregated generation.png", "url": "assets/outage_heatshock/UA/HSCBP_UA_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_UA_hourly generation.png", "url": "assets/outage_heatshock/UA/SAPwL_UA_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_UA_aggregated net transmission.png", "url": "assets/outage_heatshock/UA/HSCBP_UA_aggregated%20net%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_UA_hourly prices.png", "url": "assets/outage_heatshock/UA/SAPwL_UA_hourly%20prices.png"}, "load_shedding": {"title": "Hourly Load Shedding (MW)", "subtitle": "SAPwL_UA_load shedding.png", "url": "assets/outage_heatshock/UA/SAPwL_UA_load%20shedding.png"}}, "UA_MD_block": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_UA_MD_block_installed capacities.png", "url": "assets/outage_heatshock/UA_MD_block/HSCBP_UA_MD_block_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_UA_MD_block_aggregated generation.png", "url": "assets/outage_heatshock/UA_MD_block/HSCBP_UA_MD_block_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_UA_MD_block_hourly generation.png", "url": "assets/outage_heatshock/UA_MD_block/SAPwL_UA_MD_block_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_UA_MD_block_aggregated net transmission.png", "url": "assets/outage_heatshock/UA_MD_block/HSCBP_UA_MD_block_aggregated%20net%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_UA_MD_block_hourly prices.png", "url": "assets/outage_heatshock/UA_MD_block/SAPwL_UA_MD_block_hourly%20prices.png"}, "load_shedding": {"title": "Hourly Load Shedding (MW)", "subtitle": "SAPwL_UA_MD_block_load shedding.png", "url": "assets/outage_heatshock/UA_MD_block/SAPwL_UA_MD_block_load%20shedding.png"}}}}, "outage_23GW_transmission": {"name": "Outage 2.3GW Transmission", "buses": {"MD": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_MD_installed capacities.png", "url": "assets/outage_23GW_transmission/MD/HSCBP_MD_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_MD_aggregated generation.png", "url": "assets/outage_23GW_transmission/MD/HSCBP_MD_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_MD_hourly generation.png", "url": "assets/outage_23GW_transmission/MD/SAPwL_MD_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_MD_aggregated net transmission.png", "url": "assets/outage_23GW_transmission/MD/HSCBP_MD_aggregated%20net%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_MD_hourly prices.png", "url": "assets/outage_23GW_transmission/MD/SAPwL_MD_hourly%20prices.png"}, "load_shedding": {"title": "Hourly Load Shedding (MW)", "subtitle": "SAPwL_MD_load shedding.png", "url": null}}, "UA": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_UA_installed capacities.png", "url": "assets/outage_23GW_transmission/UA/HSCBP_UA_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_UA_aggregated generation.png", "url": "assets/outage_23GW_transmission/UA/HSCBP_UA_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_UA_hourly generation.png", "url": "assets/outage_23GW_transmission/UA/SAPwL_UA_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_UA_aggregated net transmission.png", "url": "assets/outage_23GW_transmission/UA/HSCBP_UA_aggregated%20net%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_UA_hourly prices.png", "url": "assets/outage_23GW_transmission/UA/SAPwL_UA_hourly%20prices.png"}, "load_shedding": {"title": "Hourly Load Shedding (MW)", "subtitle": "SAPwL_UA_load shedding.png", "url": "assets/outage_23GW_transmission/UA/SAPwL_UA_load%20shedding.png"}}, "UA_MD_block": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_UA_MD_block_installed capacities.png", "url": "assets/outage_23GW_transmission/UA_MD_block/HSCBP_UA_MD_block_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_UA_MD_block_aggregated generation.png", "url": "assets/outage_23GW_transmission/UA_MD_block/HSCBP_UA_MD_block_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_UA_MD_block_hourly generation.png", "url": "assets/outage_23GW_transmission/UA_MD_block/SAPwL_UA_MD_block_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_UA_MD_block_aggregated net transmission.png", "url": "assets/outage_23GW_transmission/UA_MD_block/HSCBP_UA_MD_block_aggregated%20net%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_UA_MD_block_hourly prices.png", "url": "assets/outage_23GW_transmission/UA_MD_block/SAPwL_UA_MD_block_hourly%20prices.png"}, "load_shedding": {"title": "Hourly Load Shedding (MW)", "subtitle": "SAPwL_UA_MD_block_load shedding.png", "url": "assets/outage_23GW_transmission/UA_MD_block/SAPwL_UA_MD_block_load%20shedding.png"}}}}};
     // text_config_json is YAML -> JSON, for UI messages in JS
-    const textConfig = {"project": "load_shedding_update", "plots_root": "plots", "network_file": "network_files/load_shedding_update/LP_network_unsolved.nc", "template": {"name": "onepager_images_auto.html", "output_html": "LS_dashboard.html", "output_dir": "output", "assets_subdir": "assets"}, "scenarios": {"baseline": {"name": "Baseline", "folder": "outage_baseline"}, "outage_heatshock": {"name": "Outage Heat Shock", "folder": "outage_heatshock"}, "outage_23GW_transmission": {"name": "Outage 2.3GW Transmission", "folder": "outage_23GW_transmission"}}, "figures": {"installed_capacities": {"pattern": "HSCBP_{bus}_installed capacities.png", "title": "Installed Capacities (GW)", "subtitle_template": "HSCBP_{bus}_installed capacities.png"}, "agg_generation": {"pattern": "HSCBP_{bus}_aggregated generation.png", "title": "Aggregated Generation (TWh)", "subtitle_template": "HSCBP_{bus}_aggregated generation.png"}, "hourly_generation": {"pattern": "SAPwL_{bus}_hourly generation.png", "title": "Hourly Generation (GW)", "subtitle_template": "SAPwL_{bus}_hourly generation.png"}, "agg_net_transmission": {"pattern": "HSCBP_{bus}_aggregated net transmission.png", "title": "Aggregated Net Transmission (TWh)", "subtitle_template": "HSCBP_{bus}_aggregated net transmission.png"}, "hourly_prices": {"pattern": "SAPwL_{bus}_hourly prices.png", "title": "Hourly Prices (EUR/MWh)", "subtitle_template": "SAPwL_{bus}_hourly prices.png"}, "load_shedding": {"pattern": "SAPwL_{bus}_load shedding.png", "title": "Hourly Load Shedding (MW)", "subtitle_template": "SAPwL_{bus}_load shedding.png"}}, "page": {"title": "Load Shedding in Ukraine: Winter 2025/26", "subtitle": "Modelling Ukraine's current, estimated electricity deficit with PyPSA", "key_message_prefix": "Key message:", "key_message": "Subsantial load-shedding is expected between December 2025 and March 2026, additional capacities are urgently needed.", "authors": [{"name": "Robert Carr", "linkedin": "https://www.linkedin.com/in/robert-carr-b71826183/"}, {"name": "Frank Meissner", "linkedin": "https://www.linkedin.com/in/frank-mei%C3%9Fner-317991211/"}, {"name": "Vladyslav Mikhhnych", "linkedin": "https://www.linkedin.com/in/vlad-mikhnych/"}], "affiliation": "Green Deal Ukraïna project @ Helmholtz-Zentrum Berlin"}, "meta": {"tools_label": "Tool(s):", "tools_value": "PyPSA, Atlite", "specific_model_label": "Specific model (if applicable):", "specific_model_value": "HZB_PyPSA v1.0", "weather_year_label": "Weather year:", "weather_year_value": "2019", "solver_label": "Solver:", "solver_value": "Gurobi", "scenario_set_label": "Scenario set:", "scenario_set_value": "[name]"}, "metrics": [{"id": "load_shedding", "label": "Total estimated load shedding", "value": "2.8 TWh", "note": "With additional heat-shock: +1.3 TWh"}, {"id": "available_capacities", "label": "Available conventional generation in Ukraine", "value": "12.4 GW", "note": "Majority being nuclear"}, {"id": "annual_demand", "label": "Annual electricity demand", "value": "~100 TWh", "note": "excluding losses and consumption of power sector"}, {"id": "interconnection", "label": "Cross-border transfer capacity", "value": "2.3 GW", "note": "For UA-MD block with ENTSO-E"}], "sections": {"research_objective": {"title": "Research objective", "body": "This analysis attempts to quantify the expected load-shedding in Ukraine over  the winter period 2025/26, accounting for the current state of generation capacities, war-adjusted demand, and cross-border transfer limits.\n"}, "background": {"title": "Background / motivation", "body": "The re-intensification of Russian attacks on Ukrainian energy infrastructure over October and November 2025 has led to losses in thermal capacities, both to coal and combined-heat-and-power (CHP) plants, the latter of which provide essential heating  during winter. Reports from aroudn the country indicate that load-shedding is already occuring, and is expected to worsen as heating demand peaks in the coldest months. Here we provide a model-based estimate of the expected load-shedding and explore potential mitigation measures.\n"}, "scenario_space": {"title": "Scenario space", "bullets": ["Baseline: Current estimated capacities and cross-border limits.", "Heat Shock: +XX% demand in certain hours to reflect increased electrical heating."]}, "methodology": {"title": "Methodology", "bullets": ["Model: In-house PyPSA (Python for Power Systems Analysis) model at hourly resolution.", "Objective: minimise total system cost subject to constraints.", "Spatial granularity: 1 node per country, entirety of ENTSO-E modelled", "Hourly dispatch optimised economically over the period November 2025 - March 2026.", "Maintenance outages for nuclear units included", "Dummy load shedding generators (very high cost, last in merid order) installed in Ukraine to capture unserved energy.", "Heat demand drives CHP generation based on temperature data"]}, "data_inputs": {"title": "Data inputs", "bullets": ["Demand: ENTSO-E Transparency Platform; UA adjusted for wartime impacts.", "Installed capacities: Powerplantmatching & Global Energy Monitor; UA estimates by GDU.", "Net transfer capacities: ENTSO-E Transparency Platform.", "Weather data: ERA5 cutouts via Atlite.", "Fuel and commodity prices: TradeEconomics."]}, "main_findings": {"title": "Main findings", "bullets": ["Load shedding is required in 41% of hours and sums up to 2.8 TWh.", "The maximum load shedding is about 5.6 GW, representing approx. 34% of the peak load.", "Substituting gas and district heating with electric heaters increases demand by 2 TWh mainly in the afternoon and evening hours. Under this assumption, load shedding takes place in 49% of the hours and sum up to 4.1 TWh.", "The increase of cross-border capacity has helped, but the following measures would provide even more relief:"]}}, "ui_labels": {"scenario_label": "Scenario", "bus_label": "Bus", "compare_scenarios_button": "Compare Scenarios", "compare_buses_button": "Compare Buses", "single_generation_view_label": "View:", "generation_mode_agg": "Aggregated", "generation_mode_hourly": "Hourly", "compare_generation_view_label": "Generation view:", "compare_hint_scenarios": "Select one or more scenarios to compare.", "compare_hint_buses": "Select one or more buses to compare.", "compare_no_data": "No data available for this combination.", "compare_limit_warning": "You can select at most 4."}, "footer": {"generated_on_prefix": "Generated on:", "generated_on_value": "2025-11-21", "run_id_label": "Run ID:", "run_id_value": "PLOT_DASH_TEMPLATE", "contact_text": "Contact: modelling team", "version_text": "Version: v2.2 image-based dashboard"}, "citation": {"text": "Carr, R. & Meissner, F. (2025). Load Shedding in Ukraine: Winter 2025/26. Green Deal Ukraïna project, Helmholtz-Zentrum Berlin.", "bibtex": "@techreport{carr2025load,\n  author = {Carr, Robert and Meissner, Frank},\n  title = {Load Shedding in Ukraine: Winter 2025/26},\n  institution = {Helmholtz-Zentrum Berlin, Green Deal Ukraïna project},\n  year = {2025}\n}\n"}};
+    const textConfig = {"project": "load_shedding_update", "plots_root": "plots", "network_file": "network_files/load_shedding_update/LP_network_unsolved.nc", "template": {"name": "onepager_images_auto.html", "output_html": "LS_dashboard.html", "output_dir": "output", "assets_subdir": "assets"}, "scenarios": {"baseline": {"name": "Baseline", "folder": "outage_baseline"}, "outage_heatshock": {"name": "Outage Heat Shock", "folder": "outage_heatshock"}, "outage_23GW_transmission": {"name": "Outage 2.3GW Transmission", "folder": "outage_23GW_transmission"}}, "figures": {"installed_capacities": {"pattern": "HSCBP_{bus}_installed capacities.png", "title": "Installed Capacities (GW)", "subtitle_template": "HSCBP_{bus}_installed capacities.png"}, "agg_generation": {"pattern": "HSCBP_{bus}_aggregated generation.png", "title": "Aggregated Generation (TWh)", "subtitle_template": "HSCBP_{bus}_aggregated generation.png"}, "hourly_generation": {"pattern": "SAPwL_{bus}_hourly generation.png", "title": "Hourly Generation (GW)", "subtitle_template": "SAPwL_{bus}_hourly generation.png"}, "agg_net_transmission": {"pattern": "HSCBP_{bus}_aggregated net transmission.png", "title": "Aggregated Net Transmission (TWh)", "subtitle_template": "HSCBP_{bus}_aggregated net transmission.png"}, "hourly_prices": {"pattern": "SAPwL_{bus}_hourly prices.png", "title": "Hourly Prices (EUR/MWh)", "subtitle_template": "SAPwL_{bus}_hourly prices.png"}, "load_shedding": {"pattern": "SAPwL_{bus}_load shedding.png", "title": "Hourly Load Shedding (MW)", "subtitle_template": "SAPwL_{bus}_load shedding.png"}}, "page": {"title": "Load-Shedding in Ukraine: Winter 2025/26", "subtitle": "Modelling Ukraine's current, estimated electricity deficit with PyPSA", "key_message_prefix": "Key message:", "key_message": "Subsantial load-shedding is expected between December 2025 and March 2026, additional capacities are urgently needed.", "authors": [{"name": "Robert Carr", "linkedin": "https://www.linkedin.com/in/robert-carr-b71826183/"}, {"name": "Frank Meissner", "linkedin": "https://www.linkedin.com/in/frank-mei%C3%9Fner-317991211/"}, {"name": "Vladyslav Mikhhnych", "linkedin": "https://www.linkedin.com/in/vlad-mikhnych/"}], "affiliation": "Green Deal Ukraïna project @ Helmholtz-Zentrum Berlin"}, "meta": {"tools_label": "Tool(s):", "tools_value": "PyPSA, Atlite", "specific_model_label": "Specific model (if applicable):", "specific_model_value": "HZB_PyPSA v1.0", "weather_year_label": "Weather year:", "weather_year_value": "2019", "solver_label": "Solver:", "solver_value": "Gurobi", "scenario_set_label": "Scenario set:", "scenario_set_value": "[name]"}, "metrics": [{"id": "load_shedding", "label": "Total estimated load-shedding", "value": "2.8 TWh (35% of hours)", "note": "Heat shock scenario: +1.3 TWh (50%)"}, {"id": "available_capacities", "label": "Installed capacity in Ukraine", "value": "12.4 GW", "note": "Conventional sources"}, {"id": "annual_demand", "label": "Annual electricity demand", "value": "~100 TWh", "note": "excluding losses and consumption of power sector"}, {"id": "interconnection", "label": "Cross-border transfer capacity", "value": "2.3 GW", "note": "For UA-MD block with ENTSO-E"}], "sections": {"research_objective": {"title": "Research objective", "body": "This analysis quantifies the expected load-shedding in Ukraine over  the winter period 2025/26, accounting for the current state of generation capacities, war-adjusted demand, and cross-border transfer limits.\n"}, "background": {"title": "Background / motivation", "body": "The re-intensification of Russian attacks on Ukrainian energy infrastructure over October and November 2025 resulted in losses in thermal capacities, both to coal and combined-heat-and-power (CHP) plants. The latter provides essential heating  during winter. Reports from around the country indicate that load-shedding is already occuring, and is expected to worsen as heating demand peaks over the coldest months. Here we provide a model-based estimate of the expected load-shedding and explore potential mitigation measures.\n"}, "scenario_space": {"title": "Scenarios", "bullets": ["Baseline: Current state of the system in terms of installed capacities and hourly demand profile (best estimate).", "Heat Shock: Households substitute district heating with electrical space heaters during the morning and evening hours on week days, and from morning to evening on weekends. This increases the total demand by about 2 TWh."]}, "methodology": {"title": "Methodology", "bullets": ["In-house PyPSA (Python for Power Systems Analysis) model at hourly resolution.", "Objective: to minimise total system cost subject to constraints.", "Spatial granularity: 1 node per country, entirety of ENTSO-E modelled", "Hourly dispatch is optimised economically over the period November 2025 - March 2026.", "Dummy load-shedding generators (very high cost, last in merit order) installed in Ukraine to capture unserved energy.", "Weather year 2019 (temperature, wind and solar profiles)", "Maintenance outages for individual nuclear units are included", "Heat demand drives CHP generation based on hourly temperature"]}, "data_inputs": {"title": "Data inputs", "bullets": ["Hourly electricity demand: ENTSO-E Transparency Platform (UA adjusted for wartime impacts)", "Installed capacities: Powerplantmatching & Global Energy Monitor; UA estimates by GDU.", "Cross-border transmission capacities: ENTSO-E Transparency Platform.", "Weather data: ERA5 cutouts via Atlite.", "Fuel and commodity prices: TradeEconomics."]}, "main_findings": {"title": "Main findings", "bullets": ["Between November 2025 and March 2026, load shedding would be required in 35% of hours and sums up to 2.8 TWh.", "The maximum hourly load shedding is about 5.6 GW, representing approx. 34% of the peak load.", "Substituting gas and district heating with electric heaters increases demand by 2 TWh mainly in the afternoon and evening hours. Under this assumption, load shedding takes place in 49% of the hours and sum up to 4.1 TWh."]}}, "ui_labels": {"scenario_label": "Scenario", "bus_label": "Bus", "compare_scenarios_button": "Compare Scenarios", "compare_buses_button": "Compare Buses", "single_generation_view_label": "View:", "generation_mode_agg": "Aggregated", "generation_mode_hourly": "Hourly", "compare_generation_view_label": "Generation view:", "compare_hint_scenarios": "Select one or more scenarios to compare.", "compare_hint_buses": "Select one or more buses to compare.", "compare_no_data": "No data available for this combination.", "compare_limit_warning": "You can select at most 4."}, "footer": {"generated_on_prefix": "Generated on:", "generated_on_value": "2026-01-06", "contact_text": "Contact: robert.carr@helmholtz-berlin.de", "version_text": "Version: 1.0"}, "citation": {"text": "Carr, R. & Meissner, F. (2025). Load Shedding in Ukraine: Winter 2025/26. Green Deal Ukraïna project, Helmholtz-Zentrum Berlin.", "bibtex": "@techreport{carr2025load,\n  author = {Carr, Robert and Meissner, Frank},\n  title = {Load Shedding in Ukraine: Winter 2025/26},\n  institution = {Helmholtz-Zentrum Berlin, Green Deal Ukraïna project},\n  year = {2025}\n}\n"}};
 
     // modes: 'single', 'compare_scenarios', 'compare_buses'
     let mode = "single";
@@ -1114,10 +1085,8 @@
     function showSimpleFigure(figId, figData) {
       const img = document.getElementById(`img-${figId}`);
       const titleEl = document.getElementById(`title-${figId}`);
-      const subtitleEl = document.getElementById(`subtitle-${figId}`);
 
       titleEl.textContent = figData.title;
-      subtitleEl.textContent = figData.subtitle;
 
       if (figData.url) {
         img.src = figData.url;
@@ -1131,7 +1100,6 @@
       const hourlyData = busFigMap["hourly_generation"];
       const img = document.getElementById("img-generation");
       const titleEl = document.getElementById("title-generation");
-      const subtitleEl = document.getElementById("subtitle-generation");
 
       const hasAgg = aggData && aggData.url;
       const hasHourly = hourlyData && hourlyData.url;
@@ -1142,7 +1110,6 @@
       if (!hasAny) {
         img.src = "";
         titleEl.textContent = textConfig.figures_text.generation_agg.title;
-        subtitleEl.textContent = "";
         return;
       }
 
@@ -1158,7 +1125,6 @@
 
       if (chosen) {
         titleEl.textContent = chosen.title;
-        subtitleEl.textContent = chosen.subtitle;
         img.src = chosen.url || "";
       }
     }
@@ -1369,7 +1335,6 @@
     function buildCompareTile(fig) {
       const hasData = fig && fig.url;
       const title = hasData ? fig.title : "";
-      const subtitle = hasData ? fig.subtitle : "";
       const content = hasData
         ? `<img src="${fig.url}" alt="${fig.title}" />`
         : `<div class="compare-placeholder"></div>`;
@@ -1377,7 +1342,6 @@
       return `
         <div class="compare-figure-card">
           <div class="compare-figure-title">${title}</div>
-          <div class="compare-figure-subtitle">${subtitle}</div>
           <div class="compare-figure-body">
             ${content}
           </div>
@@ -1393,7 +1357,6 @@
       const hasAny = hasAgg || hasHourly;
 
       let title = "";
-      let subtitle = "";
       let content = `<div class="compare-placeholder"></div>`;
 
       if (hasAny) {
@@ -1409,7 +1372,6 @@
 
         if (chosen) {
           title = chosen.title;
-          subtitle = chosen.subtitle;
           content = `<img src="${chosen.url}" alt="${chosen.title}" />`;
         }
       }
@@ -1417,7 +1379,6 @@
       return `
         <div class="compare-figure-card">
           <div class="compare-figure-title">${title}</div>
-          <div class="compare-figure-subtitle">${subtitle}</div>
           <div class="compare-figure-body">
             ${content}
           </div>
