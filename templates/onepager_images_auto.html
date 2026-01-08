@@ -817,94 +817,11 @@
               </div>
             </section>
 
-            <div class="figures-column" id="figures-stack">
-              <!-- Installed capacities -->
-              <section class="figure-card" data-fig-id="installed_capacities">
-                <div class="figure-header">
-                  <div>
-                    <div class="figure-title" id="title-installed_capacities"></div>
-                  </div>
-                </div>
-                <div class="figure-body">
-                  <img id="img-installed_capacities" alt="Installed capacities" />
-                </div>
-              </section>
-
-              <!-- Generation (aggregated vs hourly toggle) -->
-              <section class="figure-card" data-fig-group="generation">
-                <div class="figure-header">
-                  <div>
-                    <div class="figure-title" id="title-generation"></div>
-                  </div>
-                  <div class="control-row">
-                    <label for="generation-mode-select">
-                      {{ text_config.ui_labels.single_generation_view_label }}
-                    </label>
-                    <select id="generation-mode-select">
-                      <option value="agg">
-                        {{ text_config.ui_labels.generation_mode_agg }}
-                      </option>
-                      <option value="hourly">
-                        {{ text_config.ui_labels.generation_mode_hourly }}
-                      </option>
-                    </select>
-                  </div>
-                </div>
-                <div class="figure-body">
-                  <img id="img-generation" alt="Generation" />
-                </div>
-              </section>
-
-              <!-- Aggregated net transmission -->
-              <section class="figure-card" data-fig-id="agg_net_transmission">
-                <div class="figure-header">
-                  <div>
-                    <div class="figure-title" id="title-agg_net_transmission"></div>
-                  </div>
-                </div>
-                <div class="figure-body">
-                  <img id="img-agg_net_transmission" alt="Aggregated net transmission" />
-                </div>
-              </section>
-
-              <!-- Hourly prices -->
-              <section class="figure-card" data-fig-id="hourly_prices">
-                <div class="figure-header">
-                  <div>
-                    <div class="figure-title" id="title-hourly_prices"></div>
-                  </div>
-                </div>
-                <div class="figure-body">
-                  <img id="img-hourly_prices" alt="Hourly prices" />
-                </div>
-              </section>
-
-              <!-- Load shedding -->
-              <section class="figure-card" data-fig-id="load_shedding">
-                <div class="figure-header">
-                  <div>
-                    <div class="figure-title" id="title-load_shedding"></div>
-                  </div>
-                </div>
-                <div class="figure-body">
-                  <img id="img-load_shedding" alt="Load shedding" />
-                </div>
-              </section>
-            </div>
+            <div class="figures-column" id="figures-stack"></div>
 
             <!-- COMPARE VIEW -->
             <div id="compare-view" class="hidden">
-              <div class="compare-options">
-                <span>{{ text_config.ui_labels.compare_generation_view_label }}</span>
-                <select id="compare-generation-mode">
-                  <option value="agg">
-                    {{ text_config.ui_labels.generation_mode_agg }}
-                  </option>
-                  <option value="hourly">
-                    {{ text_config.ui_labels.generation_mode_hourly }}
-                  </option>
-                </select>
-              </div>
+              <div class="compare-options" id="compare-options"></div>
 
               <!-- Compare scenarios panel -->
               <div id="compare-scenarios-panel" class="compare-panel hidden">
@@ -956,17 +873,95 @@
 
     // modes: 'single', 'compare_scenarios', 'compare_buses'
     let mode = "single";
-    let generationMode = "agg"; // 'agg' or 'hourly'
     let dataUnlocked = false;
     let textUnlocked = false;
 
-    function setGenerationMode(newMode) {
-      generationMode = newMode;
-      // keep both dropdowns in sync
-      const singleSelect = document.getElementById("generation-mode-select");
-      const compareSelect = document.getElementById("compare-generation-mode");
-      if (singleSelect && singleSelect.value !== newMode) singleSelect.value = newMode;
-      if (compareSelect && compareSelect.value !== newMode) compareSelect.value = newMode;
+    const defaultFigureLayout = [
+      "installed_capacities",
+      "generation",
+      "agg_net_transmission",
+      "hourly_prices",
+      "load_shedding",
+    ];
+
+    const defaultFigureGroups = {
+      generation: {
+        modes: { agg: "agg_generation", hourly: "hourly_generation" },
+        view_label_key: "single_generation_view_label",
+        compare_label_key: "compare_generation_view_label",
+        mode_label_keys: {
+          agg: "generation_mode_agg",
+          hourly: "generation_mode_hourly",
+        },
+      },
+    };
+
+    function getUILabel(key, fallback = "") {
+      if (key && textConfig.ui_labels && textConfig.ui_labels[key]) {
+        return textConfig.ui_labels[key];
+      }
+      return fallback;
+    }
+
+    function normalizeGroups(groups) {
+      const out = {};
+      Object.entries(groups || {}).forEach(([groupId, cfg]) => {
+        const base = defaultFigureGroups[groupId] || {};
+        out[groupId] = {
+          modes: cfg.modes || base.modes || {},
+          view_label_key: cfg.view_label_key || base.view_label_key || "",
+          compare_label_key: cfg.compare_label_key || base.compare_label_key || "",
+          mode_label_keys: {
+            ...(base.mode_label_keys || {}),
+            ...(cfg.mode_label_keys || {}),
+          },
+        };
+      });
+      return out;
+    }
+
+    function getFigureConfig() {
+      const order = (textConfig.figure_layout && Array.isArray(textConfig.figure_layout.order))
+        ? textConfig.figure_layout.order
+        : defaultFigureLayout;
+      const rawGroups = {
+        ...defaultFigureGroups,
+        ...(textConfig.figure_groups || {}),
+      };
+      return { order, groups: normalizeGroups(rawGroups) };
+    }
+
+    const figureConfig = getFigureConfig();
+    const figureOrder = figureConfig.order;
+    const figureGroups = figureConfig.groups;
+    const groupModes = {};
+
+    function getOrderedGroupIds() {
+      return figureOrder.filter(item => figureGroups[item]);
+    }
+
+    function initGroupModes() {
+      getOrderedGroupIds().forEach(groupId => {
+        const modes = Object.keys(figureGroups[groupId].modes || {});
+        if (modes.length > 0) {
+          groupModes[groupId] = modes[0];
+        }
+      });
+    }
+
+    function syncGroupSelects() {
+      getOrderedGroupIds().forEach(groupId => {
+        const mode = groupModes[groupId];
+        const singleSelect = document.getElementById(`${groupId}-mode-select`);
+        const compareSelect = document.getElementById(`compare-${groupId}-mode`);
+        if (singleSelect && mode) singleSelect.value = mode;
+        if (compareSelect && mode) compareSelect.value = mode;
+      });
+    }
+
+    function setGroupMode(groupId, newMode) {
+      groupModes[groupId] = newMode;
+      syncGroupSelects();
 
       if (mode === "single") {
         updateSingleViewFigures();
@@ -1009,6 +1004,115 @@
       });
     }
 
+    function renderFigureStack() {
+      const container = document.getElementById("figures-stack");
+      if (!container) return;
+      container.innerHTML = "";
+
+      figureOrder.forEach(item => {
+        if (figureGroups[item]) {
+          const groupCfg = figureGroups[item];
+          const section = document.createElement("section");
+          section.className = "figure-card";
+          section.setAttribute("data-fig-group", item);
+
+          const header = document.createElement("div");
+          header.className = "figure-header";
+
+          const headerLeft = document.createElement("div");
+          const title = document.createElement("div");
+          title.className = "figure-title";
+          title.id = `title-${item}`;
+          headerLeft.appendChild(title);
+          header.appendChild(headerLeft);
+
+          const controlRow = document.createElement("div");
+          controlRow.className = "control-row";
+          const label = document.createElement("label");
+          label.setAttribute("for", `${item}-mode-select`);
+          label.textContent = getUILabel(groupCfg.view_label_key, "View:");
+          const select = document.createElement("select");
+          select.id = `${item}-mode-select`;
+          Object.entries(groupCfg.modes || {}).forEach(([modeKey]) => {
+            const opt = document.createElement("option");
+            opt.value = modeKey;
+            const labelKey = groupCfg.mode_label_keys && groupCfg.mode_label_keys[modeKey];
+            opt.textContent = getUILabel(labelKey, modeKey);
+            select.appendChild(opt);
+          });
+          controlRow.appendChild(label);
+          controlRow.appendChild(select);
+          header.appendChild(controlRow);
+
+          const body = document.createElement("div");
+          body.className = "figure-body";
+          const img = document.createElement("img");
+          img.id = `img-${item}`;
+          img.alt = item.replace(/_/g, " ");
+          body.appendChild(img);
+
+          section.appendChild(header);
+          section.appendChild(body);
+          container.appendChild(section);
+        } else {
+          const section = document.createElement("section");
+          section.className = "figure-card";
+          section.setAttribute("data-fig-id", item);
+
+          const header = document.createElement("div");
+          header.className = "figure-header";
+          const headerLeft = document.createElement("div");
+          const title = document.createElement("div");
+          title.className = "figure-title";
+          title.id = `title-${item}`;
+          headerLeft.appendChild(title);
+          header.appendChild(headerLeft);
+
+          const body = document.createElement("div");
+          body.className = "figure-body";
+          const img = document.createElement("img");
+          img.id = `img-${item}`;
+          img.alt = item.replace(/_/g, " ");
+          body.appendChild(img);
+
+          section.appendChild(header);
+          section.appendChild(body);
+          container.appendChild(section);
+        }
+      });
+    }
+
+    function renderCompareOptions() {
+      const container = document.getElementById("compare-options");
+      if (!container) return;
+      container.innerHTML = "";
+
+      const groupIds = getOrderedGroupIds();
+      if (groupIds.length === 0) return;
+
+      groupIds.forEach(groupId => {
+        const groupCfg = figureGroups[groupId];
+        const label = document.createElement("span");
+        label.textContent = getUILabel(
+          groupCfg.compare_label_key,
+          getUILabel(groupCfg.view_label_key, "View:")
+        );
+
+        const select = document.createElement("select");
+        select.id = `compare-${groupId}-mode`;
+        Object.entries(groupCfg.modes || {}).forEach(([modeKey]) => {
+          const opt = document.createElement("option");
+          opt.value = modeKey;
+          const labelKey = groupCfg.mode_label_keys && groupCfg.mode_label_keys[modeKey];
+          opt.textContent = getUILabel(labelKey, modeKey);
+          select.appendChild(opt);
+        });
+
+        container.appendChild(label);
+        container.appendChild(select);
+      });
+    }
+
     // --- single-view simple figures ---
     function toggleSimpleSection(figId, hasData) {
       const section = document.querySelector(`section[data-fig-id="${figId}"]`);
@@ -1020,8 +1124,8 @@
       }
     }
 
-    function toggleGenerationSection(hasAnyData) {
-      const section = document.querySelector(`section[data-fig-group="generation"]`);
+    function toggleGroupSection(groupId, hasAnyData) {
+      const section = document.querySelector(`section[data-fig-group="${groupId}"]`);
       if (!section) return;
       if (hasAnyData) {
         section.classList.remove("hidden");
@@ -1033,6 +1137,7 @@
     function showSimpleFigure(figId, figData) {
       const img = document.getElementById(`img-${figId}`);
       const titleEl = document.getElementById(`title-${figId}`);
+      if (!img || !titleEl) return;
 
       titleEl.textContent = figData.title;
 
@@ -1043,32 +1148,36 @@
       }
     }
 
-    function showGenerationFigureSingle(busFigMap) {
-      const aggData = busFigMap["agg_generation"];
-      const hourlyData = busFigMap["hourly_generation"];
-      const img = document.getElementById("img-generation");
-      const titleEl = document.getElementById("title-generation");
+    function pickGroupFigure(groupId, groupCfg, busFigMap) {
+      const modes = Object.entries(groupCfg.modes || {});
+      const preferredMode = groupModes[groupId];
+      let chosen = null;
+      let hasAny = false;
 
-      const hasAgg = aggData && aggData.url;
-      const hasHourly = hourlyData && hourlyData.url;
-      const hasAny = hasAgg || hasHourly;
+      modes.forEach(([modeKey, figId]) => {
+        const fig = busFigMap[figId];
+        if (fig && fig.url) {
+          hasAny = true;
+          if (!chosen) chosen = fig;
+          if (modeKey === preferredMode) chosen = fig;
+        }
+      });
 
-      toggleGenerationSection(hasAny);
+      return { chosen, hasAny };
+    }
+
+    function showGroupedFigureSingle(groupId, groupCfg, busFigMap) {
+      const img = document.getElementById(`img-${groupId}`);
+      const titleEl = document.getElementById(`title-${groupId}`);
+      if (!img || !titleEl) return;
+
+      const { chosen, hasAny } = pickGroupFigure(groupId, groupCfg, busFigMap);
+      toggleGroupSection(groupId, hasAny);
 
       if (!hasAny) {
         img.src = "";
-        titleEl.textContent = textConfig.figures_text.generation_agg.title;
+        titleEl.textContent = "";
         return;
-      }
-
-      let chosen = null;
-      if (generationMode === "agg" && hasAgg) {
-        chosen = aggData;
-      } else if (generationMode === "hourly" && hasHourly) {
-        chosen = hourlyData;
-      } else {
-        // Fallback: whichever exists
-        chosen = hasAgg ? aggData : hourlyData;
       }
 
       if (chosen) {
@@ -1084,22 +1193,22 @@
 
       const scen = scenarios[scenarioKey];
       const busFigMap = scen.buses[busKey];
+      const simpleFigIds = figureOrder.filter(item => !figureGroups[item]);
+      const groupIds = getOrderedGroupIds();
+
       if (!busFigMap) {
-        ["installed_capacities","agg_net_transmission","hourly_prices","load_shedding"].forEach(figId => {
+        simpleFigIds.forEach(figId => {
           toggleSimpleSection(figId, false);
           const img = document.getElementById(`img-${figId}`);
           if (img) img.src = "";
         });
-        toggleGenerationSection(false);
+        groupIds.forEach(groupId => {
+          toggleGroupSection(groupId, false);
+          const img = document.getElementById(`img-${groupId}`);
+          if (img) img.src = "";
+        });
         return;
       }
-
-      const simpleFigIds = [
-        "installed_capacities",
-        "agg_net_transmission",
-        "hourly_prices",
-        "load_shedding",
-      ];
 
       simpleFigIds.forEach(figId => {
         const figData = busFigMap[figId];
@@ -1113,7 +1222,10 @@
         }
       });
 
-      showGenerationFigureSingle(busFigMap);
+      groupIds.forEach(groupId => {
+        const groupCfg = figureGroups[groupId];
+        showGroupedFigureSingle(groupId, groupCfg, busFigMap);
+      });
     }
 
     // --- modes ---
@@ -1245,8 +1357,7 @@
       renderBusComparison();
     }
 
-    // Build one column in compare mode, with fixed order:
-    // Installed capacities → Generation → Net transmission → Prices → Load shedding
+    // Build one column in compare mode, with layout-driven order
     function buildCompareColumn(label, busFigMap) {
       if (!busFigMap) {
         return `
@@ -1261,20 +1372,14 @@
         <div class="compare-column-header">${label}</div>
       `;
 
-      // 1. Installed capacities
-      html += buildCompareTile(busFigMap["installed_capacities"]);
-
-      // 2. Generation (mode-dependent)
-      html += buildCompareGenerationTile(busFigMap);
-
-      // 3. Aggregated net transmission
-      html += buildCompareTile(busFigMap["agg_net_transmission"]);
-
-      // 4. Prices
-      html += buildCompareTile(busFigMap["hourly_prices"]);
-
-      // 5. Load shedding
-      html += buildCompareTile(busFigMap["load_shedding"]);
+      figureOrder.forEach(item => {
+        if (figureGroups[item]) {
+          const groupCfg = figureGroups[item];
+          html += buildCompareGroupTile(item, groupCfg, busFigMap);
+        } else {
+          html += buildCompareTile(busFigMap[item]);
+        }
+      });
 
       html += `</div>`;
       return html;
@@ -1297,32 +1402,12 @@
       `;
     }
 
-    function buildCompareGenerationTile(busFigMap) {
-      const aggData = busFigMap["agg_generation"];
-      const hourlyData = busFigMap["hourly_generation"];
-      const hasAgg = aggData && aggData.url;
-      const hasHourly = hourlyData && hourlyData.url;
-      const hasAny = hasAgg || hasHourly;
-
-      let title = "";
-      let content = `<div class="compare-placeholder"></div>`;
-
-      if (hasAny) {
-        let chosen = null;
-        if (generationMode === "agg" && hasAgg) {
-          chosen = aggData;
-        } else if (generationMode === "hourly" && hasHourly) {
-          chosen = hourlyData;
-        } else {
-          // Fallback: whichever exists
-          chosen = hasAgg ? aggData : hourlyData;
-        }
-
-        if (chosen) {
-          title = chosen.title;
-          content = `<img src="${chosen.url}" alt="${chosen.title}" />`;
-        }
-      }
+    function buildCompareGroupTile(groupId, groupCfg, busFigMap) {
+      const { chosen, hasAny } = pickGroupFigure(groupId, groupCfg, busFigMap);
+      const title = hasAny && chosen ? chosen.title : "";
+      const content = hasAny && chosen
+        ? `<img src="${chosen.url}" alt="${chosen.title}" />`
+        : `<div class="compare-placeholder"></div>`;
 
       return `
         <div class="compare-figure-card">
@@ -1386,8 +1471,6 @@
     function setupEvents() {
       const scenarioSelect = document.getElementById("scenario-select");
       const busSelect = document.getElementById("bus-select");
-      const genModeSelect = document.getElementById("generation-mode-select");
-      const compareGenModeSelect = document.getElementById("compare-generation-mode");
       const btnCompareScen = document.getElementById("btn-compare-scenarios");
       const btnCompareBus = document.getElementById("btn-compare-buses");
       const btnUnlockData = document.getElementById("btn-unlock-data");
@@ -1418,12 +1501,19 @@
         }
       });
 
-      genModeSelect.addEventListener("change", () => {
-        setGenerationMode(genModeSelect.value);
-      });
-
-      compareGenModeSelect.addEventListener("change", () => {
-        setGenerationMode(compareGenModeSelect.value);
+      getOrderedGroupIds().forEach(groupId => {
+        const singleSelect = document.getElementById(`${groupId}-mode-select`);
+        const compareSelect = document.getElementById(`compare-${groupId}-mode`);
+        if (singleSelect) {
+          singleSelect.addEventListener("change", () => {
+            setGroupMode(groupId, singleSelect.value);
+          });
+        }
+        if (compareSelect) {
+          compareSelect.addEventListener("change", () => {
+            setGroupMode(groupId, compareSelect.value);
+          });
+        }
       });
 
       btnCompareScen.addEventListener("click", () => {
@@ -1498,10 +1588,10 @@
     function init() {
       initScenarioDropdown();
       initBusDropdown();
-
-      // initial gen dropdown sync
-      document.getElementById("generation-mode-select").value = generationMode;
-      document.getElementById("compare-generation-mode").value = generationMode;
+      initGroupModes();
+      renderFigureStack();
+      renderCompareOptions();
+      syncGroupSelects();
 
       // build compare UIs
       buildScenarioCheckboxes();

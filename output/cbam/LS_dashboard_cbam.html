@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Impacts of CBAM on Ukraine &amp; Energy Community Countries: 2026</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #eef2f5;
+      --fg: #0f172a;
+      --muted: #5b6478;
+      --accent: #0ea5e9;
+      --card-bg: #ffffff;
+      --border: #d7dde6;
+      --radius-lg: 16px;
+      --font-text: "Roboto", "Helvetica Neue", Arial, sans-serif;
+      --font-num: "Courier New", Courier, monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-text);
+      background:
+        radial-gradient(circle at 20% 20%, rgba(14,165,233,0.08), transparent 35%),
+        radial-gradient(circle at 80% 10%, rgba(99,102,241,0.08), transparent 32%),
+        var(--bg);
+      color: var(--fg);
+    }
+
+    .num {
+      font-family: var(--font-num);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 20px 24px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .title-block { flex: 2; }
+
+    .title-block h1 {
+      margin: 0 0 4px;
+      font-size: 1.8rem;
+      line-height: 1.1;
+    }
+
+    .title-block p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .meta-block {
+      flex: 1;
+      text-align: right;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .meta-tag {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #eef2ff;
+      font-size: 0.75rem;
+      color: #4338ca;
+    }
+
+    /* Citation box on the right */
+    .citation-box {
+      margin-top: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+      padding: 8px;
+      border-radius: 8px;
+      text-align: left;
+    }
+    .citation-text {
+      width: 100%;
+      height: 72px;
+      padding: 8px;
+      font-size: 0.9rem;
+      border: 1px dashed var(--border);
+      border-radius: 6px;
+      resize: vertical;
+      background: transparent;
+      color: var(--fg);
+    }
+    .copy-btn {
+      margin-top: 6px;
+      padding: 6px 8px;
+      border-radius: 6px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+    .copy-btn:active { transform: translateY(1px); }
+    .main-findings-card {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      border-left: 4px solid var(--accent);
+      background: rgba(14,165,233,0.08);
+      padding: 12px 14px;
+      border-radius: 10px;
+    }
+    .main-findings-icon {
+      font-weight: 700;
+      color: var(--accent);
+      margin-top: 2px;
+    }
+    .main-findings-content h2 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+    }
+    .main-findings-content .bullet-list { margin: 0; }
+
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .metric-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .metric-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    .metric-value {
+      font-size: 1.05rem;
+      font-weight: 600;
+      font-family: var(--font-num);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .metric-note { font-size: 0.75rem; color: var(--muted); }
+
+    /* Global controls row (scenario + bus + compare buttons) */
+    #global-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between; /* left group on left, buttons on right */
+      gap: 0.5rem;
+      flex-wrap: nowrap;
+      width: 100%;
+    }
+
+    .controls-left {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .controls-right {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.35rem;
+      justify-content: flex-start;
+      margin-left: 1rem;
+      min-width: 160px;
+    }
+
+    .pill-button {
+      min-width: 110px; /* prevent extreme squishing */
+    }
+
+    /* Single-view main grid */
+    .main-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
+      gap: 16px;
+      align-items: stretch;
+      margin-top: 8px;
+    }
+    .main-grid.compare-mode {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .data-panel {
+      position: relative;
+      min-height: 200px;
+    }
+    .data-panel-content {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .data-panel.locked .data-panel-content {
+      display: none;
+      pointer-events: none;
+      user-select: none;
+    }
+    .data-veil {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 12px;
+      z-index: 10;
+    }
+    .data-veil::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--page-bg);
+    }
+    .data-veil-inner {
+      position: relative;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 18px;
+      text-align: center;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.08);
+      max-width: 320px;
+      z-index: 11;
+    }
+    .data-veil-inner h3 {
+      margin: 0 0 6px;
+      font-size: 1.1rem;
+    }
+    .data-veil-inner p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    /* Text panel lock */
+    .text-panel {
+      position: relative;
+    }
+    .text-panel-content {
+    }
+    .text-panel.locked .text-panel-content {
+      display: none;
+      pointer-events: none;
+      user-select: none;
+    }
+    .text-veil {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 12px;
+      z-index: 10;
+    }
+    .text-veil::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--page-bg);
+    }
+    .text-veil-inner {
+      position: relative;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      text-align: center;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.08);
+      max-width: 340px;
+      z-index: 11;
+    }
+    .text-veil-inner h3 {
+      margin: 0 0 6px;
+      font-size: 1.05rem;
+    }
+    .text-veil-inner p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 0;
+    }
+
+    .card-section { margin-bottom: 4px; }
+
+    .card h2 {
+      margin: 0 0 4px;
+      font-size: 1rem;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.35;
+    }
+
+    .bullet-list {
+      margin: 4px 0 0;
+      padding-left: 16px;
+      font-size: 0.85rem;
+    }
+
+    .bullet-list li { margin-bottom: 2px; }
+
+    .right-column {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 0;
+    }
+
+    .figures-column {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .figure-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .figure-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .figure-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+
+    .figure-body {
+      flex: 1;
+      min-height: 0;
+    }
+
+    .figure-body img {
+      width: 100%;
+      max-height: 260px;
+      object-fit: contain;
+      border-radius: 10px;
+      background: #f9fafb;
+      border: 1px solid var(--border);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .page-footer {
+      margin-top: 6px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 6px;
+    }
+
+    /* Compare view layout */
+    #compare-view {
+      margin-top: 10px;
+    }
+
+    .compare-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .compare-checkboxes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .compare-checkboxes span.label {
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .compare-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .compare-options select {
+      font-size: 0.8rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #f9fafb;
+    }
+
+    .compare-columns {
+      display: flex;
+      gap: 10px;
+      align-items: stretch;
+      flex-wrap: wrap;
+    }
+
+    .compare-column {
+      flex: 1 1 0;
+      min-width: 220px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .compare-column-header {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .compare-figure-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      padding: 8px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .compare-figure-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+
+    .compare-figure-body {
+      min-height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .compare-figure-body img {
+      width: 100%;
+      max-height: 180px;
+      object-fit: contain;
+      border-radius: 8px;
+      background: #f9fafb;
+      border: 1px solid var(--border);
+    }
+
+    .compare-placeholder {
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+      background: #f9fafb;
+      border: 1px dashed var(--border);
+    }
+
+    .compare-empty {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* new: authors styling */
+    .authors-block {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+    .authors-line {
+      font-weight: 600;
+      color: var(--fg);
+    }
+    .authors-line a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      margin-right: 6px;
+    }
+    .authors-line a:hover {
+      text-decoration: underline;
+    }
+    .logo-strip {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 6px;
+      justify-content: flex-end;
+    }
+    .logo-strip img {
+      height: 52px;
+      max-width: 190px;
+      object-fit: contain;
+    }
+
+    /* left-side meta block under affiliation */
+    .left-meta {
+      margin-top: 8px;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .left-meta strong { color: var(--fg); font-weight:600; margin-right:6px; }
+
+    /* Key-message styling: subtle boxed callout with accent stripe */
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .key-message-container {
+      margin-top: 10px;
+      display: inline-flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: rgba(37, 99, 235, 0.06); /* light tint of --accent */
+      border-left: 4px solid var(--accent);
+      padding: 10px 12px;
+      border-radius: 8px;
+      max-width: 100%;
+    }
+    /* full-width variant that sits under the header and spans both columns */
+    .key-message-container.full {
+      display: flex;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .key-message-prefix { font-weight: 700; color: var(--accent); margin-right:8px; }
+    .key-message-text { font-weight: 700; color: var(--fg); line-height:1.25; font-size:1rem; }
+
+    @media (max-width: 900px) {
+      .key-message-container { padding: 8px 10px; }
+    }
+
+    @media (max-width: 900px) {
+      .metrics-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .main-grid { grid-template-columns: 1fr; }
+      .page-header { flex-direction: column; }
+      .meta-block { text-align: left; }
+    }
+
+    /* simple dialog styles */
+    #network-map-dialog { display:none; position:fixed; inset:0; z-index:1200; align-items:center; justify-content:center; }
+    #network-map-backdrop { position:fixed; inset:0; background:rgba(0,0,0,0.45); }
+    #network-map-box { width:92vw; max-width:1100px; height:82vh; background:#fff; border-radius:8px; box-shadow:0 10px 40px rgba(0,0,0,0.35); overflow:hidden; display:flex; flex-direction:column; }
+    #network-map-toolbar { display:flex; justify-content:space-between; align-items:center; padding:8px 12px; border-bottom:1px solid #eee; background:#fafafa; }
+    #network-map-canvas { flex:1 1 auto; min-height:0; } /* for leaflet container */
+    #network-map-canvas iframe { width:100%; height:100%; border:0; display:block; }
+
+    /* fixed overlay panel */
+    #network-map-panel {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1400;
+      align-items: center;
+      justify-content: center;
+      pointer-events: auto;
+    }
+    #network-map-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+    }
+    #network-map-container {
+      position: relative;
+      width: 96vw;
+      max-width: 1200px;
+      height: 82vh;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+      z-index: 1401;
+      display: flex;
+      flex-direction: column;
+    }
+    #network-map-toolbar {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:8px 12px;
+      border-bottom:1px solid #eee;
+      background:#fafafa;
+      z-index: 2;
+    }
+    #network-map-canvas {
+      flex: 1 1 auto;
+      min-height: 0;
+      touch-action: none; /* prevent touch gestures from scrolling the page while panning the map */
+      -ms-touch-action: none;
+      -webkit-user-drag: none;
+    }
+    #network-map-canvas iframe { width:100%; height:100%; border:0; display:block; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <div class="title-block">
+        <h1>Impacts of CBAM on Ukraine &amp; Energy Community Countries: 2026</h1>
+        <p class="subtitle">Quantifying the consequences of CBAM for electricity trade between the EU and Energy Community countries with PyPSA</p>
+
+        <!-- new: authors -->
+        <div class="authors-block">
+          <div class="authors-line">
+            Main authors:
+            
+              <a href="https://www.linkedin.com/in/robert-carr-b71826183/" target="_blank" rel="noopener noreferrer">Robert Carr</a>,
+            
+              <a href="https://www.linkedin.com/in/frank-mei%C3%9Fner-317991211/" target="_blank" rel="noopener noreferrer">Frank Meissner</a>,
+            
+              <a href="https://www.linkedin.com/in/rouven-stubbe-41407a130/" target="_blank" rel="noopener noreferrer">Rouven Stubbe</a>
+            
+          </div>
+        </div>
+
+        <!-- left-meta remains under affiliation -->
+        <!-- <div class="left-meta">
+          
+            <div><strong>Weather year:</strong> 2019</div>
+          
+          
+            <div><strong>Tool(s):</strong> PyPSA, Atlite</div>
+          
+          
+            <div><strong>Specific model (if applicable):</strong> HZB_PyPSA v1.0</div>
+          
+          
+            <div><strong>Solver:</strong> Gurobi</div>
+          
+          
+            <div><strong>Scenario set:</strong> [name]</div>
+          
+        </div> -->
+      </div>
+
+      <div class="meta-block">
+        <div class="logo-strip" aria-label="Partner logos">
+          <img src="../logos/GDU_logo_nowhitespace.png" alt="GDU logo" loading="lazy" />
+          <img src="../logos/HZB_logo-a4-rgb transparent.png" alt="HZB logo" loading="lazy" />
+        </div>
+      </div>
+    </header>
+
+    <!-- full-width key message directly under header, spans both columns -->
+    <div class="key-message-container full" role="note" aria-label="Key message">
+      <div class="key-message-prefix">Key message:</div>
+      <div class="key-message-text">Electricity exports from Energy Community countries to the EU could be reduced by over 60%, while markets become fragmeneted with only marginal environmental gains. Rules should be reformed to avoid unintended negative effects.</div>
+    </div>
+
+    <!-- Prominent main findings -->
+    <section class="card main-findings-card" aria-label="Main findings">
+      <div class="main-findings-content">
+        <h2>Main findings</h2>
+        <ul class="bullet-list">
+          
+          <li>Introducing a CBAM charge reduces electricity exports from Ukraine to the EU by ~60%.</li>
+          
+          <li>There is a corresponding increase in transit flows from the EU via Ukraine to other EU countries.</li>
+          
+          <li>Energy Community countries become less integrated with EU energy markets, with most cross-border capacity used for transit flows</li>
+          
+          <li>System-wide CO2 emissions are reduced by just 2 Mt: Energy Community emissions come down by 9 Mt while EU emissions go up by 7 Mt.</li>
+          
+          <li>Generally: CBAM with current rules provides minimal environmental gains in the power sector, at a large economic and political cost.</li>
+          
+        </ul>
+      </div>
+    </section>
+    
+    <section class="metrics-row">
+      
+      <div class="metric-card">
+        <div class="metric-label">CBAM charge for Ukraine</div>
+        <div class="metric-value">75 EUR/MWh</div>
+        <div class="metric-note">Calculated based on average emission factor from 2016-2020</div>
+      </div>
+      
+      <div class="metric-card">
+        <div class="metric-label">Ukraine exports to EU</div>
+        <div class="metric-value">2.5 TWh with CBAM</div>
+        <div class="metric-note">Compared to 6 TWh without CBAM</div>
+      </div>
+      
+      <div class="metric-card">
+        <div class="metric-label">Energy Community emissions</div>
+        <div class="metric-value">-9 Mt CO reduction</div>
+        <div class="metric-note">with CBAM, but total system emissions only down by 2 Mt</div>
+      </div>
+      
+      <div class="metric-card">
+        <div class="metric-label">Average hourly price in UA</div>
+        <div class="metric-value">84.5 EUR/MWh (with CBAM)</div>
+        <div class="metric-note">90.3 EUR/MWH without</div>
+      </div>
+      
+    </section>
+
+    <!-- SINGLE VIEW -->
+    <div id="single-view" class="main-grid">
+      <!-- LEFT: text -->
+      <div class="text-panel locked" id="text-panel-wrapper">
+        <div class="card text-panel-content" id="text-panel">
+          <div style="display:flex; justify-content:flex-end; gap:8px;">
+            <button id="btn-lock-text" class="pill-button hidden">Hide summary</button>
+          </div>
+          <div class="card-section">
+            <h2>Research objective</h2>
+            <p>This analysis quantifies the short-term (2026) consequences of CBAM for electricity trade between EU and Energy Community countries, with a focus on Ukraine and Moldova (but extending to the Western Balkans)
+</p>
+          </div>
+          <div class="card-section">
+            <h2>Background / motivation</h2>
+            <p>The EU&#39;s Carbon Border Adjustment Mechanism (CBAM) aims to reduce the risk of carbon leakage for certain goods subject to the EU ETS, including electricity. From January 1, 2026, EU importers will need to purchase CBAM certificates at a weekly average price of EU-ETS certificates for the imbedded emissions of imported goods from non-EU countries.  Electricity is a particularly tricky good to target with CBAM, one reason being commercial trade and physical flows do not always fully align. Thus, tracing embedded emissions of electricity generation and matching them to importers poses a challenge.  While actual embedded emissions can be used in special cases, the conditions for doing-so are exceptionally hard to fulfil. In all other cases, default values for embedded direct emissions per country/region will be applied to all electricity imports based on a 2016 – 2020.  Some claim that this would be taxing “historical” emissions rather than actual ones, leading to a large trade barrier for all electricity imported from third countries into the EU and other possible unintended consequences. We explore this here. 
+</p>
+          </div>
+          <div class="card-section">
+            <h2>Scenarios</h2>
+            <ul class="bullet-list">
+              
+              <li>No CBAM: Power generated by Energy Community buses (also referred to as non-ETS buses) and expored to EU buses (ETS-buses) does not incur any additional charges.</li>
+              
+              <li>National CBAM: Power generated by Energy Community buses which is exported to any EU bus incurs a CBAM charge per MWh based on country-specific emission factors from 2016-2020.</li>
+              
+            </ul>
+          </div>
+          <div class="card-section">
+            <h2>Methodology</h2>
+            <ul class="bullet-list">
+              
+              <li>In-house PyPSA (Python for Power Systems Analysis) model at hourly resolution.</li>
+              
+              <li>Hourly dispatch is optimised economically over the period January - December 2026.</li>
+              
+              <li>Objective: to minimise total system cost subject to constraints.</li>
+              
+              <li>Spatial granularity: 1 node per country, entirety of ENTSO-E modelled</li>
+              
+              <li>Nationally determined CBAM charge (using average emission factors from 2016-2020) is applied to each MWh of electricity that is generated at a non-ETS bus and exported to an EU-bus.</li>
+              
+              <li>CBAM applied to the following countries: Ukraine, Moldova, Albania, Bosnia and Herzegovina, Kosovo, Montenegro, North Macedonia, and Serbia</li>
+              
+              <li>Transit flows (generated at ETS-bus and transiting through non-ETS bus to reach another ETS-bus) are exempt from the CBAM charge.</li>
+              
+              <li>Cross border tranmission capacity capped at 90th percentile of maximum observed flows from 2024 (ENTSO-E Transparency Platform).</li>
+              
+              <li>Transmission capacity between EU and Ukraine-Moldova block capped at 2.1 GW.</li>
+              
+              <li>Weather year 2019 (temperature, wind and solar profiles)</li>
+              
+              <li>Maintenance outages for individual nuclear units in Ukraine are included.</li>
+              
+              <li>CHPs: heat driven, with country-specific must-run trajectories developed using historical temperature data (heating degree days – HDD).</li>
+              
+            </ul>
+          </div>
+          <div class="card-section">
+            <h2>Data inputs</h2>
+            <ul class="bullet-list">
+              
+              <li>Hourly electricity demand: ENTSO-E Transparency Platform (UA adjusted for wartime impacts)</li>
+              
+              <li>Installed capacities: Powerplantmatching (conventional), Global Energy Monitor (renewables), ENTSO-E Transparency Platform (hydro and rooftop PV); UA estimates by GDU.</li>
+              
+              <li>Cross-border transmission capacities: ENTSO-E Transparency Platform.</li>
+              
+              <li>Weather data: ERA5 cutouts via Atlite.</li>
+              
+              <li>Fuel and commodity prices: TradeEconomics (annual average for 2024).</li>
+              
+            </ul>
+          </div>
+
+          <!-- citation box moved here, under Main findings -->
+          <div class="card-section">
+            <div class="citation-box" aria-label="Citation">
+              <label style="font-weight:600; font-size:0.9rem; margin-bottom:6px; display:block;">Citation</label>
+              <textarea id="citationText" class="citation-text" readonly>Carr, R. &amp; Meissner, F. (2025). Load Shedding in Ukraine: Winter 2025/26. Green Deal Ukraïna project, Helmholtz-Zentrum Berlin.</textarea>
+              <div style="display:flex; justify-content:flex-end;">
+                <button class="copy-btn" onclick="copyCitation()">Copy citation</button>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        <div class="text-veil" id="text-veil">
+          <div class="text-veil-inner">
+            <h3>Read the summary</h3>
+            <p>Review objectives, background, scenarios, and inputs.</p>
+            <button id="btn-unlock-text" class="pill-button">Go</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: figures -->
+      <div class="right-column">
+        <div id="data-panel" class="data-panel locked">
+          <div class="data-panel-content">
+            <!-- GLOBAL CONTROLS -->
+            <section id="global-controls">
+              <div class="controls-left">
+                <label for="scenario-select">Scenario:</label>
+                <select id="scenario-select"></select>
+
+                <label for="bus-select">Bus:</label>
+                <select id="bus-select"></select>
+              </div>
+              <div class="controls-right">
+                <button id="btn-network-map" class="pill-button" title="Open network map">Network map</button>
+                <button id="btn-compare-scenarios" class="pill-button">
+                  Compare Scenarios
+                </button>
+                <button id="btn-compare-buses" class="pill-button">
+                  Compare Buses
+                </button>
+                <button id="btn-lock-data" class="pill-button hidden">
+                  Hide data
+                </button>
+              </div>
+            </section>
+
+            <div class="figures-column" id="figures-stack"></div>
+
+            <!-- COMPARE VIEW -->
+            <div id="compare-view" class="hidden">
+              <div class="compare-options" id="compare-options"></div>
+
+              <!-- Compare scenarios panel -->
+              <div id="compare-scenarios-panel" class="compare-panel hidden">
+                <div class="compare-checkboxes" id="compare-scenarios-checkboxes">
+                  <!-- filled by JS -->
+                </div>
+                <div id="compare-scenarios-columns" class="compare-columns"></div>
+              </div>
+
+              <!-- Compare buses panel -->
+              <div id="compare-buses-panel" class="compare-panel hidden">
+                <div class="compare-checkboxes" id="compare-buses-checkboxes">
+                  <!-- filled by JS -->
+                </div>
+                <div id="compare-buses-columns" class="compare-columns"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="data-veil" id="data-veil">
+            <div class="data-veil-inner">
+              <h3>Explore the results</h3>
+              <p>Dive into figures and compare buses and scenearios.</p>
+              <button id="btn-unlock-data" class="pill-button">Go</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="page-footer">
+      <div>
+        Generated on:
+        <span class="num">2026-01-06</span>
+      </div>
+      <div>
+        Contact: robert.carr@helmholtz-berlin.de
+        •
+        Version: 1.0
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // scenarios_json is a nested dict from Python
+    const scenarios = {"no_cbam": {"name": "No CBAM", "buses": {"AL": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_AL_installed capacities.png", "url": "assets/no_cbam/AL/HSCBP_AL_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_AL_aggregated generation.png", "url": "assets/no_cbam/AL/HSCBP_AL_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_AL_hourly generation.png", "url": "assets/no_cbam/AL/SAPwL_AL_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_AL_aggregated net transmission.png", "url": "assets/no_cbam/AL/HSCBP_AL_aggregated%20net%20transmission.png"}, "national_transmission": {"title": "National Transmission (TWh)", "subtitle": "HSCBP_AL_national transmission.png", "url": "assets/no_cbam/AL/HSCBP_AL_national%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_AL_hourly prices.png", "url": "assets/no_cbam/AL/SAPwL_AL_hourly%20prices.png"}}, "BA": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_BA_installed capacities.png", "url": "assets/no_cbam/BA/HSCBP_BA_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_BA_aggregated generation.png", "url": "assets/no_cbam/BA/HSCBP_BA_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_BA_hourly generation.png", "url": "assets/no_cbam/BA/SAPwL_BA_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_BA_aggregated net transmission.png", "url": "assets/no_cbam/BA/HSCBP_BA_aggregated%20net%20transmission.png"}, "national_transmission": {"title": "National Transmission (TWh)", "subtitle": "HSCBP_BA_national transmission.png", "url": "assets/no_cbam/BA/HSCBP_BA_national%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_BA_hourly prices.png", "url": "assets/no_cbam/BA/SAPwL_BA_hourly%20prices.png"}}, "Balkans": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_Balkans_installed capacities.png", "url": "assets/no_cbam/Balkans/HSCBP_Balkans_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_Balkans_aggregated generation.png", "url": "assets/no_cbam/Balkans/HSCBP_Balkans_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_Balkans_hourly generation.png", "url": "assets/no_cbam/Balkans/SAPwL_Balkans_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_Balkans_aggregated net transmission.png", "url": "assets/no_cbam/Balkans/HSCBP_Balkans_aggregated%20net%20transmission.png"}, "national_transmission": {"title": "National Transmission (TWh)", "subtitle": "HSCBP_Balkans_national transmission.png", "url": "assets/no_cbam/Balkans/HSCBP_Balkans_national%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_Balkans_hourly prices.png", "url": "assets/no_cbam/Balkans/SAPwL_Balkans_hourly%20prices.png"}}, "DE": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_DE_installed capacities.png", "url": "assets/no_cbam/DE/HSCBP_DE_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_DE_aggregated generation.png", "url": "assets/no_cbam/DE/HSCBP_DE_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_DE_hourly generation.png", "url": "assets/no_cbam/DE/SAPwL_DE_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_DE_aggregated net transmission.png", "url": "assets/no_cbam/DE/HSCBP_DE_aggregated%20net%20transmission.png"}, "national_transmission": {"title": "National Transmission (TWh)", "subtitle": "HSCBP_DE_national transmission.png", "url": "assets/no_cbam/DE/HSCBP_DE_national%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_DE_hourly prices.png", "url": "assets/no_cbam/DE/SAPwL_DE_hourly%20prices.png"}}, "ETS": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_ETS_installed capacities.png", "url": "assets/no_cbam/ETS/HSCBP_ETS_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_ETS_aggregated generation.png", "url": "assets/no_cbam/ETS/HSCBP_ETS_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_ETS_hourly generation.png", "url": "assets/no_cbam/ETS/SAPwL_ETS_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_ETS_aggregated net transmission.png", "url": "assets/no_cbam/ETS/HSCBP_ETS_aggregated%20net%20transmission.png"}, "national_transmission": {"title": "National Transmission (TWh)", "subtitle": "HSCBP_ETS_national transmission.png", "url": "assets/no_cbam/ETS/HSCBP_ETS_national%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_ETS_hourly prices.png", "url": "assets/no_cbam/ETS/SAPwL_ETS_hourly%20prices.png"}}, "IT": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_IT_installed capacities.png", "url": "assets/no_cbam/IT/HSCBP_IT_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_IT_aggregated generation.png", "url": "assets/no_cbam/IT/HSCBP_IT_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_IT_hourly generation.png", "url": "assets/no_cbam/IT/SAPwL_IT_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_IT_aggregated net transmission.png", "url": "assets/no_cbam/IT/HSCBP_IT_aggregated%20net%20transmission.png"}, "national_transmission": {"title": "National Transmission (TWh)", "subtitle": "HSCBP_IT_national transmission.png", "url": "assets/no_cbam/IT/HSCBP_IT_national%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_IT_hourly prices.png", "url": "assets/no_cbam/IT/SAPwL_IT_hourly%20prices.png"}}, "MD": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_MD_installed capacities.png", "url": "assets/no_cbam/MD/HSCBP_MD_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_MD_aggregated generation.png", "url": "assets/no_cbam/MD/HSCBP_MD_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_MD_hourly generation.png", "url": "assets/no_cbam/MD/SAPwL_MD_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_MD_aggregated net transmission.png", "url": "assets/no_cbam/MD/HSCBP_MD_aggregated%20net%20transmission.png"}, "national_transmission": {"title": "National Transmission (TWh)", "subtitle": "HSCBP_MD_national transmission.png", "url": "assets/no_cbam/MD/HSCBP_MD_national%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_MD_hourly prices.png", "url": "assets/no_cbam/MD/SAPwL_MD_hourly%20prices.png"}}, "ME": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_ME_installed capacities.png", "url": "assets/no_cbam/ME/HSCBP_ME_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_ME_aggregated generation.png", "url": "assets/no_cbam/ME/HSCBP_ME_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_ME_hourly generation.png", "url": "assets/no_cbam/ME/SAPwL_ME_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_ME_aggregated net transmission.png", "url": "assets/no_cbam/ME/HSCBP_ME_aggregated%20net%20transmission.png"}, "national_transmission": {"title": "National Transmission (TWh)", "subtitle": "HSCBP_ME_national transmission.png", "url": "assets/no_cbam/ME/HSCBP_ME_national%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_ME_hourly prices.png", "url": "assets/no_cbam/ME/SAPwL_ME_hourly%20prices.png"}}, "RS": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_RS_installed capacities.png", "url": "assets/no_cbam/RS/HSCBP_RS_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_RS_aggregated generation.png", "url": "assets/no_cbam/RS/HSCBP_RS_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_RS_hourly generation.png", "url": "assets/no_cbam/RS/SAPwL_RS_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_RS_aggregated net transmission.png", "url": "assets/no_cbam/RS/HSCBP_RS_aggregated%20net%20transmission.png"}, "national_transmission": {"title": "National Transmission (TWh)", "subtitle": "HSCBP_RS_national transmission.png", "url": "assets/no_cbam/RS/HSCBP_RS_national%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_RS_hourly prices.png", "url": "assets/no_cbam/RS/SAPwL_RS_hourly%20prices.png"}}, "UA": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_UA_installed capacities.png", "url": "assets/no_cbam/UA/HSCBP_UA_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_UA_aggregated generation.png", "url": "assets/no_cbam/UA/HSCBP_UA_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_UA_hourly generation.png", "url": "assets/no_cbam/UA/SAPwL_UA_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_UA_aggregated net transmission.png", "url": "assets/no_cbam/UA/HSCBP_UA_aggregated%20net%20transmission.png"}, "national_transmission": {"title": "National Transmission (TWh)", "subtitle": "HSCBP_UA_national transmission.png", "url": "assets/no_cbam/UA/HSCBP_UA_national%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_UA_hourly prices.png", "url": "assets/no_cbam/UA/SAPwL_UA_hourly%20prices.png"}}, "UA_MD_block": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_UA_MD_block_installed capacities.png", "url": "assets/no_cbam/UA_MD_block/HSCBP_UA_MD_block_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_UA_MD_block_aggregated generation.png", "url": "assets/no_cbam/UA_MD_block/HSCBP_UA_MD_block_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_UA_MD_block_hourly generation.png", "url": "assets/no_cbam/UA_MD_block/SAPwL_UA_MD_block_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_UA_MD_block_aggregated net transmission.png", "url": "assets/no_cbam/UA_MD_block/HSCBP_UA_MD_block_aggregated%20net%20transmission.png"}, "national_transmission": {"title": "National Transmission (TWh)", "subtitle": "HSCBP_UA_MD_block_national transmission.png", "url": "assets/no_cbam/UA_MD_block/HSCBP_UA_MD_block_national%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_UA_MD_block_hourly prices.png", "url": "assets/no_cbam/UA_MD_block/SAPwL_UA_MD_block_hourly%20prices.png"}}, "UK": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_UK_installed capacities.png", "url": "assets/no_cbam/UK/HSCBP_UK_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_UK_aggregated generation.png", "url": "assets/no_cbam/UK/HSCBP_UK_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_UK_hourly generation.png", "url": "assets/no_cbam/UK/SAPwL_UK_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_UK_aggregated net transmission.png", "url": "assets/no_cbam/UK/HSCBP_UK_aggregated%20net%20transmission.png"}, "national_transmission": {"title": "National Transmission (TWh)", "subtitle": "HSCBP_UK_national transmission.png", "url": "assets/no_cbam/UK/HSCBP_UK_national%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_UK_hourly prices.png", "url": "assets/no_cbam/UK/SAPwL_UK_hourly%20prices.png"}}, "XK": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_XK_installed capacities.png", "url": "assets/no_cbam/XK/HSCBP_XK_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_XK_aggregated generation.png", "url": "assets/no_cbam/XK/HSCBP_XK_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_XK_hourly generation.png", "url": "assets/no_cbam/XK/SAPwL_XK_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_XK_aggregated net transmission.png", "url": "assets/no_cbam/XK/HSCBP_XK_aggregated%20net%20transmission.png"}, "national_transmission": {"title": "National Transmission (TWh)", "subtitle": "HSCBP_XK_national transmission.png", "url": "assets/no_cbam/XK/HSCBP_XK_national%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_XK_hourly prices.png", "url": "assets/no_cbam/XK/SAPwL_XK_hourly%20prices.png"}}, "non-ETS": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_non-ETS_installed capacities.png", "url": "assets/no_cbam/non-ETS/HSCBP_non-ETS_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_non-ETS_aggregated generation.png", "url": "assets/no_cbam/non-ETS/HSCBP_non-ETS_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_non-ETS_hourly generation.png", "url": "assets/no_cbam/non-ETS/SAPwL_non-ETS_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_non-ETS_aggregated net transmission.png", "url": "assets/no_cbam/non-ETS/HSCBP_non-ETS_aggregated%20net%20transmission.png"}, "national_transmission": {"title": "National Transmission (TWh)", "subtitle": "HSCBP_non-ETS_national transmission.png", "url": "assets/no_cbam/non-ETS/HSCBP_non-ETS_national%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_non-ETS_hourly prices.png", "url": "assets/no_cbam/non-ETS/SAPwL_non-ETS_hourly%20prices.png"}}}}, "cbam_national": {"name": "CBAM (nationally determined)", "buses": {"AL": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_AL_installed capacities.png", "url": "assets/cbam_national/AL/HSCBP_AL_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_AL_aggregated generation.png", "url": "assets/cbam_national/AL/HSCBP_AL_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_AL_hourly generation.png", "url": "assets/cbam_national/AL/SAPwL_AL_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_AL_aggregated net transmission.png", "url": "assets/cbam_national/AL/HSCBP_AL_aggregated%20net%20transmission.png"}, "national_transmission": {"title": "National Transmission (TWh)", "subtitle": "HSCBP_AL_national transmission.png", "url": "assets/cbam_national/AL/HSCBP_AL_national%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_AL_hourly prices.png", "url": "assets/cbam_national/AL/SAPwL_AL_hourly%20prices.png"}}, "BA": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_BA_installed capacities.png", "url": "assets/cbam_national/BA/HSCBP_BA_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_BA_aggregated generation.png", "url": "assets/cbam_national/BA/HSCBP_BA_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_BA_hourly generation.png", "url": "assets/cbam_national/BA/SAPwL_BA_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_BA_aggregated net transmission.png", "url": "assets/cbam_national/BA/HSCBP_BA_aggregated%20net%20transmission.png"}, "national_transmission": {"title": "National Transmission (TWh)", "subtitle": "HSCBP_BA_national transmission.png", "url": "assets/cbam_national/BA/HSCBP_BA_national%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_BA_hourly prices.png", "url": "assets/cbam_national/BA/SAPwL_BA_hourly%20prices.png"}}, "Balkans": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_Balkans_installed capacities.png", "url": "assets/cbam_national/Balkans/HSCBP_Balkans_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_Balkans_aggregated generation.png", "url": "assets/cbam_national/Balkans/HSCBP_Balkans_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_Balkans_hourly generation.png", "url": "assets/cbam_national/Balkans/SAPwL_Balkans_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_Balkans_aggregated net transmission.png", "url": "assets/cbam_national/Balkans/HSCBP_Balkans_aggregated%20net%20transmission.png"}, "national_transmission": {"title": "National Transmission (TWh)", "subtitle": "HSCBP_Balkans_national transmission.png", "url": "assets/cbam_national/Balkans/HSCBP_Balkans_national%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_Balkans_hourly prices.png", "url": "assets/cbam_national/Balkans/SAPwL_Balkans_hourly%20prices.png"}}, "DE": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_DE_installed capacities.png", "url": "assets/cbam_national/DE/HSCBP_DE_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_DE_aggregated generation.png", "url": "assets/cbam_national/DE/HSCBP_DE_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_DE_hourly generation.png", "url": "assets/cbam_national/DE/SAPwL_DE_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_DE_aggregated net transmission.png", "url": "assets/cbam_national/DE/HSCBP_DE_aggregated%20net%20transmission.png"}, "national_transmission": {"title": "National Transmission (TWh)", "subtitle": "HSCBP_DE_national transmission.png", "url": "assets/cbam_national/DE/HSCBP_DE_national%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_DE_hourly prices.png", "url": "assets/cbam_national/DE/SAPwL_DE_hourly%20prices.png"}}, "ETS": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_ETS_installed capacities.png", "url": "assets/cbam_national/ETS/HSCBP_ETS_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_ETS_aggregated generation.png", "url": "assets/cbam_national/ETS/HSCBP_ETS_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_ETS_hourly generation.png", "url": "assets/cbam_national/ETS/SAPwL_ETS_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_ETS_aggregated net transmission.png", "url": "assets/cbam_national/ETS/HSCBP_ETS_aggregated%20net%20transmission.png"}, "national_transmission": {"title": "National Transmission (TWh)", "subtitle": "HSCBP_ETS_national transmission.png", "url": "assets/cbam_national/ETS/HSCBP_ETS_national%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_ETS_hourly prices.png", "url": "assets/cbam_national/ETS/SAPwL_ETS_hourly%20prices.png"}}, "IT": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_IT_installed capacities.png", "url": "assets/cbam_national/IT/HSCBP_IT_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_IT_aggregated generation.png", "url": "assets/cbam_national/IT/HSCBP_IT_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_IT_hourly generation.png", "url": "assets/cbam_national/IT/SAPwL_IT_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_IT_aggregated net transmission.png", "url": "assets/cbam_national/IT/HSCBP_IT_aggregated%20net%20transmission.png"}, "national_transmission": {"title": "National Transmission (TWh)", "subtitle": "HSCBP_IT_national transmission.png", "url": "assets/cbam_national/IT/HSCBP_IT_national%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_IT_hourly prices.png", "url": "assets/cbam_national/IT/SAPwL_IT_hourly%20prices.png"}}, "MD": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_MD_installed capacities.png", "url": "assets/cbam_national/MD/HSCBP_MD_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_MD_aggregated generation.png", "url": "assets/cbam_national/MD/HSCBP_MD_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_MD_hourly generation.png", "url": "assets/cbam_national/MD/SAPwL_MD_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_MD_aggregated net transmission.png", "url": "assets/cbam_national/MD/HSCBP_MD_aggregated%20net%20transmission.png"}, "national_transmission": {"title": "National Transmission (TWh)", "subtitle": "HSCBP_MD_national transmission.png", "url": "assets/cbam_national/MD/HSCBP_MD_national%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_MD_hourly prices.png", "url": "assets/cbam_national/MD/SAPwL_MD_hourly%20prices.png"}}, "ME": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_ME_installed capacities.png", "url": "assets/cbam_national/ME/HSCBP_ME_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_ME_aggregated generation.png", "url": "assets/cbam_national/ME/HSCBP_ME_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_ME_hourly generation.png", "url": "assets/cbam_national/ME/SAPwL_ME_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_ME_aggregated net transmission.png", "url": "assets/cbam_national/ME/HSCBP_ME_aggregated%20net%20transmission.png"}, "national_transmission": {"title": "National Transmission (TWh)", "subtitle": "HSCBP_ME_national transmission.png", "url": "assets/cbam_national/ME/HSCBP_ME_national%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_ME_hourly prices.png", "url": "assets/cbam_national/ME/SAPwL_ME_hourly%20prices.png"}}, "RS": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_RS_installed capacities.png", "url": "assets/cbam_national/RS/HSCBP_RS_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_RS_aggregated generation.png", "url": "assets/cbam_national/RS/HSCBP_RS_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_RS_hourly generation.png", "url": "assets/cbam_national/RS/SAPwL_RS_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_RS_aggregated net transmission.png", "url": "assets/cbam_national/RS/HSCBP_RS_aggregated%20net%20transmission.png"}, "national_transmission": {"title": "National Transmission (TWh)", "subtitle": "HSCBP_RS_national transmission.png", "url": "assets/cbam_national/RS/HSCBP_RS_national%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_RS_hourly prices.png", "url": "assets/cbam_national/RS/SAPwL_RS_hourly%20prices.png"}}, "UA": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_UA_installed capacities.png", "url": "assets/cbam_national/UA/HSCBP_UA_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_UA_aggregated generation.png", "url": "assets/cbam_national/UA/HSCBP_UA_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_UA_hourly generation.png", "url": "assets/cbam_national/UA/SAPwL_UA_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_UA_aggregated net transmission.png", "url": "assets/cbam_national/UA/HSCBP_UA_aggregated%20net%20transmission.png"}, "national_transmission": {"title": "National Transmission (TWh)", "subtitle": "HSCBP_UA_national transmission.png", "url": "assets/cbam_national/UA/HSCBP_UA_national%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_UA_hourly prices.png", "url": "assets/cbam_national/UA/SAPwL_UA_hourly%20prices.png"}}, "UA_MD_block": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_UA_MD_block_installed capacities.png", "url": "assets/cbam_national/UA_MD_block/HSCBP_UA_MD_block_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_UA_MD_block_aggregated generation.png", "url": "assets/cbam_national/UA_MD_block/HSCBP_UA_MD_block_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_UA_MD_block_hourly generation.png", "url": "assets/cbam_national/UA_MD_block/SAPwL_UA_MD_block_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_UA_MD_block_aggregated net transmission.png", "url": "assets/cbam_national/UA_MD_block/HSCBP_UA_MD_block_aggregated%20net%20transmission.png"}, "national_transmission": {"title": "National Transmission (TWh)", "subtitle": "HSCBP_UA_MD_block_national transmission.png", "url": "assets/cbam_national/UA_MD_block/HSCBP_UA_MD_block_national%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_UA_MD_block_hourly prices.png", "url": "assets/cbam_national/UA_MD_block/SAPwL_UA_MD_block_hourly%20prices.png"}}, "UK": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_UK_installed capacities.png", "url": "assets/cbam_national/UK/HSCBP_UK_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_UK_aggregated generation.png", "url": "assets/cbam_national/UK/HSCBP_UK_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_UK_hourly generation.png", "url": "assets/cbam_national/UK/SAPwL_UK_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_UK_aggregated net transmission.png", "url": "assets/cbam_national/UK/HSCBP_UK_aggregated%20net%20transmission.png"}, "national_transmission": {"title": "National Transmission (TWh)", "subtitle": "HSCBP_UK_national transmission.png", "url": "assets/cbam_national/UK/HSCBP_UK_national%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_UK_hourly prices.png", "url": "assets/cbam_national/UK/SAPwL_UK_hourly%20prices.png"}}, "XK": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_XK_installed capacities.png", "url": "assets/cbam_national/XK/HSCBP_XK_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_XK_aggregated generation.png", "url": "assets/cbam_national/XK/HSCBP_XK_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_XK_hourly generation.png", "url": "assets/cbam_national/XK/SAPwL_XK_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_XK_aggregated net transmission.png", "url": "assets/cbam_national/XK/HSCBP_XK_aggregated%20net%20transmission.png"}, "national_transmission": {"title": "National Transmission (TWh)", "subtitle": "HSCBP_XK_national transmission.png", "url": "assets/cbam_national/XK/HSCBP_XK_national%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_XK_hourly prices.png", "url": "assets/cbam_national/XK/SAPwL_XK_hourly%20prices.png"}}, "non-ETS": {"installed_capacities": {"title": "Installed Capacities (GW)", "subtitle": "HSCBP_non-ETS_installed capacities.png", "url": "assets/cbam_national/non-ETS/HSCBP_non-ETS_installed%20capacities.png"}, "agg_generation": {"title": "Aggregated Generation (TWh)", "subtitle": "HSCBP_non-ETS_aggregated generation.png", "url": "assets/cbam_national/non-ETS/HSCBP_non-ETS_aggregated%20generation.png"}, "hourly_generation": {"title": "Hourly Generation (GW)", "subtitle": "SAPwL_non-ETS_hourly generation.png", "url": "assets/cbam_national/non-ETS/SAPwL_non-ETS_hourly%20generation.png"}, "agg_net_transmission": {"title": "Aggregated Net Transmission (TWh)", "subtitle": "HSCBP_non-ETS_aggregated net transmission.png", "url": "assets/cbam_national/non-ETS/HSCBP_non-ETS_aggregated%20net%20transmission.png"}, "national_transmission": {"title": "National Transmission (TWh)", "subtitle": "HSCBP_non-ETS_national transmission.png", "url": "assets/cbam_national/non-ETS/HSCBP_non-ETS_national%20transmission.png"}, "hourly_prices": {"title": "Hourly Prices (EUR/MWh)", "subtitle": "SAPwL_non-ETS_hourly prices.png", "url": "assets/cbam_national/non-ETS/SAPwL_non-ETS_hourly%20prices.png"}}}}};
+    // text_config_json is YAML -> JSON, for UI messages in JS
+    const textConfig = {"project": "cbam", "plots_root": "plots", "network_file": "network_files/cbam/LP_network_unsolved.nc", "template": {"name": "onepager_images_auto.html", "output_html": "LS_dashboard_cbam.html", "output_dir": "output", "assets_subdir": "assets"}, "scenarios": {"no_cbam": {"name": "No CBAM", "folder": "no_cbam"}, "cbam_national": {"name": "CBAM (nationally determined)", "folder": "cbam_national"}}, "figures": {"installed_capacities": {"pattern": "HSCBP_{bus}_installed capacities.png", "title": "Installed Capacities (GW)", "subtitle_template": "HSCBP_{bus}_installed capacities.png"}, "agg_generation": {"pattern": "HSCBP_{bus}_aggregated generation.png", "title": "Aggregated Generation (TWh)", "subtitle_template": "HSCBP_{bus}_aggregated generation.png"}, "hourly_generation": {"pattern": "SAPwL_{bus}_hourly generation.png", "title": "Hourly Generation (GW)", "subtitle_template": "SAPwL_{bus}_hourly generation.png"}, "agg_net_transmission": {"pattern": "HSCBP_{bus}_aggregated net transmission.png", "title": "Aggregated Net Transmission (TWh)", "subtitle_template": "HSCBP_{bus}_aggregated net transmission.png"}, "national_transmission": {"pattern": "HSCBP_{bus}_national transmission.png", "title": "National Transmission (TWh)", "subtitle_template": "HSCBP_{bus}_national transmission.png"}, "hourly_prices": {"pattern": "SAPwL_{bus}_hourly prices.png", "title": "Hourly Prices (EUR/MWh)", "subtitle_template": "SAPwL_{bus}_hourly prices.png"}}, "figure_layout": {"order": ["installed_capacities", "generation", "agg_net_transmission", "national_transmission", "hourly_prices"]}, "figure_groups": {"generation": {"modes": {"agg": "agg_generation", "hourly": "hourly_generation"}, "view_label_key": "single_generation_view_label", "compare_label_key": "compare_generation_view_label", "mode_label_keys": {"agg": "generation_mode_agg", "hourly": "generation_mode_hourly"}}}, "page": {"title": "Impacts of CBAM on Ukraine & Energy Community Countries: 2026", "subtitle": "Quantifying the consequences of CBAM for electricity trade between the EU and Energy Community countries with PyPSA", "key_message_prefix": "Key message:", "key_message": "Electricity exports from Energy Community countries to the EU could be reduced by over 60%, while markets become fragmeneted with only marginal environmental gains. Rules should be reformed to avoid unintended negative effects.", "authors": [{"name": "Robert Carr", "linkedin": "https://www.linkedin.com/in/robert-carr-b71826183/"}, {"name": "Frank Meissner", "linkedin": "https://www.linkedin.com/in/frank-mei%C3%9Fner-317991211/"}, {"name": "Rouven Stubbe", "linkedin": "https://www.linkedin.com/in/rouven-stubbe-41407a130/"}], "affiliation": "Green Deal Ukraïna project @ Helmholtz-Zentrum Berlin"}, "meta": {"tools_label": "Tool(s):", "tools_value": "PyPSA, Atlite", "specific_model_label": "Specific model (if applicable):", "specific_model_value": "HZB_PyPSA v1.0", "weather_year_label": "Weather year:", "weather_year_value": "2019", "solver_label": "Solver:", "solver_value": "Gurobi", "scenario_set_label": "Scenario set:", "scenario_set_value": "[name]"}, "metrics": [{"id": "UA_cbam_price", "label": "CBAM charge for Ukraine", "value": "75 EUR/MWh", "note": "Calculated based on average emission factor from 2016-2020"}, {"id": "UA_exports", "label": "Ukraine exports to EU", "value": "2.5 TWh with CBAM", "note": "Compared to 6 TWh without CBAM"}, {"id": "emissions", "label": "Energy Community emissions", "value": "-9 Mt CO reduction", "note": "with CBAM, but total system emissions only down by 2 Mt"}, {"id": "price_UA", "label": "Average hourly price in UA", "value": "84.5 EUR/MWh (with CBAM)", "note": "90.3 EUR/MWH without"}], "sections": {"research_objective": {"title": "Research objective", "body": "This analysis quantifies the short-term (2026) consequences of CBAM for electricity trade between EU and Energy Community countries, with a focus on Ukraine and Moldova (but extending to the Western Balkans)\n"}, "background": {"title": "Background / motivation", "body": "The EU's Carbon Border Adjustment Mechanism (CBAM) aims to reduce the risk of carbon leakage for certain goods subject to the EU ETS, including electricity. From January 1, 2026, EU importers will need to purchase CBAM certificates at a weekly average price of EU-ETS certificates for the imbedded emissions of imported goods from non-EU countries.  Electricity is a particularly tricky good to target with CBAM, one reason being commercial trade and physical flows do not always fully align. Thus, tracing embedded emissions of electricity generation and matching them to importers poses a challenge.  While actual embedded emissions can be used in special cases, the conditions for doing-so are exceptionally hard to fulfil. In all other cases, default values for embedded direct emissions per country/region will be applied to all electricity imports based on a 2016 – 2020.  Some claim that this would be taxing “historical” emissions rather than actual ones, leading to a large trade barrier for all electricity imported from third countries into the EU and other possible unintended consequences. We explore this here. \n"}, "scenario_space": {"title": "Scenarios", "bullets": ["No CBAM: Power generated by Energy Community buses (also referred to as non-ETS buses) and expored to EU buses (ETS-buses) does not incur any additional charges.", "National CBAM: Power generated by Energy Community buses which is exported to any EU bus incurs a CBAM charge per MWh based on country-specific emission factors from 2016-2020."]}, "methodology": {"title": "Methodology", "bullets": ["In-house PyPSA (Python for Power Systems Analysis) model at hourly resolution.", "Hourly dispatch is optimised economically over the period January - December 2026.", "Objective: to minimise total system cost subject to constraints.", "Spatial granularity: 1 node per country, entirety of ENTSO-E modelled", "Nationally determined CBAM charge (using average emission factors from 2016-2020) is applied to each MWh of electricity that is generated at a non-ETS bus and exported to an EU-bus.", "CBAM applied to the following countries: Ukraine, Moldova, Albania, Bosnia and Herzegovina, Kosovo, Montenegro, North Macedonia, and Serbia", "Transit flows (generated at ETS-bus and transiting through non-ETS bus to reach another ETS-bus) are exempt from the CBAM charge.", "Cross border tranmission capacity capped at 90th percentile of maximum observed flows from 2024 (ENTSO-E Transparency Platform).", "Transmission capacity between EU and Ukraine-Moldova block capped at 2.1 GW.", "Weather year 2019 (temperature, wind and solar profiles)", "Maintenance outages for individual nuclear units in Ukraine are included.", "CHPs: heat driven, with country-specific must-run trajectories developed using historical temperature data (heating degree days – HDD)."]}, "data_inputs": {"title": "Data inputs", "bullets": ["Hourly electricity demand: ENTSO-E Transparency Platform (UA adjusted for wartime impacts)", "Installed capacities: Powerplantmatching (conventional), Global Energy Monitor (renewables), ENTSO-E Transparency Platform (hydro and rooftop PV); UA estimates by GDU.", "Cross-border transmission capacities: ENTSO-E Transparency Platform.", "Weather data: ERA5 cutouts via Atlite.", "Fuel and commodity prices: TradeEconomics (annual average for 2024)."]}, "main_findings": {"title": "Main findings", "bullets": ["Introducing a CBAM charge reduces electricity exports from Ukraine to the EU by ~60%.", "There is a corresponding increase in transit flows from the EU via Ukraine to other EU countries.", "Energy Community countries become less integrated with EU energy markets, with most cross-border capacity used for transit flows", "System-wide CO2 emissions are reduced by just 2 Mt: Energy Community emissions come down by 9 Mt while EU emissions go up by 7 Mt.", "Generally: CBAM with current rules provides minimal environmental gains in the power sector, at a large economic and political cost."]}}, "ui_labels": {"scenario_label": "Scenario", "bus_label": "Bus", "compare_scenarios_button": "Compare Scenarios", "compare_buses_button": "Compare Buses", "single_generation_view_label": "View:", "generation_mode_agg": "Aggregated", "generation_mode_hourly": "Hourly", "compare_generation_view_label": "Generation view:", "compare_hint_scenarios": "Select one or more scenarios to compare.", "compare_hint_buses": "Select one or more buses to compare.", "compare_no_data": "No data available for this combination.", "compare_limit_warning": "You can select at most 4."}, "footer": {"generated_on_prefix": "Generated on:", "generated_on_value": "2026-01-06", "contact_text": "Contact: robert.carr@helmholtz-berlin.de", "version_text": "Version: 1.0"}, "citation": {"text": "Carr, R. & Meissner, F. (2025). Load Shedding in Ukraine: Winter 2025/26. Green Deal Ukraïna project, Helmholtz-Zentrum Berlin.", "bibtex": "@techreport{carr2025load,\n  author = {Carr, Robert and Meissner, Frank},\n  title = {Load Shedding in Ukraine: Winter 2025/26},\n  institution = {Helmholtz-Zentrum Berlin, Green Deal Ukraïna project},\n  year = {2025}\n}\n"}};
+
+    // modes: 'single', 'compare_scenarios', 'compare_buses'
+    let mode = "single";
+    let dataUnlocked = false;
+    let textUnlocked = false;
+
+    const defaultFigureLayout = [
+      "installed_capacities",
+      "generation",
+      "agg_net_transmission",
+      "hourly_prices",
+      "load_shedding",
+    ];
+
+    const defaultFigureGroups = {
+      generation: {
+        modes: { agg: "agg_generation", hourly: "hourly_generation" },
+        view_label_key: "single_generation_view_label",
+        compare_label_key: "compare_generation_view_label",
+        mode_label_keys: {
+          agg: "generation_mode_agg",
+          hourly: "generation_mode_hourly",
+        },
+      },
+    };
+
+    function getUILabel(key, fallback = "") {
+      if (key && textConfig.ui_labels && textConfig.ui_labels[key]) {
+        return textConfig.ui_labels[key];
+      }
+      return fallback;
+    }
+
+    function normalizeGroups(groups) {
+      const out = {};
+      Object.entries(groups || {}).forEach(([groupId, cfg]) => {
+        const base = defaultFigureGroups[groupId] || {};
+        out[groupId] = {
+          modes: cfg.modes || base.modes || {},
+          view_label_key: cfg.view_label_key || base.view_label_key || "",
+          compare_label_key: cfg.compare_label_key || base.compare_label_key || "",
+          mode_label_keys: {
+            ...(base.mode_label_keys || {}),
+            ...(cfg.mode_label_keys || {}),
+          },
+        };
+      });
+      return out;
+    }
+
+    function getFigureConfig() {
+      const order = (textConfig.figure_layout && Array.isArray(textConfig.figure_layout.order))
+        ? textConfig.figure_layout.order
+        : defaultFigureLayout;
+      const rawGroups = {
+        ...defaultFigureGroups,
+        ...(textConfig.figure_groups || {}),
+      };
+      return { order, groups: normalizeGroups(rawGroups) };
+    }
+
+    const figureConfig = getFigureConfig();
+    const figureOrder = figureConfig.order;
+    const figureGroups = figureConfig.groups;
+    const groupModes = {};
+
+    function getOrderedGroupIds() {
+      return figureOrder.filter(item => figureGroups[item]);
+    }
+
+    function initGroupModes() {
+      getOrderedGroupIds().forEach(groupId => {
+        const modes = Object.keys(figureGroups[groupId].modes || {});
+        if (modes.length > 0) {
+          groupModes[groupId] = modes[0];
+        }
+      });
+    }
+
+    function syncGroupSelects() {
+      getOrderedGroupIds().forEach(groupId => {
+        const mode = groupModes[groupId];
+        const singleSelect = document.getElementById(`${groupId}-mode-select`);
+        const compareSelect = document.getElementById(`compare-${groupId}-mode`);
+        if (singleSelect && mode) singleSelect.value = mode;
+        if (compareSelect && mode) compareSelect.value = mode;
+      });
+    }
+
+    function setGroupMode(groupId, newMode) {
+      groupModes[groupId] = newMode;
+      syncGroupSelects();
+
+      if (mode === "single") {
+        updateSingleViewFigures();
+      } else if (mode === "compare_scenarios") {
+        renderScenarioComparison();
+      } else if (mode === "compare_buses") {
+        renderBusComparison();
+      }
+    }
+
+    function getAllBuses() {
+      const set = new Set();
+      Object.values(scenarios).forEach(scen => {
+        Object.keys(scen.buses || {}).forEach(b => set.add(b));
+      });
+      return Array.from(set).sort();
+    }
+
+    // --- dropdowns ---
+    function initScenarioDropdown() {
+      const scenarioSelect = document.getElementById("scenario-select");
+      scenarioSelect.innerHTML = "";
+      for (const [key, scen] of Object.entries(scenarios)) {
+        const opt = document.createElement("option");
+        opt.value = key;
+        opt.textContent = scen.name || key;
+        scenarioSelect.appendChild(opt);
+      }
+    }
+
+    function initBusDropdown() {
+      const busSelect = document.getElementById("bus-select");
+      busSelect.innerHTML = "";
+      const buses = getAllBuses();
+      buses.forEach(bus => {
+        const opt = document.createElement("option");
+        opt.value = bus;
+        opt.textContent = bus;
+        busSelect.appendChild(opt);
+      });
+    }
+
+    function renderFigureStack() {
+      const container = document.getElementById("figures-stack");
+      if (!container) return;
+      container.innerHTML = "";
+
+      figureOrder.forEach(item => {
+        if (figureGroups[item]) {
+          const groupCfg = figureGroups[item];
+          const section = document.createElement("section");
+          section.className = "figure-card";
+          section.setAttribute("data-fig-group", item);
+
+          const header = document.createElement("div");
+          header.className = "figure-header";
+
+          const headerLeft = document.createElement("div");
+          const title = document.createElement("div");
+          title.className = "figure-title";
+          title.id = `title-${item}`;
+          headerLeft.appendChild(title);
+          header.appendChild(headerLeft);
+
+          const controlRow = document.createElement("div");
+          controlRow.className = "control-row";
+          const label = document.createElement("label");
+          label.setAttribute("for", `${item}-mode-select`);
+          label.textContent = getUILabel(groupCfg.view_label_key, "View:");
+          const select = document.createElement("select");
+          select.id = `${item}-mode-select`;
+          Object.entries(groupCfg.modes || {}).forEach(([modeKey]) => {
+            const opt = document.createElement("option");
+            opt.value = modeKey;
+            const labelKey = groupCfg.mode_label_keys && groupCfg.mode_label_keys[modeKey];
+            opt.textContent = getUILabel(labelKey, modeKey);
+            select.appendChild(opt);
+          });
+          controlRow.appendChild(label);
+          controlRow.appendChild(select);
+          header.appendChild(controlRow);
+
+          const body = document.createElement("div");
+          body.className = "figure-body";
+          const img = document.createElement("img");
+          img.id = `img-${item}`;
+          img.alt = item.replace(/_/g, " ");
+          body.appendChild(img);
+
+          section.appendChild(header);
+          section.appendChild(body);
+          container.appendChild(section);
+        } else {
+          const section = document.createElement("section");
+          section.className = "figure-card";
+          section.setAttribute("data-fig-id", item);
+
+          const header = document.createElement("div");
+          header.className = "figure-header";
+          const headerLeft = document.createElement("div");
+          const title = document.createElement("div");
+          title.className = "figure-title";
+          title.id = `title-${item}`;
+          headerLeft.appendChild(title);
+          header.appendChild(headerLeft);
+
+          const body = document.createElement("div");
+          body.className = "figure-body";
+          const img = document.createElement("img");
+          img.id = `img-${item}`;
+          img.alt = item.replace(/_/g, " ");
+          body.appendChild(img);
+
+          section.appendChild(header);
+          section.appendChild(body);
+          container.appendChild(section);
+        }
+      });
+    }
+
+    function renderCompareOptions() {
+      const container = document.getElementById("compare-options");
+      if (!container) return;
+      container.innerHTML = "";
+
+      const groupIds = getOrderedGroupIds();
+      if (groupIds.length === 0) return;
+
+      groupIds.forEach(groupId => {
+        const groupCfg = figureGroups[groupId];
+        const label = document.createElement("span");
+        label.textContent = getUILabel(
+          groupCfg.compare_label_key,
+          getUILabel(groupCfg.view_label_key, "View:")
+        );
+
+        const select = document.createElement("select");
+        select.id = `compare-${groupId}-mode`;
+        Object.entries(groupCfg.modes || {}).forEach(([modeKey]) => {
+          const opt = document.createElement("option");
+          opt.value = modeKey;
+          const labelKey = groupCfg.mode_label_keys && groupCfg.mode_label_keys[modeKey];
+          opt.textContent = getUILabel(labelKey, modeKey);
+          select.appendChild(opt);
+        });
+
+        container.appendChild(label);
+        container.appendChild(select);
+      });
+    }
+
+    // --- single-view simple figures ---
+    function toggleSimpleSection(figId, hasData) {
+      const section = document.querySelector(`section[data-fig-id="${figId}"]`);
+      if (!section) return;
+      if (hasData) {
+        section.classList.remove("hidden");
+      } else {
+        section.classList.add("hidden");
+      }
+    }
+
+    function toggleGroupSection(groupId, hasAnyData) {
+      const section = document.querySelector(`section[data-fig-group="${groupId}"]`);
+      if (!section) return;
+      if (hasAnyData) {
+        section.classList.remove("hidden");
+      } else {
+        section.classList.add("hidden");
+      }
+    }
+
+    function showSimpleFigure(figId, figData) {
+      const img = document.getElementById(`img-${figId}`);
+      const titleEl = document.getElementById(`title-${figId}`);
+      if (!img || !titleEl) return;
+
+      titleEl.textContent = figData.title;
+
+      if (figData.url) {
+        img.src = figData.url;
+      } else {
+        img.src = "";
+      }
+    }
+
+    function pickGroupFigure(groupId, groupCfg, busFigMap) {
+      const modes = Object.entries(groupCfg.modes || {});
+      const preferredMode = groupModes[groupId];
+      let chosen = null;
+      let hasAny = false;
+
+      modes.forEach(([modeKey, figId]) => {
+        const fig = busFigMap[figId];
+        if (fig && fig.url) {
+          hasAny = true;
+          if (!chosen) chosen = fig;
+          if (modeKey === preferredMode) chosen = fig;
+        }
+      });
+
+      return { chosen, hasAny };
+    }
+
+    function showGroupedFigureSingle(groupId, groupCfg, busFigMap) {
+      const img = document.getElementById(`img-${groupId}`);
+      const titleEl = document.getElementById(`title-${groupId}`);
+      if (!img || !titleEl) return;
+
+      const { chosen, hasAny } = pickGroupFigure(groupId, groupCfg, busFigMap);
+      toggleGroupSection(groupId, hasAny);
+
+      if (!hasAny) {
+        img.src = "";
+        titleEl.textContent = "";
+        return;
+      }
+
+      if (chosen) {
+        titleEl.textContent = chosen.title;
+        img.src = chosen.url || "";
+      }
+    }
+
+    function updateSingleViewFigures() {
+      const scenarioKey = document.getElementById("scenario-select").value;
+      const busKey = document.getElementById("bus-select").value;
+      if (!scenarioKey || !busKey) return;
+
+      const scen = scenarios[scenarioKey];
+      const busFigMap = scen.buses[busKey];
+      const simpleFigIds = figureOrder.filter(item => !figureGroups[item]);
+      const groupIds = getOrderedGroupIds();
+
+      if (!busFigMap) {
+        simpleFigIds.forEach(figId => {
+          toggleSimpleSection(figId, false);
+          const img = document.getElementById(`img-${figId}`);
+          if (img) img.src = "";
+        });
+        groupIds.forEach(groupId => {
+          toggleGroupSection(groupId, false);
+          const img = document.getElementById(`img-${groupId}`);
+          if (img) img.src = "";
+        });
+        return;
+      }
+
+      simpleFigIds.forEach(figId => {
+        const figData = busFigMap[figId];
+        const hasData = figData && figData.url;
+        toggleSimpleSection(figId, !!hasData);
+        if (hasData) {
+          showSimpleFigure(figId, figData);
+        } else {
+          const img = document.getElementById(`img-${figId}`);
+          if (img) img.src = "";
+        }
+      });
+
+      groupIds.forEach(groupId => {
+        const groupCfg = figureGroups[groupId];
+        showGroupedFigureSingle(groupId, groupCfg, busFigMap);
+      });
+    }
+
+    // --- modes ---
+    function setMode(newMode) {
+      if (!dataUnlocked) return;
+      mode = newMode;
+
+        const figStack = document.getElementById("figures-stack");
+        const textPanel = document.getElementById("text-panel");
+        const textWrapper = document.getElementById("text-panel-wrapper");
+        const mainGrid = document.getElementById("single-view");
+        const compareView = document.getElementById("compare-view");
+        const btnCompareScen = document.getElementById("btn-compare-scenarios");
+        const btnCompareBus = document.getElementById("btn-compare-buses");
+
+      if (mode === "single") {
+        textWrapper.classList.remove("hidden");
+        textPanel.classList.remove("hidden");
+        mainGrid.classList.remove("compare-mode");
+        figStack.classList.remove("hidden");
+        compareView.classList.add("hidden");
+        btnCompareScen.classList.remove("active");
+        btnCompareBus.classList.remove("active");
+        const scenariosPanel = document.getElementById("compare-scenarios-panel");
+        const busesPanel = document.getElementById("compare-buses-panel");
+        scenariosPanel.classList.add("hidden");
+        busesPanel.classList.add("hidden");
+        updateSingleViewFigures();
+      } else {
+        textPanel.classList.add("hidden");
+        textWrapper.classList.add("hidden");
+        mainGrid.classList.add("compare-mode");
+        figStack.classList.add("hidden");
+        compareView.classList.remove("hidden");
+        const scenariosPanel = document.getElementById("compare-scenarios-panel");
+        const busesPanel = document.getElementById("compare-buses-panel");
+
+        if (mode === "compare_scenarios") {
+          btnCompareScen.classList.add("active");
+          btnCompareBus.classList.remove("active");
+          scenariosPanel.classList.remove("hidden");
+          busesPanel.classList.add("hidden");
+          renderScenarioComparison();
+        } else if (mode === "compare_buses") {
+          btnCompareBus.classList.add("active");
+          btnCompareScen.classList.remove("active");
+          scenariosPanel.classList.add("hidden");
+          busesPanel.classList.remove("hidden");
+          renderBusComparison();
+        }
+      }
+    }
+
+    // --- compare: helpers ---
+    function buildScenarioCheckboxes() {
+      const boxContainer = document.getElementById("compare-scenarios-checkboxes");
+      boxContainer.innerHTML = "";
+      const label = document.createElement("span");
+      label.className = "label";
+      label.textContent = "Select scenarios (max 4):";
+      boxContainer.appendChild(label);
+
+      for (const [key, scen] of Object.entries(scenarios)) {
+        const wrapper = document.createElement("label");
+        wrapper.style.display = "inline-flex";
+        wrapper.style.alignItems = "center";
+        const cb = document.createElement("input");
+        cb.type = "checkbox";
+        cb.value = key;
+        cb.name = "compare-scenarios";
+        cb.style.marginRight = "4px";
+        cb.addEventListener("change", onScenarioCheckboxChange);
+        wrapper.appendChild(cb);
+        wrapper.append(scen.name || key);
+        boxContainer.appendChild(wrapper);
+      }
+    }
+
+    function buildBusCheckboxes() {
+      const boxContainer = document.getElementById("compare-buses-checkboxes");
+      boxContainer.innerHTML = "";
+      const label = document.createElement("span");
+      label.className = "label";
+      label.textContent = "Select buses (max 4):";
+      boxContainer.appendChild(label);
+
+      const scenarioKey = document.getElementById("scenario-select").value;
+      const scen = scenarios[scenarioKey];
+      const buses = Object.keys(scen.buses || {});
+
+      buses.forEach(bus => {
+        const wrapper = document.createElement("label");
+        wrapper.style.display = "inline-flex";
+        wrapper.style.alignItems = "center";
+        const cb = document.createElement("input");
+        cb.type = "checkbox";
+        cb.value = bus;
+        cb.name = "compare-buses";
+        cb.style.marginRight = "4px";
+        cb.addEventListener("change", onBusCheckboxChange);
+        wrapper.appendChild(cb);
+        wrapper.append(bus);
+        boxContainer.appendChild(wrapper);
+      });
+    }
+
+    function getCheckedValues(name) {
+      const cbs = Array.from(document.querySelectorAll(`input[name="${name}"]:checked`));
+      return cbs.map(cb => cb.value);
+    }
+
+    function enforceMax(name, maxCount, event) {
+      const checked = getCheckedValues(name);
+      if (checked.length > maxCount) {
+        event.target.checked = false;
+        alert(textConfig.ui_labels.compare_limit_warning);
+        return false;
+      }
+      return true;
+    }
+
+    function onScenarioCheckboxChange(e) {
+      if (!enforceMax("compare-scenarios", 4, e)) return;
+      renderScenarioComparison();
+    }
+
+    function onBusCheckboxChange(e) {
+      if (!enforceMax("compare-buses", 4, e)) return;
+      renderBusComparison();
+    }
+
+    // Build one column in compare mode, with layout-driven order
+    function buildCompareColumn(label, busFigMap) {
+      if (!busFigMap) {
+        return `
+          <div class="compare-column">
+            <div class="compare-column-header">${label}</div>
+            <div class="compare-empty">${textConfig.ui_labels.compare_no_data}</div>
+          </div>
+        `;
+      }
+
+      let html = `<div class="compare-column">
+        <div class="compare-column-header">${label}</div>
+      `;
+
+      figureOrder.forEach(item => {
+        if (figureGroups[item]) {
+          const groupCfg = figureGroups[item];
+          html += buildCompareGroupTile(item, groupCfg, busFigMap);
+        } else {
+          html += buildCompareTile(busFigMap[item]);
+        }
+      });
+
+      html += `</div>`;
+      return html;
+    }
+
+    function buildCompareTile(fig) {
+      const hasData = fig && fig.url;
+      const title = hasData ? fig.title : "";
+      const content = hasData
+        ? `<img src="${fig.url}" alt="${fig.title}" />`
+        : `<div class="compare-placeholder"></div>`;
+
+      return `
+        <div class="compare-figure-card">
+          <div class="compare-figure-title">${title}</div>
+          <div class="compare-figure-body">
+            ${content}
+          </div>
+        </div>
+      `;
+    }
+
+    function buildCompareGroupTile(groupId, groupCfg, busFigMap) {
+      const { chosen, hasAny } = pickGroupFigure(groupId, groupCfg, busFigMap);
+      const title = hasAny && chosen ? chosen.title : "";
+      const content = hasAny && chosen
+        ? `<img src="${chosen.url}" alt="${chosen.title}" />`
+        : `<div class="compare-placeholder"></div>`;
+
+      return `
+        <div class="compare-figure-card">
+          <div class="compare-figure-title">${title}</div>
+          <div class="compare-figure-body">
+            ${content}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderScenarioComparison() {
+      const busKey = document.getElementById("bus-select").value;
+      const selectedScenarios = getCheckedValues("compare-scenarios");
+      const container = document.getElementById("compare-scenarios-columns");
+      container.innerHTML = "";
+
+      if (selectedScenarios.length === 0) {
+        container.innerHTML = `<div class="compare-empty">${textConfig.ui_labels.compare_hint_scenarios}</div>`;
+        return;
+      }
+
+      let html = "";
+      selectedScenarios.forEach(sKey => {
+        const scen = scenarios[sKey];
+        const busFigMap = (scen.buses || {})[busKey];
+        const label = `${scen.name || sKey} (${busKey})`;
+        html += buildCompareColumn(label, busFigMap);
+      });
+
+      container.innerHTML = html;
+    }
+
+    function renderBusComparison() {
+      const scenarioKey = document.getElementById("scenario-select").value;
+      const selectedBuses = getCheckedValues("compare-buses");
+      const container = document.getElementById("compare-buses-columns");
+      container.innerHTML = "";
+
+      if (selectedBuses.length === 0) {
+        container.innerHTML = `<div class="compare-empty">${textConfig.ui_labels.compare_hint_buses}</div>`;
+        return;
+      }
+
+      const scen = scenarios[scenarioKey];
+      let html = "";
+      selectedBuses.forEach(busKey => {
+        const busFigMap = (scen.buses || {})[busKey];
+        const label = `${busKey} (${scen.name || scenarioKey})`;
+        html += buildCompareColumn(label, busFigMap);
+      });
+
+      if (!html) {
+        container.innerHTML = `<div class="compare-empty">${textConfig.ui_labels.compare_no_data}</div>`;
+      } else {
+        container.innerHTML = html;
+      }
+    }
+
+    // --- event wiring ---
+    function setupEvents() {
+      const scenarioSelect = document.getElementById("scenario-select");
+      const busSelect = document.getElementById("bus-select");
+      const btnCompareScen = document.getElementById("btn-compare-scenarios");
+      const btnCompareBus = document.getElementById("btn-compare-buses");
+      const btnUnlockData = document.getElementById("btn-unlock-data");
+      const dataPanel = document.getElementById("data-panel");
+      const dataVeil = document.getElementById("data-veil");
+      const btnLockData = document.getElementById("btn-lock-data");
+      const btnUnlockText = document.getElementById("btn-unlock-text");
+      const btnLockText = document.getElementById("btn-lock-text");
+      const textWrapper = document.getElementById("text-panel-wrapper");
+      const textVeil = document.getElementById("text-veil");
+
+      scenarioSelect.addEventListener("change", () => {
+        if (mode === "compare_buses") {
+          buildBusCheckboxes();
+          renderBusComparison();
+        } else if (mode === "compare_scenarios") {
+          renderScenarioComparison();
+        } else {
+          updateSingleViewFigures();
+        }
+      });
+
+      busSelect.addEventListener("change", () => {
+        if (mode === "compare_scenarios") {
+          renderScenarioComparison();
+        } else if (mode === "single") {
+          updateSingleViewFigures();
+        }
+      });
+
+      getOrderedGroupIds().forEach(groupId => {
+        const singleSelect = document.getElementById(`${groupId}-mode-select`);
+        const compareSelect = document.getElementById(`compare-${groupId}-mode`);
+        if (singleSelect) {
+          singleSelect.addEventListener("change", () => {
+            setGroupMode(groupId, singleSelect.value);
+          });
+        }
+        if (compareSelect) {
+          compareSelect.addEventListener("change", () => {
+            setGroupMode(groupId, compareSelect.value);
+          });
+        }
+      });
+
+      btnCompareScen.addEventListener("click", () => {
+        if (mode === "compare_scenarios") {
+          setMode("single");
+        } else {
+          setMode("compare_scenarios");
+        }
+      });
+
+      btnCompareBus.addEventListener("click", () => {
+        if (mode === "compare_buses") {
+          setMode("single");
+        } else {
+          setMode("compare_buses");
+        }
+      });
+
+      btnUnlockData.addEventListener("click", () => {
+        dataUnlocked = true;
+        dataPanel.classList.remove("locked");
+        dataVeil.classList.add("hidden");
+        updateSingleViewFigures();
+        btnLockData.classList.remove("hidden");
+      });
+
+      btnUnlockText.addEventListener("click", () => {
+        textUnlocked = true;
+        textWrapper.classList.remove("locked");
+        textVeil.classList.add("hidden");
+        btnLockText.classList.remove("hidden");
+      });
+
+      btnLockData.addEventListener("click", () => {
+        // reset to single view and hide compare panels
+        const figStack = document.getElementById("figures-stack");
+        const textPanel = document.getElementById("text-panel");
+        const textWrapper = document.getElementById("text-panel-wrapper");
+        const mainGrid = document.getElementById("single-view");
+        const compareView = document.getElementById("compare-view");
+        const scenariosPanel = document.getElementById("compare-scenarios-panel");
+        const busesPanel = document.getElementById("compare-buses-panel");
+        const btnCompareScen = document.getElementById("btn-compare-scenarios");
+        const btnCompareBus = document.getElementById("btn-compare-buses");
+
+        mode = "single";
+        textWrapper.classList.remove("hidden");
+        textPanel.classList.remove("hidden");
+        mainGrid.classList.remove("compare-mode");
+        figStack.classList.remove("hidden");
+        compareView.classList.add("hidden");
+        scenariosPanel.classList.add("hidden");
+        busesPanel.classList.add("hidden");
+        btnCompareScen.classList.remove("active");
+        btnCompareBus.classList.remove("active");
+
+        dataUnlocked = false;
+        dataPanel.classList.add("locked");
+        dataVeil.classList.remove("hidden");
+        btnLockData.classList.add("hidden");
+        // keep text unlocked state as-is
+      });
+
+      btnLockText.addEventListener("click", () => {
+        textUnlocked = false;
+        textWrapper.classList.add("locked");
+        textVeil.classList.remove("hidden");
+        btnLockText.classList.add("hidden");
+      });
+    }
+
+    function init() {
+      initScenarioDropdown();
+      initBusDropdown();
+      initGroupModes();
+      renderFigureStack();
+      renderCompareOptions();
+      syncGroupSelects();
+
+      // build compare UIs
+      buildScenarioCheckboxes();
+      buildBusCheckboxes();
+
+      setupEvents();
+      updateSingleViewFigures();
+    }
+
+    init();
+
+    function copyCitation() {
+      const el = document.getElementById("citationText");
+      const text = el.value || "";
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          // small visual feedback: temporarily change button text
+          const btn = event.currentTarget || null;
+          if (btn) {
+            const old = btn.innerText;
+            btn.innerText = "Copied";
+            setTimeout(()=> btn.innerText = old, 1200);
+          }
+        }).catch(()=> alert("Copy failed; select and copy manually."));
+      } else {
+        // Fallback: select + execCommand
+        el.select();
+        try {
+          document.execCommand("copy");
+          alert("Citation copied to clipboard.");
+        } catch (e) {
+          alert("Copy not available. Select and copy manually.");
+        }
+      }
+    }
+
+    // defaults injected from Jinja
+    const DEFAULT_SCENARIO = "";
+    const DEFAULT_BUS = "";
+
+    // --- example initialization flow (adapt to your existing code) ---
+    function initControls(scenariosData) {
+      const scenarioSelect = document.getElementById('scenarioSelect'); // adjust id
+      const busSelect = document.getElementById('busSelect');           // adjust id
+
+      // populate scenarioSelect from scenariosData...
+      // (your existing code likely does this already)
+
+      // set default scenario (use key, not display name)
+      if (DEFAULT_SCENARIO && Array.from(scenarioSelect.options).some(o => o.value === DEFAULT_SCENARIO)) {
+        scenarioSelect.value = DEFAULT_SCENARIO;
+      } else {
+        scenarioSelect.selectedIndex = 0;
+      }
+
+      // trigger whatever populates buses for the selected scenario
+      scenarioSelect.dispatchEvent(new Event('change'));
+
+      // now set default bus if available
+      if (DEFAULT_BUS && Array.from(busSelect.options).some(o => o.value === DEFAULT_BUS)) {
+        busSelect.value = DEFAULT_BUS;
+      } else {
+        busSelect.selectedIndex = 0;
+      }
+
+      // call your function that renders the page for the selected scenario+bus
+      // e.g. onScenarioOrBusChanged();
+    }
+  </script>
+
+  <!-- === Network map panel (fixed overlay, not a modal dialog) === -->
+  <div id="network-map-panel" aria-hidden="true" aria-labelledby="network-map-title">
+    <div id="network-map-backdrop" role="presentation"></div>
+    <div id="network-map-container" role="region" aria-label="Network map panel">
+      <div id="network-map-toolbar">
+        <strong id="network-map-title">Network map</strong>
+        <div>
+          <button id="network-map-close" class="pill-button" aria-label="Close network map">Close</button>
+        </div>
+      </div>
+      <div id="network-map-canvas" aria-live="polite">
+        <!-- iframe created on demand -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const btnMap = document.getElementById('btn-network-map');
+      const panel = document.getElementById('network-map-panel');
+      const backdrop = document.getElementById('network-map-backdrop');
+      const closeBtn = document.getElementById('network-map-close');
+      const canvas = document.getElementById('network-map-canvas');
+      let mapIframe = null;
+
+      function createIframe() {
+        if (mapIframe) return mapIframe;
+        const iframe = document.createElement('iframe');
+        iframe.src = 'network_map.html';
+        iframe.loading = 'lazy';
+        iframe.title = 'Network map';
+        iframe.style.width = '100%';
+        iframe.style.height = '100%';
+        iframe.style.border = '0';
+        canvas.appendChild(iframe);
+        mapIframe = iframe;
+        return iframe;
+      }
+
+      function openPanel() {
+        // show overlay and prevent body scroll while open
+        panel.style.display = 'flex';
+        panel.setAttribute('aria-hidden', 'false');
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => {
+          // create iframe after layout so map can initialize correctly
+          createIframe();
+        }, 40);
+      }
+
+      function closePanel() {
+        panel.style.display = 'none';
+        panel.setAttribute('aria-hidden', 'true');
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+        // remove iframe to stop tile requests; recreate next open
+        if (mapIframe && mapIframe.parentNode) {
+          mapIframe.parentNode.removeChild(mapIframe);
+          mapIframe = null;
+        }
+      }
+
+      btnMap?.addEventListener('click', openPanel);
+      closeBtn?.addEventListener('click', closePanel);
+      backdrop?.addEventListener('click', closePanel);
+      window.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
+    })();
+  </script>
+
+</body>
+</html>

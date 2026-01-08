@@ -70,6 +70,28 @@ figures:
     title: "Hourly Load Shedding (MW)"
     subtitle_template: "SAPwL_{bus}_load shedding.png"
 
+# ---------------------------------------------------------------------------
+# FIGURE LAYOUT
+# ---------------------------------------------------------------------------
+figure_layout:
+  order:
+    - installed_capacities
+    - generation
+    - agg_net_transmission
+    - hourly_prices
+    - load_shedding
+
+figure_groups:
+  generation:
+    modes:
+      agg: agg_generation
+      hourly: hourly_generation
+    view_label_key: "single_generation_view_label"
+    compare_label_key: "compare_generation_view_label"
+    mode_label_keys:
+      agg: "generation_mode_agg"
+      hourly: "generation_mode_hourly"
+
 # =============================================================================
 # TEXT CONTENT (onepager_text.yaml)
 # =============================================================================

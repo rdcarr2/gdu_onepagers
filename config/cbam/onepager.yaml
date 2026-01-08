@@ -1,0 +1,262 @@
+# =============================================================================
+# ONE-PAGER CONFIGURATION
+# Structural + content settings for the one-pager generator
+# =============================================================================
+
+# ---------------------------------------------------------------------------
+# PROJECT SETTINGS
+# ---------------------------------------------------------------------------
+project: cbam
+plots_root: "plots"
+
+network_file: "network_files/cbam/LP_network_unsolved.nc"
+
+# ---------------------------------------------------------------------------
+# TEMPLATE + OUTPUT SETTINGS
+# ---------------------------------------------------------------------------
+template:
+  name: "onepager_images_auto.html"
+  output_html: "LS_dashboard_cbam.html"
+  output_dir: "output"
+  assets_subdir: "assets"
+
+# ---------------------------------------------------------------------------
+# SCENARIOS
+# ---------------------------------------------------------------------------
+scenarios:
+  no_cbam:
+    name: "No CBAM"
+    folder: "no_cbam"
+
+  cbam_national:
+    name: "CBAM (nationally determined)"
+    folder: "cbam_national"
+
+
+# ---------------------------------------------------------------------------
+# FIGURE DEFINITIONS
+# ---------------------------------------------------------------------------
+figures:
+  installed_capacities:
+    pattern: "HSCBP_{bus}_installed capacities.png"
+    title: "Installed Capacities (GW)"
+    subtitle_template: "HSCBP_{bus}_installed capacities.png"
+
+  agg_generation:
+    pattern: "HSCBP_{bus}_aggregated generation.png"
+    title: "Aggregated Generation (TWh)"
+    subtitle_template: "HSCBP_{bus}_aggregated generation.png"
+
+  hourly_generation:
+    pattern: "SAPwL_{bus}_hourly generation.png"
+    title: "Hourly Generation (GW)"
+    subtitle_template: "SAPwL_{bus}_hourly generation.png"
+
+  agg_net_transmission:
+    pattern: "HSCBP_{bus}_aggregated net transmission.png"
+    title: "Aggregated Net Transmission (TWh)"
+    subtitle_template: "HSCBP_{bus}_aggregated net transmission.png"
+  
+  national_transmission:
+    pattern: "HSCBP_{bus}_national transmission.png"
+    title: "National Transmission (TWh)"
+    subtitle_template: "HSCBP_{bus}_national transmission.png"
+  
+  hourly_prices:
+    pattern: "SAPwL_{bus}_hourly prices.png"
+    title: "Hourly Prices (EUR/MWh)"
+    subtitle_template: "SAPwL_{bus}_hourly prices.png"
+
+# ---------------------------------------------------------------------------
+# FIGURE LAYOUT
+# ---------------------------------------------------------------------------
+figure_layout:
+  order:
+    - installed_capacities
+    - generation
+    - agg_net_transmission
+    - national_transmission
+    - hourly_prices
+
+figure_groups:
+  generation:
+    modes:
+      agg: agg_generation
+      hourly: hourly_generation
+    view_label_key: "single_generation_view_label"
+    compare_label_key: "compare_generation_view_label"
+    mode_label_keys:
+      agg: "generation_mode_agg"
+      hourly: "generation_mode_hourly"
+
+
+# =============================================================================
+# TEXT CONTENT (onepager_text.yaml)
+# =============================================================================
+
+# ---------------------------------------------------------------------------
+# PAGE HEADER
+# ---------------------------------------------------------------------------
+page:
+  title: "Impacts of CBAM on Ukraine & Energy Community Countries: 2026"
+  subtitle: "Quantifying the consequences of CBAM for electricity trade between the EU and Energy Community countries with PyPSA"
+
+  key_message_prefix: "Key message:"
+  key_message: "Electricity exports from Energy Community countries to the EU could be reduced by over 60%, while markets become fragmeneted with only marginal environmental gains. Rules should be reformed to avoid unintended negative effects."
+
+  authors:
+    - name: "Robert Carr"
+      linkedin: "https://www.linkedin.com/in/robert-carr-b71826183/"
+    - name: "Frank Meissner"
+      linkedin: "https://www.linkedin.com/in/frank-mei%C3%9Fner-317991211/"
+    - name: "Rouven Stubbe"
+      linkedin: "https://www.linkedin.com/in/rouven-stubbe-41407a130/"
+
+  affiliation: "Green Deal Ukraïna project @ Helmholtz-Zentrum Berlin"
+
+# ---------------------------------------------------------------------------
+# META INFO BOX
+# ---------------------------------------------------------------------------
+meta:
+  tools_label: "Tool(s):"
+  tools_value: "PyPSA, Atlite"
+
+  specific_model_label: "Specific model (if applicable):"
+  specific_model_value: "HZB_PyPSA v1.0"
+
+  weather_year_label: "Weather year:"
+  weather_year_value: "2019"
+
+  solver_label: "Solver:"
+  solver_value: "Gurobi"
+
+  scenario_set_label: "Scenario set:"
+  scenario_set_value: "[name]"
+
+# ---------------------------------------------------------------------------
+# KEY METRICS
+# ---------------------------------------------------------------------------
+metrics:
+  - id: "UA_cbam_price"
+    label: "CBAM charge for Ukraine"
+    value: "75 EUR/MWh"
+    note: "Calculated based on average emission factor from 2016-2020"
+
+  - id: "UA_exports"
+    label: "Ukraine exports to EU"
+    value: "2.5 TWh with CBAM"
+    note: "Compared to 6 TWh without CBAM"
+
+  - id: "emissions"
+    label: "Energy Community emissions"
+    value: "-9 Mt CO reduction"
+    note: "with CBAM, but total system emissions only down by 2 Mt"
+
+  - id: "price_UA"
+    label: "Average hourly price in UA"
+    value: "84.5 EUR/MWh (with CBAM)"
+    note: "90.3 EUR/MWH without"
+
+# ---------------------------------------------------------------------------
+# TEXT SECTIONS (LEFT COLUMN)
+# ---------------------------------------------------------------------------
+sections:
+
+  research_objective:
+    title: "Research objective"
+    body: >
+      This analysis quantifies the short-term (2026) consequences of CBAM for electricity trade between EU and Energy Community countries, with a focus on Ukraine and Moldova (but extending to the Western Balkans)
+
+  background:
+    title: "Background / motivation"
+    body: >
+      The EU's Carbon Border Adjustment Mechanism (CBAM) aims to reduce the risk of carbon leakage for certain goods subject to the EU ETS, including electricity. From January 1, 2026, EU importers will need to purchase CBAM certificates at a weekly average price of EU-ETS certificates for the imbedded emissions of imported goods from non-EU countries. 
+      Electricity is a particularly tricky good to target with CBAM, one reason being commercial trade and physical flows do not always fully align. Thus, tracing embedded emissions of electricity generation and matching them to importers poses a challenge. 
+      While actual embedded emissions can be used in special cases, the conditions for doing-so are exceptionally hard to fulfil. In all other cases, default values for embedded direct emissions per country/region will be applied to all electricity imports based on a 2016 – 2020. 
+      Some claim that this would be taxing “historical” emissions rather than actual ones, leading to a large trade barrier for all electricity imported from third countries into the EU and other possible unintended consequences. We explore this here. 
+
+
+  scenario_space:
+    title: "Scenarios"
+    bullets:
+      - "No CBAM: Power generated by Energy Community buses (also referred to as non-ETS buses) and expored to EU buses (ETS-buses) does not incur any additional charges."
+      - "National CBAM: Power generated by Energy Community buses which is exported to any EU bus incurs a CBAM charge per MWh based on country-specific emission factors from 2016-2020."
+
+  methodology:
+    title: "Methodology"
+    bullets:
+      - "In-house PyPSA (Python for Power Systems Analysis) model at hourly resolution."
+      - "Hourly dispatch is optimised economically over the period January - December 2026."
+      - "Objective: to minimise total system cost subject to constraints."
+      - "Spatial granularity: 1 node per country, entirety of ENTSO-E modelled"
+      - "Nationally determined CBAM charge (using average emission factors from 2016-2020) is applied to each MWh of electricity that is generated at a non-ETS bus and exported to an EU-bus."
+      - "CBAM applied to the following countries: Ukraine, Moldova, Albania, Bosnia and Herzegovina, Kosovo, Montenegro, North Macedonia, and Serbia"
+      - "Transit flows (generated at ETS-bus and transiting through non-ETS bus to reach another ETS-bus) are exempt from the CBAM charge."
+      - "Cross border tranmission capacity capped at 90th percentile of maximum observed flows from 2024 (ENTSO-E Transparency Platform)."
+      - "Transmission capacity between EU and Ukraine-Moldova block capped at 2.1 GW."
+      - "Weather year 2019 (temperature, wind and solar profiles)"
+      - "Maintenance outages for individual nuclear units in Ukraine are included."
+      - "CHPs: heat driven, with country-specific must-run trajectories developed using historical temperature data (heating degree days – HDD)."
+
+  data_inputs:
+    title: "Data inputs"
+    bullets:
+      - "Hourly electricity demand: ENTSO-E Transparency Platform (UA adjusted for wartime impacts)"
+      - "Installed capacities: Powerplantmatching (conventional), Global Energy Monitor (renewables), ENTSO-E Transparency Platform (hydro and rooftop PV); UA estimates by GDU."
+      - "Cross-border transmission capacities: ENTSO-E Transparency Platform."
+      - "Weather data: ERA5 cutouts via Atlite."
+      - "Fuel and commodity prices: TradeEconomics (annual average for 2024)."
+
+  main_findings:
+    title: "Main findings"
+    bullets:
+      - "Introducing a CBAM charge reduces electricity exports from Ukraine to the EU by ~60%." 
+      - "There is a corresponding increase in transit flows from the EU via Ukraine to other EU countries."
+      - "Energy Community countries become less integrated with EU energy markets, with most cross-border capacity used for transit flows"
+      - "System-wide CO2 emissions are reduced by just 2 Mt: Energy Community emissions come down by 9 Mt while EU emissions go up by 7 Mt."
+      - "Generally: CBAM with current rules provides minimal environmental gains in the power sector, at a large economic and political cost."
+
+
+# ---------------------------------------------------------------------------
+# UI LABELS
+# ---------------------------------------------------------------------------
+ui_labels:
+  scenario_label: "Scenario"
+  bus_label: "Bus"
+
+  compare_scenarios_button: "Compare Scenarios"
+  compare_buses_button: "Compare Buses"
+
+  single_generation_view_label: "View:"
+  generation_mode_agg: "Aggregated"
+  generation_mode_hourly: "Hourly"
+
+  compare_generation_view_label: "Generation view:"
+
+  compare_hint_scenarios: "Select one or more scenarios to compare."
+  compare_hint_buses: "Select one or more buses to compare."
+  compare_no_data: "No data available for this combination."
+  compare_limit_warning: "You can select at most 4."
+
+# ---------------------------------------------------------------------------
+# FOOTER
+# ---------------------------------------------------------------------------
+footer:
+  generated_on_prefix: "Generated on:"
+  generated_on_value: "2026-01-06"
+
+  contact_text: "Contact: robert.carr@helmholtz-berlin.de"
+  version_text: "Version: 1.0"
+
+# ---------------------------------------------------------------------------
+# CITATION BLOCK
+# ---------------------------------------------------------------------------
+citation:
+  text: "Carr, R. & Meissner, F. (2025). Load Shedding in Ukraine: Winter 2025/26. Green Deal Ukraïna project, Helmholtz-Zentrum Berlin."
+  bibtex: |
+    @techreport{carr2025load,
+      author = {Carr, Robert and Meissner, Frank},
+      title = {Load Shedding in Ukraine: Winter 2025/26},
+      institution = {Helmholtz-Zentrum Berlin, Green Deal Ukraïna project},
+      year = {2025}
+    }
